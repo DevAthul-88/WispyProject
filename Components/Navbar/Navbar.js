@@ -73,9 +73,11 @@ export default function Nav() {
 
           <Flex alignItems={"center"}>
             <Stack direction={"row"} spacing={7}>
-              <Button variant={"solid"} colorScheme={"messenger"}>
+              <NextLink href="/signup">
+              <Button variant={"solid"} colorScheme={"messenger"} >
                 Sign Up
               </Button>
+              </NextLink>
             </Stack>
           </Flex>
         </Flex>
