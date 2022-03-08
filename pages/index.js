@@ -14,7 +14,7 @@ export default function SplitScreen() {
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       
       <Head>
-        <title>TryBug - Home</title>
+        <title>WispyProject - Home</title>
       </Head>
       
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
@@ -34,7 +34,7 @@ export default function SplitScreen() {
                 zIndex: -1,
               }}
             >
-              TRYBUG
+              WispyProject
             </Text>
             <br />{" "}
             <Text color={"messenger.500"} as={"span"}>
@@ -42,7 +42,7 @@ export default function SplitScreen() {
             </Text>{" "}
           </Heading>
           <Text fontSize={{ base: "md", lg: "lg" }} color={"gray.500"}>
-            TryBug is a free, open-source bug tracking and project management
+          WispyProject is a free, open-source bug tracking and project management
             system. It's perfect for freelancers, agencies, and moonlighters.
           </Text>
           <Stack direction={{ base: "column", md: "row" }} spacing={4}>

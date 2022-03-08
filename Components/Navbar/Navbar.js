@@ -52,7 +52,7 @@ export default function Nav() {
           <Box>
             <Text fontSize={"4xl"} color={"messenger.500"} className={"bebas"}>
               <Link as={NextLink} href="/">
-                TRYBUG
+              wispyproject
               </Link>
             </Text>
           </Box>

@@ -45,7 +45,7 @@ export default function SplitWithImage() {
   return (
     <Container maxW={"5xl"} py={12}>
       <Head>
-        <title>TryBug - Features</title>
+        <title>WispyProject - Features</title>
       </Head>
       <SimpleGrid columns={{ base: 1, md: 2 }} spacing={10}>
         <Stack spacing={4}>
@@ -63,7 +63,7 @@ export default function SplitWithImage() {
           </Text>
           <Heading>A digital Product for developers and designers</Heading>
           <Text color={"gray.500"} fontSize={"lg"}>
-            The TryBug tracking system has a lot of features. The main features
+            The WispyProject tracking system has a lot of features. The main features
             are listed here.
           </Text>
           <Stack

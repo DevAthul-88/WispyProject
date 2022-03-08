@@ -15,7 +15,7 @@ export default function SplitScreen() {
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       
       <Head>
-          <title>TryBug - Login</title>
+          <title>WispyProject - Login</title>
       </Head>
       
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
