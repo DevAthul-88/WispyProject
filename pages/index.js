@@ -7,9 +7,20 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import Head from 'next/head'
+import Head from 'next/head';
+import {useEffect , useState} from 'react'
+import Router from 'next/router'
 
 export default function SplitScreen() {
+  const [auth , setAuth] = useState(true)
+
+  useEffect(() => {
+    if(auth){
+      Router.push("/software/")
+    }
+  }, [])
+  
+
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       

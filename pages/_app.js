@@ -6,7 +6,7 @@ import {ChakraProvider} from '@chakra-ui/react'
 
 
 function MyApp({ Component, pageProps }) {
-  const [auth , setAuth] = useState(false)
+  const [auth , setAuth] = useState(true)
   return (
     <ChakraProvider>
     {auth ? <Sidebar /> : <Navbar />}

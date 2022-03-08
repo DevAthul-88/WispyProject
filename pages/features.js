@@ -23,6 +23,7 @@ const FeatureProps = {
 };
 
 const Feature = ({ text, icon, iconBg } = FeatureProps) => {
+  
   return (
     <Stack direction={"row"} align={"center"}>
       <Flex
