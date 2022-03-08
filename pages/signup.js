@@ -9,24 +9,29 @@ import {
   Stack,
   Image,
 } from "@chakra-ui/react";
+import Head from "next/head";
 
 export default function SplitScreen() {
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
+      <Head>
+        <title>TryBug - Sign up</title>
+      </Head>
+
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
         <Stack spacing={4} w={"full"} maxW={"md"}>
           <Heading fontSize={"2xl"}>Create a new account</Heading>
-          <FormControl id="email" >
+          <FormControl id="email">
             <FormLabel>Email address</FormLabel>
-            <Input type="email" focusBorderColor={"messenger.500"}/>
+            <Input type="email" focusBorderColor={"messenger.500"} />
           </FormControl>
           <FormControl id="password">
             <FormLabel>Your organization name</FormLabel>
-            <Input type="password" focusBorderColor={"messenger.500"}/>
+            <Input type="password" focusBorderColor={"messenger.500"} />
           </FormControl>
           <FormControl id="password">
             <FormLabel>Password</FormLabel>
-            <Input type="password" focusBorderColor={"messenger.500"}/>
+            <Input type="password" focusBorderColor={"messenger.500"} />
           </FormControl>
           <Stack spacing={6}>
             <Stack
