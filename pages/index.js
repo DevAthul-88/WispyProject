@@ -24,29 +24,25 @@ export default function SplitScreen() {
                 position: 'absolute',
                 bottom: 1,
                 left: 0,
-                bg: 'blue.400',
+                bg: 'messenger.200',
                 zIndex: -1,
               }}>
-              Freelance
+              TRYBUG
             </Text>
             <br />{' '}
-            <Text color={'blue.400'} as={'span'}>
-              Design Projects
+            <Text color={'messenger.500'} as={'span'}>
+              Track Projects
             </Text>{' '}
           </Heading>
           <Text fontSize={{ base: 'md', lg: 'lg' }} color={'gray.500'}>
-            The project board is an exclusive resource for contract work. It's
-            perfect for freelancers, agencies, and moonlighters.
+          TryBug is a free, open-source bug tracking and project management system. It's perfect for freelancers, agencies, and moonlighters.
           </Text>
           <Stack direction={{ base: 'column', md: 'row' }} spacing={4}>
             <Button
               rounded={'full'}
-              bg={'blue.400'}
-              color={'white'}
-              _hover={{
-                bg: 'blue.500',
-              }}>
-              Create Project
+              colorScheme={'messenger'}
+              >
+              Get Started
             </Button>
             <Button rounded={'full'}>How It Works</Button>
           </Stack>
