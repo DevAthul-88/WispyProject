@@ -2,10 +2,9 @@ import { applyMiddleware, createStore } from "redux";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from "@redux-devtools/extension";
 import RootReducer from "./rootReducer";
-import { useEffect , useState} from "react";
+import User from "../lib/user";
 
-
-const initialState = {  };
+const initialState = { };
 
 const middleware = [thunk];
 
