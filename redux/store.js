@@ -4,7 +4,7 @@ import { composeWithDevTools } from "@redux-devtools/extension";
 import RootReducer from "./rootReducer";
 import User from "../lib/user";
 
-const initialState = { };
+const initialState = {};
 
 const middleware = [thunk];
 
