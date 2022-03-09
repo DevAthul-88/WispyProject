@@ -7,14 +7,17 @@ import {
   Input,
   Link,
   Stack,
-  FormErrorMessage,
   Image,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import { Formik, Form, Field } from "formik";
 import SignupSchema from "../Validation/signup";
+import {useDispatch , useSelector} from 'react-redux'
+import {registerAction} from '../redux/auth/action'
 
 export default function SplitScreen() {
+  const dispatch = useDispatch()
+  const {loading , error} = useSelector(state => state.auth)
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
@@ -31,8 +34,7 @@ export default function SplitScreen() {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            // same shape as initial values
-            console.log(values);
+            dispatch(registerAction(values))
           }}
         >
           {({ errors, touched }) => (
@@ -41,23 +43,81 @@ export default function SplitScreen() {
                 <Heading fontSize={"2xl"} marginBottom={"4"}>
                   Create a new account
                 </Heading>
+
+                <FormControl  marginTop={"5"}>
+                  <FormLabel>Username</FormLabel>
+                  <Field
+                    name="username"
+                    as={CustomInputComponent}
+                    type={"text"}
+                    focusBorderColor={"messenger.500"}
+                    borderColor={
+                      errors.username && touched.username
+                        ? "red.500"
+                        : "gray.300"
+                    }
+                    
+                  />
+                  {errors.username && touched.username ? (
+                    <FormLabel color={"red.600"}>{errors.username}</FormLabel>
+                  ) : (
+                    ""
+                  )}
+                </FormControl>
+
                 <FormControl id="email" marginTop={"5"}>
                   <FormLabel>Email address</FormLabel>
-                  <Input
-                    type="email"
+                  <Field
+                    name="email"
+                    as={CustomInputComponent}
+                    type={"email"}
                     focusBorderColor={"messenger.500"}
+                    borderColor={
+                      errors.email && touched.email ? "red.500" : "gray.300"
+                    }
                   />
                   {errors.email && touched.email ? (
-                    <FormErrorMessage>{errors.email}</FormErrorMessage>
-                  ) : null}
+                    <FormLabel color={"red.600"}>{errors.email}</FormLabel>
+                  ) : (
+                    ""
+                  )}
                 </FormControl>
-                <FormControl id="password" marginTop={"5"}>
+
+                <FormControl marginTop={"5"}>
                   <FormLabel>Your organization name</FormLabel>
-                  <Input type="password" focusBorderColor={"messenger.500"} />
+                  <Field
+                    name="org"
+                    as={CustomInputComponent}
+                    type={"text"}
+                    focusBorderColor={"messenger.500"}
+                    borderColor={
+                      errors.org && touched.org ? "red.500" : "gray.300"
+                    }
+                  />
+                  {errors.org && touched.org ? (
+                    <FormLabel color={"red.600"}>{errors.org}</FormLabel>
+                  ) : (
+                    ""
+                  )}
                 </FormControl>
-                <FormControl id="password" marginTop={"5"}>
+                <FormControl marginTop={"5"}>
                   <FormLabel>Password</FormLabel>
-                  <Input type="password" focusBorderColor={"messenger.500"} />
+                  <Field
+                    name="password"
+                    as={CustomInputComponent}
+                    type={"password"}
+                    focusBorderColor={"messenger.500"}
+                    borderColor={
+                      errors.password && touched.password
+                        ? "red.500"
+                        : "gray.300"
+                    }
+                  />
+                  {errors.password && touched.password ? (
+                    <FormLabel color={"red.600"}>{errors.password}</FormLabel>
+                  ) : (
+                    ""
+                  )}
                 </FormControl>
                 <Stack spacing={6} marginTop={"5"}>
                   <Stack
@@ -71,6 +131,7 @@ export default function SplitScreen() {
                     type="submit"
                     colorScheme={"messenger"}
                     variant={"solid"}
+                    isLoading={loading}
                   >
                     Sign in
                   </Button>
@@ -86,3 +147,5 @@ export default function SplitScreen() {
     </Stack>
   );
 }
+
+const CustomInputComponent = (props) => <Input type={props.type} {...props} />;
