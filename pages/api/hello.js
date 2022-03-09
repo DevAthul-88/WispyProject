@@ -1,10 +1,11 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import db from "../../utils/dbConnect";
+import userSchema from '../../Schema/userSchema'
+db();
 
-export default function handler(req, res) {
-  if(req.method === "GET"){
-    res.status(200).send({user:"user"})
-  }
-  else if(req.method === "POST"){
+export default async function handler(req, res) {
+  if (req.method === "GET") {
+    res.status(200).send({ url: process.env.MONGO_DB_URL });
+  } else if (req.method === "POST") {
     console.log(req.body);
   }
 }
