@@ -12,13 +12,13 @@ import {useEffect , useState} from 'react'
 import Router from 'next/router'
 
 export default function SplitScreen() {
-  const [auth , setAuth] = useState(true)
+  const [auth , setAuth] = useState(false)
 
   useEffect(() => {
     if(auth){
       Router.push("/software/")
     }
-  }, [])
+  }, [auth])
   
 
   return (

@@ -1,8 +1,15 @@
 import React from 'react'
+import {Container} from '@chakra-ui/react'
+import Head from 'next/head'
 
 function index() {
   return (
-    <div>index</div>
+   <Container maxW={"container.sm"}>
+     <Head>
+       <title>WispyProject - Dashboard</title>
+     </Head>
+     Index
+   </Container>
   )
 }
 
