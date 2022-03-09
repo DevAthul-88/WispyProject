@@ -34,8 +34,9 @@ export default function SplitScreen() {
             password: "",
           }}
           validationSchema={SignupSchema}
-          onSubmit={(values) => {
+          onSubmit={(values , {resetForm}) => {
             dispatch(registerAction(values));
+            resetForm()
           }}
         >
           {({ errors, touched }) => (
@@ -44,7 +45,6 @@ export default function SplitScreen() {
                 <Alert
                   trigger={true}
                   type={"error"}
-                  title="Alert"
                   description={error}
                 />
               )}
@@ -52,7 +52,6 @@ export default function SplitScreen() {
                 <Alert
                   trigger={true}
                   type={"success"}
-                  title="Success"
                   description={message}
                 />
               )}

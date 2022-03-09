@@ -8,16 +8,16 @@ import {
 import { useState } from "react";
 
 
-function AlertDialog({type , title , description , trigger}) {
+function AlertDialog({type , description , trigger}) {
   
   const [hide , setHide] = useState(trigger)
   
   return (
     <>
     {
-      hide && <Alert status={type}>
+      hide && <Alert status={type} >
       <AlertIcon />
-      <AlertTitle mr={2}>{title}</AlertTitle>
+
       <AlertDescription>
         {description}
       </AlertDescription>

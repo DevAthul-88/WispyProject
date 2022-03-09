@@ -1,5 +1,5 @@
 import db from "../../../utils/dbConnect";
-import userSchema from "../../../Schema/userSchema";
+import userModel from "../../../Schema/userSchema";
 import bcrypt from "bcrypt";
 db();
 
@@ -7,22 +7,24 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
       const { username, email, org, password } = req.body;
-      const user = await userSchema.findOne({ email: email });
+      const cred = await userModel.findOne({ email: email });
 
-      if (user) {
+      if (cred) {
         res.status(208).send({ error: "User already exists." });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      const User = new userSchema({
-        username: username,
+      const User = new userModel({
+        userName: username,
         email: email,
-        org: org,
+        organization: org,
         password: hashedPassword,
       });
 
-      User.save();
+      User.save((err) => {
+        if(err) return console.log(err);
+      });
 
       res.status(201).send({
         message: "User successfully created, Please login to continue.",
