@@ -12,13 +12,13 @@ import {
 import Head from "next/head";
 import { Formik, Form, Field } from "formik";
 import SignupSchema from "../Validation/signup";
-import {useDispatch , useSelector} from 'react-redux'
-import {registerAction} from '../redux/auth/action'
-import Alert from '../Components/Alert'
+import { useDispatch, useSelector } from "react-redux";
+import { registerAction } from "../redux/auth/action";
+import Alert from "../Components/Alert";
 
 export default function SplitScreen() {
-  const dispatch = useDispatch()
-  const {loading , error} = useSelector(state => state.auth)
+  const dispatch = useDispatch();
+  const { loading, error , message } = useSelector((state) => state.auth);
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
@@ -26,9 +26,6 @@ export default function SplitScreen() {
       </Head>
 
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
-        
-        
-        
         <Formik
           initialValues={{
             username: "",
@@ -38,22 +35,34 @@ export default function SplitScreen() {
           }}
           validationSchema={SignupSchema}
           onSubmit={(values) => {
-            dispatch(registerAction(values))
+            dispatch(registerAction(values));
           }}
         >
           {({ errors, touched }) => (
-
-            
             <Stack spacing={4} w={"full"} maxW={"md"}>
-              
-              {error && <Alert trigger={true} type={"error"} title="Alert" description={error}/>}
-              
+              {error && (
+                <Alert
+                  trigger={true}
+                  type={"error"}
+                  title="Alert"
+                  description={error}
+                />
+              )}
+               {message && (
+                <Alert
+                  trigger={true}
+                  type={"success"}
+                  title="Success"
+                  description={message}
+                />
+              )}
+
               <Form>
                 <Heading fontSize={"2xl"} marginBottom={"4"}>
                   Create a new account
                 </Heading>
 
-                <FormControl  marginTop={"5"}>
+                <FormControl marginTop={"5"}>
                   <FormLabel>Username</FormLabel>
                   <Field
                     name="username"
@@ -65,7 +74,6 @@ export default function SplitScreen() {
                         ? "red.500"
                         : "gray.300"
                     }
-                    
                   />
                   {errors.username && touched.username ? (
                     <FormLabel color={"red.600"}>{errors.username}</FormLabel>
