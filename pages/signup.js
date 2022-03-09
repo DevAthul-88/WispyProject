@@ -14,6 +14,7 @@ import { Formik, Form, Field } from "formik";
 import SignupSchema from "../Validation/signup";
 import {useDispatch , useSelector} from 'react-redux'
 import {registerAction} from '../redux/auth/action'
+import Alert from '../Components/Alert'
 
 export default function SplitScreen() {
   const dispatch = useDispatch()
@@ -25,6 +26,9 @@ export default function SplitScreen() {
       </Head>
 
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
+        
+        
+        
         <Formik
           initialValues={{
             username: "",
@@ -38,7 +42,12 @@ export default function SplitScreen() {
           }}
         >
           {({ errors, touched }) => (
+
+            
             <Stack spacing={4} w={"full"} maxW={"md"}>
+              
+              {error && <Alert trigger={true} type={"error"} title="Alert" description={error}/>}
+              
               <Form>
                 <Heading fontSize={"2xl"} marginBottom={"4"}>
                   Create a new account
