@@ -4,7 +4,8 @@ db();
 
 export default async function handler(req, res) {
   if (req.method === "GET") {
-    res.status(200).send({ url: process.env.MONGO_DB_URL });
+    const user = await userSchema.find().count()
+    res.status(200).send({ totalUsers: user});
   } else if (req.method === "POST") {
     console.log(req.body);
   }
