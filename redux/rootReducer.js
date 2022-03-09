@@ -1,11 +1,9 @@
-import { combineReducers } from "redux";
+import { combineReducers  } from "redux";
+import TestReducer from './test'
 
-const user = localStorage.getItem("soft_user")
-  ? JSON.parse(localStorage.getItem("soft_user"))
-  : null;
 
 const rootReducer = combineReducers({
-  userInfo: user,
+ test:TestReducer
 });
 
 export default rootReducer;
