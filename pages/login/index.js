@@ -1,44 +1,58 @@
 import {
   Button,
   Flex,
-  FormControl,
-  FormLabel,
-  Heading,
-  Input,
   Stack,
   Image,
+  Text,
 } from "@chakra-ui/react";
-import Head from 'next/head'
+import Head from "next/head";
+import Link from "next/link";
 
 export default function SplitScreen() {
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
-      
       <Head>
-          <title>WispyProject - Login</title>
+        <title>WispyProject - Login</title>
       </Head>
-      
-      <Flex p={8} flex={1} align={"center"} justify={"center"}>
-        <Stack spacing={4} w={"full"} maxW={"md"}>
-          <Heading fontSize={"2xl"}>Login with your account</Heading>
-          <FormControl id="email">
-            <FormLabel>Email address</FormLabel>
-            <Input type="email" focusBorderColor={"messenger.500"} />
-          </FormControl>
-          <FormControl id="password">
-            <FormLabel>Your organization name</FormLabel>
-            <Input type="password" focusBorderColor={"messenger.500"} />
-          </FormControl>
-          <FormControl id="password">
-            <FormLabel>Employee ID</FormLabel>
-            <Input type="password" focusBorderColor={"messenger.500"} />
-          </FormControl>
-          <Stack spacing={6}>
-            <Button colorScheme={"messenger"} variant={"solid"}>
-              Login
-            </Button>
+
+      <Flex p={8} flex={1} direction={"column"}  justify={"center"}>
+        <Text fontSize={"2xl"} marginBottom="5">Select your account type</Text>
+          <Stack >
+            <Text fontSize={"2xl"} >
+              Login as admin
+            </Text>
+           <Link href={"/login/admin"}>
+           <Button colorScheme={"messenger"} variant={"outline"}>Get started</Button>
+           </Link>
           </Stack>
-        </Stack>
+
+          <Stack marginTop={"8"} >
+            <Text fontSize={"2xl"} >
+              Login as developer
+            </Text>
+            <Link href={"/login/developer"}>
+            <Button colorScheme={"linkedin"}  variant={"outline"}>Get started</Button>
+            </Link>
+          </Stack>
+
+          <Stack marginTop={"8"} >
+            <Text fontSize={"2xl"} >
+              Login as project manager
+            </Text>
+           <Link href={"/login/manager"}>
+           <Button colorScheme={"red"}  variant={"outline"}>Get started</Button>
+           </Link>
+          </Stack>
+
+          <Stack marginTop={"8"} >
+            <Text fontSize={"2xl"} >
+              Login as submitter
+            </Text>
+           <Link href={"/login/submitter"}>
+           <Button colorScheme={"facebook"}  variant={"outline"}>Get started</Button>
+           </Link>
+          </Stack>
+        
       </Flex>
       <Flex flex={1}>
         <Image alt={"Login Image"} objectFit={"cover"} src={"/image_4.jpg"} />
