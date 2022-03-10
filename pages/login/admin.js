@@ -19,7 +19,7 @@ import Alert from "../../Components/Alert";
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
-  const { loading, error, message } = useSelector((state) => state.auth);
+  const { admin_loading, admin_error, admin_message } = useSelector((state) => state.auth);
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
@@ -45,11 +45,11 @@ export default function SplitScreen() {
                 <Link textDecoration="underline">Go Back</Link>
               </NextLink>
 
-              {error && (
-                <Alert trigger={true} type={"error"} description={error} />
+              {admin_error && (
+                <Alert trigger={true} type={"error"} description={admin_error} />
               )}
-              {message && (
-                <Alert trigger={true} type={"success"} description={message} />
+              {admin_message && (
+                <Alert trigger={true} type={"success"} description={admin_message} />
               )}
 
               <Form>
@@ -123,7 +123,7 @@ export default function SplitScreen() {
                     type="submit"
                     colorScheme={"messenger"}
                     variant={"solid"}
-                    isLoading={loading}
+                    isLoading={admin_loading}
                   >
                     Log in
                   </Button>
