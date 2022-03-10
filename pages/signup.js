@@ -136,13 +136,7 @@ export default function SplitScreen() {
                   )}
                 </FormControl>
                 <Stack spacing={6} marginTop={"5"}>
-                  <Stack
-                    direction={{ base: "column", sm: "row" }}
-                    align={"start"}
-                    justify={"space-between"}
-                  >
-                    <Link color={"messenger.500"}>Forgot password?</Link>
-                  </Stack>
+                 
                   <Button
                     type="submit"
                     colorScheme={"messenger"}

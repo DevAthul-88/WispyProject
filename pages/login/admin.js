@@ -13,7 +13,7 @@ import Head from "next/head";
 import { FaAngleLeft } from "react-icons/fa";
 import NextLink from "next/link";
 import { Formik, Form, Field } from "formik";
-import SignupSchema from "../../Validation/signup";
+import LoginSchema from "../../Validation/login";
 import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../../redux/auth/action";
 import Alert from "../../Components/Alert";
@@ -34,7 +34,7 @@ export default function SplitScreen() {
             org: "",
             password: "",
           }}
-          validationSchema={SignupSchema}
+          validationSchema={LoginSchema}
           onSubmit={(values , {resetForm}) => {
             dispatch(registerAction(values));
             resetForm()
