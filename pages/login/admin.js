@@ -10,12 +10,11 @@ import {
   Link,
 } from "@chakra-ui/react";
 import Head from "next/head";
-import { FaAngleLeft } from "react-icons/fa";
 import NextLink from "next/link";
 import { Formik, Form, Field } from "formik";
 import LoginSchema from "../../Validation/login";
 import { useDispatch, useSelector } from "react-redux";
-import { registerAction } from "../../redux/auth/action";
+import { adminLoginAction } from "../../redux/auth/action";
 import Alert from "../../Components/Alert";
 
 export default function SplitScreen() {
@@ -36,7 +35,7 @@ export default function SplitScreen() {
           }}
           validationSchema={LoginSchema}
           onSubmit={(values, { resetForm }) => {
-            dispatch(registerAction(values));
+            dispatch(adminLoginAction(values));
             resetForm();
           }}
         >
