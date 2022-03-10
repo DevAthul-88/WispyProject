@@ -19,8 +19,8 @@ import { registerAction } from "../../redux/auth/action";
 import Alert from "../../Components/Alert";
 
 export default function SplitScreen() {
-    const dispatch = useDispatch();
-    const { loading, error , message } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const { loading, error, message } = useSelector((state) => state.auth);
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
@@ -28,41 +28,35 @@ export default function SplitScreen() {
       </Head>
 
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
-      <Formik
+        <Formik
           initialValues={{
             email: "",
             org: "",
             password: "",
           }}
           validationSchema={LoginSchema}
-          onSubmit={(values , {resetForm}) => {
+          onSubmit={(values, { resetForm }) => {
             dispatch(registerAction(values));
-            resetForm()
+            resetForm();
           }}
         >
           {({ errors, touched }) => (
             <Stack spacing={4} w={"full"} maxW={"md"}>
+              <NextLink href="/login">
+                <Link textDecoration="underline">Go Back</Link>
+              </NextLink>
+
               {error && (
-                <Alert
-                  trigger={true}
-                  type={"error"}
-                  description={error}
-                />
+                <Alert trigger={true} type={"error"} description={error} />
               )}
-               {message && (
-                <Alert
-                  trigger={true}
-                  type={"success"}
-                  description={message}
-                />
+              {message && (
+                <Alert trigger={true} type={"success"} description={message} />
               )}
 
               <Form>
                 <Heading fontSize={"2xl"} marginBottom={"4"}>
                   Login with your account
                 </Heading>
-
-               
 
                 <FormControl id="email" marginTop={"5"}>
                   <FormLabel>Email address</FormLabel>

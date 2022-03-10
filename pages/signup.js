@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../redux/auth/action";
 import Alert from "../Components/Alert";
 
+
 export default function SplitScreen() {
   const dispatch = useDispatch();
   const { loading, error , message } = useSelector((state) => state.auth);
@@ -26,6 +27,8 @@ export default function SplitScreen() {
       </Head>
 
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
+        
+        
         <Formik
           initialValues={{
             username: "",
