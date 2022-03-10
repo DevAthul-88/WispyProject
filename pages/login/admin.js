@@ -126,7 +126,7 @@ export default function SplitScreen() {
                     variant={"solid"}
                     isLoading={loading}
                   >
-                    Sign in
+                    Log in
                   </Button>
                 </Stack>
               </Form>
