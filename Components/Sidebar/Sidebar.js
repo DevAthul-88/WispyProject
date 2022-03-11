@@ -32,6 +32,7 @@ import {
 import {FaTicketAlt} from 'react-icons/fa'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
+import {useSelector} from 'react-redux'
 
 const LinkItemProps = {
   name: String,
@@ -158,6 +159,7 @@ const NavItem = ({ icon, href  , children, ...rest }) => {
 
 
 const MobileNav = ({ onOpen, ...rest }) => {
+  const {userInfo} = useSelector((state) => state.auth)
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -182,7 +184,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
         fontSize="2xl"
         fontFamily="monospace"
         fontWeight="bold">
-        Logo
+        WispyProject
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
@@ -210,7 +212,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
                   alignItems="flex-start"
                   spacing="1px"
                   ml="2">
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">{userInfo && userInfo.username}</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>

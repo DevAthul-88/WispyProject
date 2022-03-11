@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
     const userCredentials = {
       _id: User._id,
-      username: User.username,
+      username: User.userName,
       email: User.email,
       org: User.organization,
       role: User.role,
