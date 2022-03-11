@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import {
   IconButton,
   Avatar,
@@ -14,8 +14,6 @@ import {
   DrawerContent,
   Text,
   useDisclosure,
-  BoxProps,
-  FlexProps,
   Menu,
   MenuButton,
   MenuDivider,
@@ -24,26 +22,27 @@ import {
 } from '@chakra-ui/react';
 import {
   FiHome,
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
   FiSettings,
   FiMenu,
   FiBell,
   FiChevronDown,
+  FiUsers,
+  FiBriefcase,
 } from 'react-icons/fi';
-
+import {FaTicketAlt} from 'react-icons/fa'
+import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 
 const LinkItemProps = {
   name: String,
   icon: String,
 }
 const LinkItems = [
-  { name: 'Dashboard', icon: FiHome },
-  { name: 'Trending', icon: FiTrendingUp },
-  { name: 'Explore', icon: FiCompass },
-  { name: 'Favourites', icon: FiStar },
-  { name: 'Settings', icon: FiSettings },
+  { name: 'Dashboard', icon: FiHome  , href: '/software'},
+  { name: 'Projects', icon: FiBriefcase , href: '/software/projects'},
+  { name: 'Employees', icon: FiUsers  , href: '/software/employees'},
+  { name: 'Tickets', icon: FaTicketAlt , href: '/software/tickets'},
+  { name: 'Settings', icon: FiSettings , href: '/software/settings'},
 ];
 
 export default function SidebarWithHeader({
@@ -102,22 +101,36 @@ const SidebarContent = ({ onClose, ...rest }) => {
         <CloseButton display={{ base: 'flex', md: 'none' }} onClick={onClose} />
       </Flex>
       {LinkItems.map((link) => (
-        <NavItem key={link.name} icon={link.icon}>
+       
+          <NavItem href={link.href} key={link.name} icon={link.icon}>
           {link.name}
         </NavItem>
+       
       ))}
     </Box>
   );
 };
 
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, href  , children, ...rest }) => {
+  
+  const router = useRouter()
+ 
+
+  const handleClick = (e) => {
+    e.preventDefault()
+    router.push(href)
+  }
+  
   return (
-    <Link href="#" style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }}>
+    <NextLink href={href} >
+      <Link  style={{ textDecoration: 'none' }} _focus={{ boxShadow: 'none' }} onClick={handleClick}>
       <Flex
         align="center"
         p="4"
         mx="4"
+        background={router.asPath === href ? "messenger.500" : ""}
+        color={router.asPath === href ? "white" : ""}
         borderRadius="lg"
         role="group"
         cursor="pointer"
@@ -139,6 +152,7 @@ const NavItem = ({ icon, children, ...rest }) => {
         {children}
       </Flex>
     </Link>
+    </NextLink>
   );
 };
 
