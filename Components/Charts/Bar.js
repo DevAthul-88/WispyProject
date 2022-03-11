@@ -21,6 +21,9 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  scales: {
+    xAxes: [{ barPercentage: 0.5 }]
+},
   plugins: {
     legend: {
       position: "top",
@@ -30,9 +33,10 @@ export const options = {
       text: "Tickets by priority",
     },
   },
+  
 };
 
-const labels = ["January", "February", "March", "April", "May", "June", "July"];
+const labels = ["None" , "Low" , "Medium" , "High" ];
 
 export const data = {
   labels,

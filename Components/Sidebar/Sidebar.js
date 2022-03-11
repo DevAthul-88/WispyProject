@@ -32,8 +32,7 @@ import {
   FiBell,
   FiChevronDown,
 } from 'react-icons/fi';
-import { IconType } from 'react-icons';
-import { ReactText } from 'react';
+
 
 const LinkItemProps = {
   name: String,
@@ -57,6 +56,9 @@ export default function SidebarWithHeader({
     <Box >
       <SidebarContent
         onClose={() => onClose}
+        position={'fixed'}
+        left={0}
+        right={0}
         display={{ base: 'none', md: 'block' }}
       />
       <Drawer
