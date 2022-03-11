@@ -20,12 +20,17 @@ import { useEffect } from "react";
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
-  const { admin_loading, admin_error, admin_message , user} = useSelector((state) => state.auth);
+  const { admin_loading, admin_error, admin_message, user } = useSelector(
+    (state) => state.auth
+  );
   useEffect(() => {
-    localStorage.setItem("token" , JSON.stringify(user.token))
-    localStorage.setItem("userInfo" , JSON.stringify(user.userInfo))
-  }, [user])
-  
+    if (user) {
+      localStorage.setItem("token", JSON.stringify(user.token));
+      localStorage.setItem("userInfo", JSON.stringify(user.userInfo));
+      window.location.href = "/software/"
+    }
+  }, [user]);
+
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
@@ -52,10 +57,18 @@ export default function SplitScreen() {
               </NextLink>
 
               {admin_error && (
-                <Alert trigger={true} type={"error"} description={admin_error} />
+                <Alert
+                  trigger={true}
+                  type={"error"}
+                  description={admin_error}
+                />
               )}
               {admin_message && (
-                <Alert trigger={true} type={"success"} description={admin_message} />
+                <Alert
+                  trigger={true}
+                  type={"success"}
+                  description={admin_message}
+                />
               )}
 
               <Form>
