@@ -1,6 +1,8 @@
 import db from "../../../utils/dbConnect";
 import userModel from "../../../Schema/userSchema";
+import orgModel from "../../../Schema/orgSchema";
 import bcrypt from "bcrypt";
+
 db();
 
 export default async function handler(req, res) {
@@ -22,15 +24,22 @@ export default async function handler(req, res) {
         password: hashedPassword,
       });
 
-      User.save((err) => {
-        if(err) return console.log(err);
+      const Org = new orgModel({
+        name: org,
       });
 
+      User.save((err) => {
+        if (err) return console.log(err);
+      });
+
+      Org.save((err) => {
+        if (err) return console.log(err);
+      });
       res.status(201).send({
         message: "User successfully created, Please login to continue.",
       });
     } catch (error) {
-      res.status(500).send({error: error.message});
+      res.status(500).send({ error: error.message });
     }
   }
 }
