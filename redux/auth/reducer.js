@@ -20,7 +20,7 @@ export const userReducer = (state = initialState, action) => {
     case SET_ADMIN_LOGIN_REQUEST:
       return { admin_loading: true };
     case SET_ADMIN_LOGIN_SUCCESS:
-      return { admin_loading: false, admin_message: action.payload };
+      return { admin_loading: false, user: action.payload };
     case SET_ADMIN_LOGIN_ERROR:
       return { admin_loading: false, admin_error: action.payload };
     default:

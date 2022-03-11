@@ -16,10 +16,16 @@ import LoginSchema from "../../Validation/login";
 import { useDispatch, useSelector } from "react-redux";
 import { adminLoginAction } from "../../redux/auth/action";
 import Alert from "../../Components/Alert";
+import { useEffect } from "react";
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
-  const { admin_loading, admin_error, admin_message } = useSelector((state) => state.auth);
+  const { admin_loading, admin_error, admin_message , user} = useSelector((state) => state.auth);
+  useEffect(() => {
+    localStorage.setItem("token" , JSON.stringify(user.token))
+    localStorage.setItem("userInfo" , JSON.stringify(user.userInfo))
+  }, [user])
+  
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
