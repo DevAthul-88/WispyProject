@@ -18,14 +18,3 @@ function index() {
 export default index
 
 
-export const getServerSideProps = () => {
-  if(User() == null){
-    return {
-      redirect: {
-        destination: "/login",
-        permanent: false,
-      },
-      props: {},
-    };
-  }
-}
