@@ -2,7 +2,7 @@ import React from 'react'
 import {Container} from '@chakra-ui/react'
 import Head from 'next/head'
 import User from '../../lib/user'
-
+import {BarChart} from '../../Components/Charts/Bar'
 
 function index() {
   return (
@@ -10,7 +10,7 @@ function index() {
      <Head>
        <title>WispyProject - Dashboard</title>
      </Head>
-     Index
+     <BarChart />
    </Container>
   )
 }
