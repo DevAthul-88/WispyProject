@@ -7,8 +7,12 @@ import {
 } from "@chakra-ui/react";
 import Head from "next/head";
 import Link from "next/link";
+import User from '../../lib/user'
+
 
 export default function SplitScreen() {
+ 
+
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
@@ -59,4 +63,16 @@ export default function SplitScreen() {
       </Flex>
     </Stack>
   );
+}
+
+export const getServerSideProps = () => {
+  if(User() !== null){
+    return {
+      redirect: {
+        destination: "/software/",
+        permanent: false,
+      },
+      props: {},
+    };
+  }
 }

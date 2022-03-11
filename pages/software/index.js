@@ -1,6 +1,8 @@
 import React from 'react'
 import {Container} from '@chakra-ui/react'
 import Head from 'next/head'
+import User from '../../lib/user'
+
 
 function index() {
   return (
@@ -14,3 +16,16 @@ function index() {
 }
 
 export default index
+
+
+export const getServerSideProps = () => {
+  if(User() == null){
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+      props: {},
+    };
+  }
+}

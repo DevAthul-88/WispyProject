@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { adminLoginAction } from "../../redux/auth/action";
 import Alert from "../../Components/Alert";
 import { useEffect } from "react";
+import User from '../../lib/user'
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
@@ -159,3 +160,15 @@ export default function SplitScreen() {
   );
 }
 const CustomInputComponent = (props) => <Input type={props.type} {...props} />;
+
+export const getServerSideProps = () => {
+  if(User() !== null){
+    return {
+      redirect: {
+        destination: "/software/",
+        permanent: false,
+      },
+      props: {},
+    };
+  }
+}

@@ -54,7 +54,7 @@ export default function SidebarWithHeader({
 }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
-    <Box>
+    <Box >
       <SidebarContent
         onClose={() => onClose}
         display={{ base: 'none', md: 'block' }}
@@ -84,6 +84,7 @@ export default function SidebarWithHeader({
 const SidebarContent = ({ onClose, ...rest }) => {
   return (
     <Box
+    zIndex={'overlay'}
       transition="3s ease"
       bg={useColorModeValue('white', 'gray.900')}
       borderRight="1px"

@@ -8,18 +8,10 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import Head from 'next/head';
-import {useEffect , useState} from 'react'
-import Router from 'next/router'
+import User from '../lib/user'
 
 export default function SplitScreen() {
-  const [auth , setAuth] = useState(false)
 
-  useEffect(() => {
-    if(auth){
-      Router.push("/software/")
-    }
-  }, [auth])
-  
 
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
@@ -69,4 +61,16 @@ export default function SplitScreen() {
       </Flex>
     </Stack>
   );
+}
+
+export const getServerSideProps = () => {
+  if(User() !== null){
+    return {
+      redirect: {
+        destination: "/software/",
+        permanent: false,
+      },
+      props: {},
+    };
+  }
 }
