@@ -26,8 +26,8 @@ export const adminLoginAction = (credentials) => async (dispatch) => {
     const { data } = await axios.post("/api/auth/login/admin", credentials);
     if (data.error)
       return dispatch({ type: SET_ADMIN_LOGIN_ERROR, payload: data.error });
-    dispatch({ type: SET_ADMIN_LOGIN_SUCCESS, payload: data});
+    dispatch({ type: SET_ADMIN_LOGIN_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type:SET_ADMIN_LOGIN_ERROR , payload: error.message})
+    dispatch({ type: SET_ADMIN_LOGIN_ERROR, payload: error.message });
   }
-}
+};

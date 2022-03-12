@@ -31,7 +31,7 @@ export default async function handler(req, res) {
           owner: {
             username: username,
             email: email,
-            _id: user._id,
+            id: user._id+"",
           },
         });
 

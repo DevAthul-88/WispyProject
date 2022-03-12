@@ -3,10 +3,12 @@ import orgModel from "../../../Schema/orgSchema";
 db()
 
 export default async function handler(req , res){
-  if(req.method === "GET"){
+  if(req.method === "POST"){
+      console.log(req.body);
+
       try {
-          const {id} = req.params;
-          const data = await orgModel.findOne({"owner._id":id})
+          const userId = req.body.id;
+          const data = await orgModel.findOne({"owner.id":userId})
           res.send({data: data});
 
       } catch (error) {
