@@ -8,6 +8,7 @@ const orgSchema = new mongoose.Schema({
     },
     owner:{
         type:Object,
+        default:{},
         required: true
     },
 

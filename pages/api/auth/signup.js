@@ -24,26 +24,27 @@ export default async function handler(req, res) {
         password: hashedPassword,
       });
 
-      await User.save((err) => {
+      User.save((err, user) => {
         if (err) return console.log(err);
+        const Org = new orgModel({
+          name: org,
+          owner: {
+            username: username,
+            email: email,
+            _id: user._id,
+          },
+        });
+
+        Org.save((err) => {
+          if (err) return console.log(err);
+        });
       });
 
-      const Org = new orgModel({
-        name: org,
-        owner: {
-          username: username,
-          email: email,
-        },
-      });
-
-     await Org.save((err) => {
-        if (err) return console.log(err);
-      });
       res.status(201).send({
         message: "User successfully created, Please login to continue.",
       });
     } catch (error) {
-      res.status(500).send({ error: error.message });
+      res.send({ error: error.message });
     }
   }
 }
