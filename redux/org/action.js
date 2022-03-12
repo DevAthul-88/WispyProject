@@ -1,0 +1,1 @@
+import { GET_ORG_REQUEST, GET_ORG_SUCCESS, GET_ORG_ERROR } from "./type";

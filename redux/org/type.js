@@ -1,0 +1,3 @@
+export const GET_ORG_REQUEST = 'GET_ORG_REQUEST';
+export const GET_ORG_SUCCESS = 'GET_ORG_SUCCESS';
+export const GET_ORG_ERROR = 'GET_ORG_ERROR';
