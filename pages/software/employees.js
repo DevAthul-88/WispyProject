@@ -7,7 +7,7 @@ function employees() {
   const {userInfo} = useSelector((state) => state.auth)
 
   useEffect(() => {
-    dispatch(fetchData({id:userInfo._id}))
+    dispatch(fetchData(userInfo._id))
   },[])
 
   return (

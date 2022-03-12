@@ -6,7 +6,7 @@ export const fetchData = (credentials) => async (dispatch) => {
  try {
   dispatch({ type:GET_ORG_REQUEST})
  
-  const {data} = await axios.post(`/api/org/emp` , credentials) 
+  const {data} = await axios.get(`/api/org/${credentials}`) 
   if(data.error) return dispatch({type:GET_ORG_ERROR , payload:data.error})
   dispatch({type:GET_ORG_SUCCESS , payload:data.data})   
  } catch (error) {
