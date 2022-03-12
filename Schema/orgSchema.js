@@ -31,6 +31,6 @@ const orgSchema = new mongoose.Schema({
 
 },{timestamps: true})
 
-const modal = mongoose.model("organization" , orgSchema)
+const modal = mongoose.models.organization || mongoose.model("organization" , orgSchema)
 
 export default modal
