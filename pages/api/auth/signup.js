@@ -24,15 +24,19 @@ export default async function handler(req, res) {
         password: hashedPassword,
       });
 
-      const Org = new orgModel({
-        name: org,
-      });
-
-      User.save((err) => {
+      await User.save((err) => {
         if (err) return console.log(err);
       });
 
-      Org.save((err) => {
+      const Org = new orgModel({
+        name: org,
+        owner: {
+          username: username,
+          email: email,
+        },
+      });
+
+     await Org.save((err) => {
         if (err) return console.log(err);
       });
       res.status(201).send({
