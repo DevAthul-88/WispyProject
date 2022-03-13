@@ -1,16 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState } from "react";
 import { Container, Flex , Text , Stack , Button} from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchData } from "../../redux/org/action";
 import Loader from "../../Components/Loader";
 import Head from "next/head";
 import NoData from "../../Components/noData";
-import {FaPlus} from 'react-icons/fa'
+import {FaPlus} from 'react-icons/fa';
+import Modal from '../../Components/Modal/Modal.emp'
 
 function employees() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { data, error, loading } = useSelector((state) => state.org);
+  const [toggle , setToggle] = useState(false)
 
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
@@ -42,6 +44,7 @@ function employees() {
                 <NoData title={"No users found."} />
               </Flex>
             )}
+            <Modal toggle={toggle} setToggle={toggle}/>
           </Container>
         )}
       </>
