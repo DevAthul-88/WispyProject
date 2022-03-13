@@ -15,19 +15,17 @@ function Model({toggle , setToggle}) {
 
     return (
       <>
-        <Button >Open Modal</Button>
   
         <Modal isOpen={toggle}>
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>Modal Title</ModalHeader>
-            <ModalCloseButton />
             <ModalBody>
               
             </ModalBody>
   
             <ModalFooter>
-              <Button colorScheme='blue' mr={3} >
+              <Button colorScheme='blue' mr={3} onClick={() => setToggle(!toggle)}>
                 Close
               </Button>
               <Button variant='ghost'>Secondary Action</Button>

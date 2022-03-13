@@ -32,7 +32,7 @@ function employees() {
            <Flex justify={"space-between"} marginBottom={"5"}>
            <Text fontSize={"2xl"} fontWeight={"bold"}>Employee</Text>
               <Stack>
-              <Button leftIcon={<FaPlus />} colorScheme={"messenger"}>Add user</Button>
+              <Button leftIcon={<FaPlus />} colorScheme={"messenger"} onClick={() => setToggle(true)}>Add user</Button>
               </Stack>
            </Flex>
            <hr />
@@ -44,7 +44,7 @@ function employees() {
                 <NoData title={"No users found."} />
               </Flex>
             )}
-            <Modal toggle={toggle} setToggle={toggle}/>
+            <Modal toggle={toggle} setToggle={setToggle}/>
           </Container>
         )}
       </>
