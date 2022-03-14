@@ -10,18 +10,21 @@ export default async function handler(req , res){
          const {username , email , org , emp_id, role , userId} = req.body;
          const checkAdmin = await orgModel.findOne({"owner.email":email})
          if(checkAdmin) return res.send({error:"You can't use this credentials. Because it's admins"})
-         const check = await orgModel.findOne({"owner.id": userId} , {employees:{$elemMatch:{email:email}}})
-         if(!check){
+         const check = await orgModel.findOne({"owner.id": userId} , {employees:{email:email}})
+   
+         if(check.employees.length === 0){
+             const hashedPassword = await bcrypt.hash(emp_id , 10)
              const employee = {
                  _id:uuidv4(),
                  username,
                  email,
                  org,
                  role,
-                 password: bcrypt.hash(emp_id , 10),
+                 password:hashedPassword,
                  assignedProjects:[],
              }
              await orgModel.updateOne({"owner.id":userId} , {$push:{employees:employee}})
+             res.send({refresh:true})
          }
          else{
              res.send({error:"Employee already exists."})
