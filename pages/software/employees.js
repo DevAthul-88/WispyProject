@@ -47,7 +47,7 @@ function employees() {
             )}
          <Modal toggle={toggle} setToggle={setToggle} name={data && data.name}/>
          <Stack marginTop={"5"}>
-         <Tables />
+         {data && <Tables org={data.employees}/>}
          </Stack>
 
           </Container>

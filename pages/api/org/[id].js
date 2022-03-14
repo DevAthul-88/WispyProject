@@ -6,7 +6,7 @@ export default async function handler(req , res){
   if(req.method === "GET"){
       try {
           const userId = req.query.id;
-          const data = await orgModel.findOne({"owner.id":userId})
+          const data = await orgModel.findOne({"owner.id":userId}).select("-employees.password")
           res.send({data: data});
 
       } catch (error) {
