@@ -7,6 +7,7 @@ import Head from "next/head";
 import NoData from "../../Components/noData";
 import {FaPlus} from 'react-icons/fa';
 import Modal from '../../Components/Modal/Modal.emp'
+import Tables from '../../Components/Table/table.emp'
 
 function employees() {
   const dispatch = useDispatch();
@@ -45,6 +46,10 @@ function employees() {
               </Flex>
             )}
          <Modal toggle={toggle} setToggle={setToggle} name={data && data.name}/>
+         <Stack marginTop={"5"}>
+         <Tables />
+         </Stack>
+
           </Container>
         )}
       </>
