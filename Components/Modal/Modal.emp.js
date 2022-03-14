@@ -11,6 +11,7 @@ import {
   FormLabel,
   Input,
   Stack,
+  Select,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import SignupSchema from "../../Validation/signup";
@@ -101,6 +102,15 @@ function Model({ toggle, setToggle }) {
                         ) : (
                           ""
                         )}
+                       
+                      </FormControl>
+                      <FormControl marginTop={"5"}>
+                      <FormLabel>Select role</FormLabel>
+                      <Select placeholder="Select role" colorScheme={"messenger"}>
+                          <option value="option1">Option 1</option>
+                          <option value="option2">Option 2</option>
+                          <option value="option3">Option 3</option>
+                        </Select>
                       </FormControl>
                       <FormControl marginTop={"5"}>
                         <FormLabel>Password</FormLabel>
@@ -132,7 +142,9 @@ function Model({ toggle, setToggle }) {
                       >
                         Close
                       </Button>
-                      <Button colorScheme={"messenger"} type="submit">Save</Button>
+                      <Button colorScheme={"messenger"} type="submit">
+                        Save
+                      </Button>
                     </ModalFooter>
                   </Stack>
                 )}

@@ -163,7 +163,7 @@ const CustomInputComponent = (props) => <Input type={props.type} {...props} />;
 
 export const getServerSideProps = () => {
   
-  if(User() !== undefined && User() !== null) {
+  if(User() !== undefined || User() !== null) {
     return {
       redirect: {
         destination: "/software/",
