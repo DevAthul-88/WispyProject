@@ -17,7 +17,7 @@ import { Formik, Form, Field } from "formik";
 import EmpSchema from "../../Validation/emp_add";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
-import { createEmp } from "../../redux/org/action";
+import { createEmp } from "../../redux/employee/action";
 
 function Model({ toggle, setToggle, name }) {
   const dispatch = useDispatch();
