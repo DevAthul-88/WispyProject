@@ -22,6 +22,7 @@ import { createEmp } from "../../redux/org/action";
 function Model({ toggle, setToggle, name }) {
   const dispatch = useDispatch();
   const { set_emp_loading, set_emp_error } = useSelector((state) => state.org);
+  const { userInfo } = useSelector((state) => state.auth);
   const options = [
     { value: "developer", label: "Developer" },
     { value: "submitter", label: "Submitter" },
@@ -35,6 +36,7 @@ function Model({ toggle, setToggle, name }) {
         <ModalContent>
           <ModalHeader>Add employees</ModalHeader>
           <ModalBody>
+            {set_emp_error && <Alert trigger={true} type={"error"} description={set_emp_error}/>}
             <Flex justify={"center"}>
               <Formik
                 initialValues={{
@@ -43,6 +45,7 @@ function Model({ toggle, setToggle, name }) {
                   role: "",
                   emp_id: "",
                   org: name,
+                  userId:userInfo && userInfo._id
                 }}
                 validationSchema={EmpSchema}
                 onSubmit={(values, { resetForm }) => {
@@ -119,7 +122,7 @@ function Model({ toggle, setToggle, name }) {
                         )}
                       </FormControl>
                       <FormControl marginTop={"5"}>
-                        <FormLabel>Password</FormLabel>
+                        <FormLabel>Employee ID</FormLabel>
                         <Field
                           name="emp_id"
                           as={CustomInputComponent}
