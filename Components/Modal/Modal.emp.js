@@ -21,7 +21,7 @@ import { createEmp } from "../../redux/employee/action";
 
 function Model({ toggle, setToggle, name }) {
   const dispatch = useDispatch();
-  const { set_emp_loading, set_emp_error } = useSelector((state) => state.org);
+  const { set_emp_loading, set_emp_error , refresh } = useSelector((state) => state.emp);
   const { userInfo } = useSelector((state) => state.auth);
   const options = [
     { value: "MODERATOR", label: "Moderator" },
@@ -51,6 +51,9 @@ function Model({ toggle, setToggle, name }) {
                 validationSchema={EmpSchema}
                 onSubmit={(values, { resetForm }) => {
                   dispatch(createEmp(values));
+
+                    refresh()
+                  
                 }}
               >
                 {({ errors, touched }) => (

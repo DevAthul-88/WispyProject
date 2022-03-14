@@ -15,7 +15,6 @@ export default async function handler(req, res) {
         });
       const check = await orgModel.findOne(
         { "owner.id": userId },
-        { employees: { email: email } }
       );
 
       if (check.employees.some((e) => e.email == email)) {
@@ -35,7 +34,8 @@ export default async function handler(req, res) {
           { "owner.id": userId },
           { $push: { employees: employee } }
         );
-        res.send({ refresh: true });
+      
+        res.send({ refresh: true});
       }
     } catch (error) {
       res.send({ error: error.message });
