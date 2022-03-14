@@ -44,7 +44,7 @@ function employees() {
                 <NoData title={"No users found."} />
               </Flex>
             )}
-            <Modal toggle={toggle} setToggle={setToggle}/>
+            {data && <Modal toggle={toggle} setToggle={setToggle} name={data.name}/>}
           </Container>
         )}
       </>

@@ -17,8 +17,16 @@ import { Formik, Form, Field } from "formik";
 import EmpSchema from "../../Validation/emp_add";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
+import { useState } from "react";
 
-function Model({ toggle, setToggle }) {
+function Model({ toggle, setToggle, name }) {
+
+  const options = [
+    { value: "developer", label: "Developer" },
+    { value: "submitter", label: "Submitter" },
+    { value: "project_manger", label: "Project Manger" },
+  ];
+
   return (
     <>
       <Modal isOpen={toggle} size={"xl"}>
@@ -33,6 +41,7 @@ function Model({ toggle, setToggle }) {
                   email: "",
                   role: "",
                   emp_id: "",
+                  org: name,
                 }}
                 validationSchema={EmpSchema}
                 onSubmit={(values, { resetForm }) => {
@@ -40,6 +49,7 @@ function Model({ toggle, setToggle }) {
                 }}
               >
                 {({ errors, touched }) => (
+
                   <Stack spacing={4} w={"full"} maxW={"md"}>
                     <Form>
                       <FormControl marginTop={"5"}>
@@ -69,7 +79,6 @@ function Model({ toggle, setToggle }) {
                         <Field
                           name="email"
                           as={CustomInputComponent}
-                          type={"email"}
                           focusBorderColor={"messenger.500"}
                           borderColor={
                             errors.email && touched.email
@@ -88,17 +97,23 @@ function Model({ toggle, setToggle }) {
                       <FormControl marginTop={"5"}>
                         <FormLabel>Select role</FormLabel>
                         <Field
-                          name="role"
-                          as={CustomSelectComponent}
+                          as={customSelectorComponent}
+                          name={"role"}
                           borderColor={
                             errors.role && touched.role ? "red.500" : "gray.300"
                           }
-                        />
+                        >
+                          {options.map((e, index) => {
+                            return (
+                              <option value={e.value} key={index}>
+                                {e.label}
+                              </option>
+                            );
+                          })}
+                        </Field>
 
                         {errors.role && touched.role ? (
-                          <FormLabel color={"red.600"}>
-                            {errors.role}
-                          </FormLabel>
+                          <FormLabel color={"red.600"}>{errors.role}</FormLabel>
                         ) : (
                           ""
                         )}
@@ -124,8 +139,7 @@ function Model({ toggle, setToggle }) {
                           ""
                         )}
                       </FormControl>
-                    </Form>
-                    <ModalFooter>
+                      <ModalFooter>
                       <Button
                         colorScheme="red"
                         mr={3}
@@ -137,6 +151,8 @@ function Model({ toggle, setToggle }) {
                         Save
                       </Button>
                     </ModalFooter>
+                    </Form>
+                   
                   </Stack>
                 )}
               </Formik>
@@ -154,10 +170,6 @@ const CustomInputComponent = (props) => (
   <Input type={props.type} {...props} width={"full"} />
 );
 
-const CustomSelectComponent = (props) => (
-  <Select placeholder="Select role" colorScheme={"messenger"}>
-    <option value="developer">Developer</option>
-    <option value="project_manager">Project manager</option>
-    <option value="submitter">Submitter</option>
-  </Select>
+const customSelectorComponent = (props) => (
+  <Select {...props} placeholder="Select role" />
 );
