@@ -19,7 +19,7 @@ import User from "../lib/user";
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
-  const { loading, error , message } = useSelector((state) => state.auth);
+  const { loading, error, message } = useSelector((state) => state.auth);
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
@@ -27,8 +27,6 @@ export default function SplitScreen() {
       </Head>
 
       <Flex p={8} flex={1} align={"center"} justify={"center"}>
-        
-        
         <Formik
           initialValues={{
             username: "",
@@ -37,26 +35,18 @@ export default function SplitScreen() {
             password: "",
           }}
           validationSchema={SignupSchema}
-          onSubmit={(values , {resetForm}) => {
+          onSubmit={(values, { resetForm }) => {
             dispatch(registerAction(values));
-            resetForm()
+            resetForm();
           }}
         >
           {({ errors, touched }) => (
             <Stack spacing={4} w={"full"} maxW={"md"}>
               {error && (
-                <Alert
-                  trigger={true}
-                  type={"error"}
-                  description={error}
-                />
+                <Alert trigger={true} type={"error"} description={error} />
               )}
-               {message && (
-                <Alert
-                  trigger={true}
-                  type={"success"}
-                  description={message}
-                />
+              {message && (
+                <Alert trigger={true} type={"success"} description={message} />
               )}
 
               <Form>
@@ -139,7 +129,6 @@ export default function SplitScreen() {
                   )}
                 </FormControl>
                 <Stack spacing={6} marginTop={"5"}>
-                 
                   <Button
                     type="submit"
                     colorScheme={"messenger"}
@@ -164,8 +153,7 @@ export default function SplitScreen() {
 const CustomInputComponent = (props) => <Input type={props.type} {...props} />;
 
 export const getServerSideProps = () => {
-  
-  if(User() !== undefined || User() !== null) {
+  if (User() !== undefined || User() !== null) {
     return {
       redirect: {
         destination: "/software/",
@@ -174,5 +162,5 @@ export const getServerSideProps = () => {
       props: {},
     };
   }
-  return {props:{}}
-}
+  return { props: {} };
+};

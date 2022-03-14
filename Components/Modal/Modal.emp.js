@@ -17,10 +17,11 @@ import { Formik, Form, Field } from "formik";
 import EmpSchema from "../../Validation/emp_add";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
-import { useState } from "react";
+import { createEmp } from "../../redux/org/action";
 
 function Model({ toggle, setToggle, name }) {
-
+  const dispatch = useDispatch();
+  const { set_emp_loading, set_emp_error } = useSelector((state) => state.org);
   const options = [
     { value: "developer", label: "Developer" },
     { value: "submitter", label: "Submitter" },
@@ -45,11 +46,10 @@ function Model({ toggle, setToggle, name }) {
                 }}
                 validationSchema={EmpSchema}
                 onSubmit={(values, { resetForm }) => {
-                  console.log(values);
+                  dispatch(createEmp(values));
                 }}
               >
                 {({ errors, touched }) => (
-
                   <Stack spacing={4} w={"full"} maxW={"md"}>
                     <Form>
                       <FormControl marginTop={"5"}>
@@ -140,19 +140,22 @@ function Model({ toggle, setToggle, name }) {
                         )}
                       </FormControl>
                       <ModalFooter>
-                      <Button
-                        colorScheme="red"
-                        mr={3}
-                        onClick={() => setToggle(!toggle)}
-                      >
-                        Close
-                      </Button>
-                      <Button colorScheme={"messenger"} type="submit">
-                        Save
-                      </Button>
-                    </ModalFooter>
+                        <Button
+                          colorScheme="red"
+                          mr={3}
+                          onClick={() => setToggle(!toggle)}
+                        >
+                          Close
+                        </Button>
+                        <Button
+                          colorScheme={"messenger"}
+                          type="submit"
+                          isLoading={set_emp_loading}
+                        >
+                          Save
+                        </Button>
+                      </ModalFooter>
                     </Form>
-                   
                   </Stack>
                 )}
               </Formik>
