@@ -14,7 +14,7 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
-import SignupSchema from "../../Validation/signup";
+import EmpSchema from "../../Validation/emp_add";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
 
@@ -31,10 +31,10 @@ function Model({ toggle, setToggle }) {
                 initialValues={{
                   username: "",
                   email: "",
-                  org: "",
-                  password: "",
+                  role: "",
+                  emp_id: "",
                 }}
-                validationSchema={SignupSchema}
+                validationSchema={EmpSchema}
                 onSubmit={(values, { resetForm }) => {
                   console.log(values);
                 }}
@@ -85,49 +85,40 @@ function Model({ toggle, setToggle }) {
                           ""
                         )}
                       </FormControl>
-
                       <FormControl marginTop={"5"}>
-                        <FormLabel>Your organization name</FormLabel>
+                        <FormLabel>Select role</FormLabel>
                         <Field
-                          name="org"
-                          as={CustomInputComponent}
-                          type={"text"}
-                          focusBorderColor={"messenger.500"}
+                          name="role"
+                          as={CustomSelectComponent}
                           borderColor={
-                            errors.org && touched.org ? "red.500" : "gray.300"
+                            errors.role && touched.role ? "red.500" : "gray.300"
                           }
                         />
-                        {errors.org && touched.org ? (
-                          <FormLabel color={"red.600"}>{errors.org}</FormLabel>
+
+                        {errors.role && touched.role ? (
+                          <FormLabel color={"red.600"}>
+                            {errors.role}
+                          </FormLabel>
                         ) : (
                           ""
                         )}
-                       
-                      </FormControl>
-                      <FormControl marginTop={"5"}>
-                      <FormLabel>Select role</FormLabel>
-                      <Select placeholder="Select role" colorScheme={"messenger"}>
-                          <option value="option1">Option 1</option>
-                          <option value="option2">Option 2</option>
-                          <option value="option3">Option 3</option>
-                        </Select>
                       </FormControl>
                       <FormControl marginTop={"5"}>
                         <FormLabel>Password</FormLabel>
                         <Field
-                          name="password"
+                          name="emp_id"
                           as={CustomInputComponent}
                           type={"password"}
                           focusBorderColor={"messenger.500"}
                           borderColor={
-                            errors.password && touched.password
+                            errors.emp_id && touched.emp_id
                               ? "red.500"
                               : "gray.300"
                           }
                         />
-                        {errors.password && touched.password ? (
+                        {errors.emp_id && touched.emp_id ? (
                           <FormLabel color={"red.600"}>
-                            {errors.password}
+                            {errors.emp_id}
                           </FormLabel>
                         ) : (
                           ""
@@ -161,4 +152,12 @@ export default Model;
 
 const CustomInputComponent = (props) => (
   <Input type={props.type} {...props} width={"full"} />
+);
+
+const CustomSelectComponent = (props) => (
+  <Select placeholder="Select role" colorScheme={"messenger"}>
+    <option value="developer">Developer</option>
+    <option value="project_manager">Project manager</option>
+    <option value="submitter">Submitter</option>
+  </Select>
 );
