@@ -1,16 +1,19 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Th, Td, chakra } from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, chakra , Link , Avatar} from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy, usePagination } from "react-table";
+import { useTable, useSortBy} from "react-table";
+import NextLink from 'next/link'
 
 function DataTable({ org }) {
   const data = React.useMemo(() => org, []);
 
   const columns = React.useMemo(
     () => [
+      
       {
-        Header: "ID",
-        accessor: "_id",
+         Header:"Avatar",
+         accessor: "av",
+         Cell:({row}) => (<Avatar name={row.original.username}/>)
       },
       {
         Header: "username",
@@ -24,6 +27,12 @@ function DataTable({ org }) {
         Header: "role",
         accessor: "role",
       },
+      {
+        Header: "View profile",
+        Cell: ({ row }) => (<>
+        <Link as={NextLink} href={`/software/profile/${row.original._id}`} >View profile</Link>
+        </> )
+      }
     ],
     []
   );
