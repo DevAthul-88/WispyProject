@@ -8,10 +8,10 @@ function DataTable({ org }) {
 
   const columns = React.useMemo(
     () => [
-        {
-            Header: "ID",
-            accessor: "_id"
-        },
+      {
+        Header: "ID",
+        accessor: "_id",
+      },
       {
         Header: "username",
         accessor: "username",
@@ -30,16 +30,14 @@ function DataTable({ org }) {
 
   const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
     useTable({ columns, data }, useSortBy);
- console.log(data);
+
   return (
     <Table {...getTableProps()}>
       <Thead>
         {headerGroups.map((headerGroup) => (
           <Tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map((column) => (
-              <Th
-                {...column.getHeaderProps(column.getSortByToggleProps())}
-              >
+              <Th {...column.getHeaderProps(column.getSortByToggleProps())}>
                 {column.render("Header")}
                 <chakra.span pl="4">
                   {column.isSorted ? (
@@ -61,9 +59,7 @@ function DataTable({ org }) {
           return (
             <Tr {...row.getRowProps()}>
               {row.cells.map((cell) => (
-                <Td {...cell.getCellProps()} >
-                  {cell.render("Cell")}
-                </Td>
+                <Td {...cell.getCellProps()}>{cell.render("Cell")}</Td>
               ))}
             </Tr>
           );

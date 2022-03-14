@@ -32,9 +32,15 @@ function employees() {
             
            <Flex justify={"space-between"} marginBottom={"5"}>
            <Text fontSize={"2xl"} fontWeight={"bold"}>Employee</Text>
-              <Stack>
-              <Button leftIcon={<FaPlus />} colorScheme={"messenger"} onClick={() => setToggle(true)}>Add user</Button>
-              </Stack>
+              {
+                userInfo && <>
+                {
+                  userInfo.role === "ADMIN" ? <Stack>
+                  <Button leftIcon={<FaPlus />} colorScheme={"messenger"} onClick={() => setToggle(true)}>Add user</Button>
+                  </Stack> : null
+                }
+                </>
+              }
            </Flex>
            <hr />
             

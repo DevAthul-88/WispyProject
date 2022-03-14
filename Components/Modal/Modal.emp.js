@@ -24,9 +24,10 @@ function Model({ toggle, setToggle, name }) {
   const { set_emp_loading, set_emp_error } = useSelector((state) => state.org);
   const { userInfo } = useSelector((state) => state.auth);
   const options = [
-    { value: "developer", label: "Developer" },
-    { value: "submitter", label: "Submitter" },
-    { value: "project_manger", label: "Project Manger" },
+    { value: "MODERATOR", label: "Moderator" },
+    { value: "DEVELOPER", label: "Developer" },
+    { value: "SUBMITTER", label: "Submitter" },
+    { value: "PROJECT_MANAGER", label: "Project Manger" },
   ];
 
   return (
