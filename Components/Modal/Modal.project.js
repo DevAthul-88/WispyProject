@@ -14,7 +14,7 @@ import {
     Select,
   } from "@chakra-ui/react";
   import { Formik, Form, Field } from "formik";
-  import EmpSchema from "../../Validation/emp_add";
+  import ProjectSchema from "../../Validation/project_add";
   import { useDispatch, useSelector } from "react-redux";
   import Alert from "../../Components/Alert";
   import { createEmp } from "../../redux/employee/action";
@@ -41,18 +41,14 @@ import {
               <Flex justify={"center"}>
                 <Formik
                   initialValues={{
-                    username: "",
-                    email: "",
-                    role: "",
-                    emp_id: "",
-                    org: name,
-                    userId:userInfo && userInfo._id
+                    title: "",
+                    description: "",
+                    members: [],
+                    priority: "",
                   }}
-                  validationSchema={EmpSchema}
+                  validationSchema={ProjectSchema}
                   onSubmit={(values, { resetForm }) => {
-                    dispatch(createEmp(values));
-  
-                      refresh()
+                    console.log(values);
                     
                   }}
                 >
@@ -67,14 +63,14 @@ import {
                             type={"text"}
                             focusBorderColor={"messenger.500"}
                             borderColor={
-                              errors.username && touched.username
+                              errors.title && touched.title
                                 ? "red.500"
                                 : "gray.300"
                             }
                           />
-                          {errors.username && touched.username ? (
+                          {errors.title && touched.title ? (
                             <FormLabel color={"red.600"}>
-                              {errors.username}
+                              {errors.title}
                             </FormLabel>
                           ) : (
                             ""
@@ -84,18 +80,18 @@ import {
                         <FormControl id="email" marginTop={"5"}>
                           <FormLabel>Project description</FormLabel>
                           <Field
-                            name="email"
+                            name="description"
                             as={CustomInputComponent}
                             focusBorderColor={"messenger.500"}
                             borderColor={
-                              errors.email && touched.email
+                              errors.description && touched.description
                                 ? "red.500"
                                 : "gray.300"
                             }
                           />
-                          {errors.email && touched.email ? (
+                          {errors.description && touched.description ? (
                             <FormLabel color={"red.600"}>
-                              {errors.email}
+                              {errors.description}
                             </FormLabel>
                           ) : (
                             ""
@@ -105,9 +101,11 @@ import {
                           <FormLabel>Select members to assign</FormLabel>
                           <Field
                             as={customSelectorComponent}
-                            name={"role"}
+                            name={"members"}
+                            multiple={true}
+                            
                             borderColor={
-                              errors.role && touched.role ? "red.500" : "gray.300"
+                              errors.members && touched.members ? "red.500" : "gray.300"
                             }
                           >
                             {options.map((e, index) => {
@@ -119,8 +117,8 @@ import {
                             })}
                           </Field>
   
-                          {errors.role && touched.role ? (
-                            <FormLabel color={"red.600"}>{errors.role}</FormLabel>
+                          {errors.members && touched.members ? (
+                            <FormLabel color={"red.600"}>{errors.members}</FormLabel>
                           ) : (
                             ""
                           )}
@@ -130,10 +128,10 @@ import {
                         <FormControl marginTop={"5"}>
                           <FormLabel>Select priority</FormLabel>
                           <Field
-                            as={customSelectorComponent}
-                            name={"role"}
+                            as={customSelectorComponent2}
+                            name={"priority"}
                             borderColor={
-                              errors.role && touched.role ? "red.500" : "gray.300"
+                              errors.priority && touched.priority ? "red.500" : "gray.300"
                             }
                           >
                             {options.map((e, index) => {
@@ -145,8 +143,8 @@ import {
                             })}
                           </Field>
   
-                          {errors.role && touched.role ? (
-                            <FormLabel color={"red.600"}>{errors.role}</FormLabel>
+                          {errors.priority && touched.priority ? (
+                            <FormLabel color={"red.600"}>{errors.priority}</FormLabel>
                           ) : (
                             ""
                           )}
@@ -188,6 +186,8 @@ import {
   );
   
   const customSelectorComponent = (props) => (
-    <Select {...props} placeholder="Select role"/>
+    <Select {...props} placeholder="Select role" icon={"none"} height={"5rem"}/>
   );
-  
+  const customSelectorComponent2 = (props) => (
+    <Select {...props} placeholder="Select role" />
+  );
