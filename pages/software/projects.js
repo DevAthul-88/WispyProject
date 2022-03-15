@@ -6,7 +6,7 @@ import Loader from "../../Components/Loader";
 import Head from "next/head";
 import NoData from "../../Components/noData";
 import {FaPlus} from 'react-icons/fa';
-import Modal from '../../Components/Modal/Modal.emp'
+import Modal from '../../Components/Modal/Modal.project'
 import Tables from '../../Components/Table/table.emp'
 
 function employees() {
