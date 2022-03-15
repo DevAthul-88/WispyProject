@@ -9,6 +9,9 @@ export const createProject = (credentials) => async (dispatch) => {
     try {
         dispatch({type:SET_PROJECT_REQUEST})
         const {data} = await axios.post("/api/project/create" , credentials)
+        if(data.refresh){
+            dispatch({type:SET_PROJECT_SUCCESS})
+        }
     } catch (error) {
         dispatch({type:SET_PROJECT_ERROR , payload:error.message})
     }
