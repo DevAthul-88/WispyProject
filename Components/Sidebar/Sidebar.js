@@ -29,21 +29,19 @@ import {
   FiUsers,
   FiBriefcase,
 } from 'react-icons/fi';
-import {FaTicketAlt} from 'react-icons/fa'
+import {FaTicketAlt , FaUser} from 'react-icons/fa'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import {useSelector} from 'react-redux'
 
-const LinkItemProps = {
-  name: String,
-  icon: String,
-}
+
 const LinkItems = [
   { name: 'Dashboard', icon: FiHome  , href: '/software'},
   { name: 'Projects', icon: FiBriefcase , href: '/software/projects'},
   { name: 'Employees', icon: FiUsers  , href: '/software/employees'},
   { name: 'Tickets', icon: FaTicketAlt , href: '/software/tickets'},
   { name: 'Settings', icon: FiSettings , href: '/software/settings'},
+  { name: 'Profile', icon: FaUser , href: '/software/profile'},
 ];
 
 export default function SidebarWithHeader({
@@ -203,9 +201,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
               <HStack>
                 <Avatar
                   size={'sm'}
-                  src={
-                    `https://www.gravatar.com/avatar/${userInfo && userInfo._id}?s=164&d=identicon`
-                  }
+                  name={userInfo && userInfo.username}
                 />
                 <VStack
                   display={{ base: 'none', md: 'flex' }}

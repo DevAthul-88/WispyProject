@@ -1,9 +1,66 @@
-import React from 'react'
+import React, { useEffect , useState } from "react";
+import { Container, Flex , Text , Stack , Button} from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchData } from "../../redux/org/action";
+import Loader from "../../Components/Loader";
+import Head from "next/head";
+import NoData from "../../Components/noData";
+import {FaPlus} from 'react-icons/fa';
+import Modal from '../../Components/Modal/Modal.emp'
+import Tables from '../../Components/Table/table.emp'
 
-function project() {
+function employees() {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
+  const { data, error, loading } = useSelector((state) => state.org);
+  const {refresh} = useSelector((state) => state.emp)
+  const [toggle , setToggle] = useState(false)
+
+  useEffect(() => {
+    dispatch(fetchData(userInfo._id));
+  }, [refresh]);
+
   return (
-    <div>project</div>
-  )
+    <>
+      <Head>
+        <title>WispyProject - Projects</title>
+      </Head>
+      <>
+        {loading ? (
+          <Loader />
+        ) : (
+          <Container maxWidth={"container.lg"} marginRight={"20"}>
+            
+           <Flex justify={"space-between"} marginBottom={"5"}>
+           <Text fontSize={"2xl"} fontWeight={"bold"}>Project</Text>
+              {
+                userInfo && <>
+                {
+                  userInfo.role === "ADMIN" ? <Stack>
+                  <Button leftIcon={<FaPlus />} colorScheme={"messenger"} onClick={() => setToggle(true)}>New project</Button>
+                  </Stack> : null
+                }
+                </>
+              }
+           </Flex>
+           <hr />
+            
+            {data && data.projects.length >= 1 ? (
+              ""
+            ) : (
+              <Flex justify={"center"}>
+                <NoData title={"No projects found."} />
+              </Flex>
+            )}
+         <Modal toggle={toggle} setToggle={setToggle} name={data && data.name}/>
+         <Stack marginTop={"5"}>
+         </Stack>
+
+          </Container>
+        )}
+      </>
+    </>
+  );
 }
 
-export default project
+export default employees;
