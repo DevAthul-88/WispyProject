@@ -19,10 +19,9 @@ import {
   import Alert from "../../Components/Alert";
   import { createEmp } from "../../redux/employee/action";
   
-  function Model({ toggle, setToggle, name }) {
+  function Model({ toggle, setToggle,  data }) {
     const dispatch = useDispatch();
     const { set_emp_loading, set_emp_error , refresh } = useSelector((state) => state.emp);
-    const { data } = useSelector((state) => state.org);
     const options = [
       { value: "high", label: "High" },
       { value: "medium", label: "Medium" },
@@ -30,13 +29,12 @@ import {
       { value: "none", label: "None" },
     ];
 
-    const members = [
-        data.employees.map((e) => {
+    const members = data.employees.map((e) => {
             return {
-                value:{id:e._id} , label: e.username
+                value:e._id , label: e.username
             }
         })
-    ]
+    
   
     return (
       <>
@@ -114,7 +112,7 @@ import {
                               errors.members && touched.members ? "red.500" : "gray.300"
                             }
                           >
-                            {members[0].map((e, index) => {
+                            {members.map((e, index) => {
                               return (
                                 <option value={e.value} key={index}>
                                   {e.label}
@@ -192,7 +190,7 @@ import {
   );
   
   const customSelectorComponent = (props) => (
-    <Select {...props}  icon={"none"} height={"8rem"}/>
+    <Select {...props}  icon={"none"} height={"8rem"} multiple/>
   );
   const customSelectorComponent2 = (props) => (
     <Select {...props} placeholder="Select priority" />

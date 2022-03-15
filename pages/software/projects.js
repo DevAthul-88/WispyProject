@@ -52,7 +52,7 @@ function employees() {
                 <NoData title={"No projects found."} />
               </Flex>
             )}
-         <Modal toggle={toggle} setToggle={setToggle} name={data && data.name}/>
+        {data &&  <Modal toggle={toggle} setToggle={setToggle} data={data && data}/>}
          <Stack marginTop={"5"}>
          </Stack>
 
