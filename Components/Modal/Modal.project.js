@@ -22,20 +22,28 @@ import {
   function Model({ toggle, setToggle, name }) {
     const dispatch = useDispatch();
     const { set_emp_loading, set_emp_error , refresh } = useSelector((state) => state.emp);
-    const { userInfo } = useSelector((state) => state.auth);
+    const { data } = useSelector((state) => state.org);
     const options = [
-      { value: "MODERATOR", label: "Moderator" },
-      { value: "DEVELOPER", label: "Developer" },
-      { value: "SUBMITTER", label: "Submitter" },
-      { value: "PROJECT_MANAGER", label: "Project Manger" },
+      { value: "high", label: "High" },
+      { value: "medium", label: "Medium" },
+      { value: "low", label: "Low" },
+      { value: "none", label: "None" },
     ];
+
+    const members = [
+        data.employees.map((e) => {
+            return {
+                value:{id:e._id} , label: e.username
+            }
+        })
+    ]
   
     return (
       <>
         <Modal isOpen={toggle} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>Add employees</ModalHeader>
+            <ModalHeader>New project</ModalHeader>
             <ModalBody>
               {set_emp_error && <Alert trigger={true} type={"error"} description={set_emp_error}/>}
               <Flex justify={"center"}>
@@ -101,14 +109,12 @@ import {
                           <FormLabel>Select members to assign</FormLabel>
                           <Field
                             as={customSelectorComponent}
-                            name={"members"}
-                            multiple={true}
-                            
+                            name={"members"}    
                             borderColor={
                               errors.members && touched.members ? "red.500" : "gray.300"
                             }
                           >
-                            {options.map((e, index) => {
+                            {members[0].map((e, index) => {
                               return (
                                 <option value={e.value} key={index}>
                                   {e.label}
@@ -186,8 +192,8 @@ import {
   );
   
   const customSelectorComponent = (props) => (
-    <Select {...props} placeholder="Select role" icon={"none"} height={"5rem"}/>
+    <Select {...props}  icon={"none"} height={"8rem"}/>
   );
   const customSelectorComponent2 = (props) => (
-    <Select {...props} placeholder="Select role" />
+    <Select {...props} placeholder="Select priority" />
   );
