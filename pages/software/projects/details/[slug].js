@@ -52,7 +52,7 @@ function Slug() {
                    <Details data={proj}/>
                   </TabPanel>
                   <TabPanel>
-                    <Comment />
+                    <Comment comment={proj.comments}/>
                   </TabPanel>
                 </TabPanels>
               </Tabs>

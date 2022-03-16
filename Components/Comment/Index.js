@@ -3,11 +3,11 @@ import {Flex , Stack} from '@chakra-ui/react'
 import Comments from './Comments'
 import Form from './Form'
 
-function Index() {
+function Index({comment}) {
   return (
     <Flex justify={"space-between"} py={{ base: 18, md: 4 }} direction={{base: "column", md: "row" }}>
      <Stack>
-         <Comments />
+         <Comments comment={comment}/>
      </Stack>
      <Stack>
          <Form />

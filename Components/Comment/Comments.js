@@ -1,8 +1,13 @@
 import React from 'react'
+import Message from '../../Components/noData'
 
-function Comments() {
+function Comments({comment}) {
   return (
-    <div>Comments</div>
+    <div>
+      {
+        !comment ? <Message title={"no comments"}/> : <></>
+      }
+    </div>
   )
 }
 
