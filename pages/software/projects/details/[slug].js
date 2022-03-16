@@ -15,6 +15,7 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import Details from '../../../../Components/project.details'
+import Comment from '../../../../Components/Comment/Index'
 
 function Slug() {
   const dispatch = useDispatch();
@@ -38,7 +39,7 @@ function Slug() {
             <Loader />
           ) : (
             <Container maxWidth={"container.lg"} marginRight={"20"}>
-              <Tabs isFitted variant="soft-rounded" colorScheme={"messenger"}>
+              <Tabs isFitted variant="soft-rounded" colorScheme={"facebook"}>
                 <TabList mb="1em">
                   <Tab>Details</Tab>
                   <Tab>Comments</Tab>
@@ -51,7 +52,7 @@ function Slug() {
                    <Details data={proj}/>
                   </TabPanel>
                   <TabPanel>
-                    <p>two!</p>
+                    <Comment />
                   </TabPanel>
                 </TabPanels>
               </Tabs>
