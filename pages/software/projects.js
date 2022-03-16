@@ -7,7 +7,7 @@ import Head from "next/head";
 import NoData from "../../Components/noData";
 import {FaPlus} from 'react-icons/fa';
 import Modal from '../../Components/Modal/Modal.project'
-import Tables from '../../Components/Table/table.emp'
+import Tables from '../../Components/Table/table.proj'
 
 function employees() {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ function employees() {
            <hr />
             
             {data && data.projects.length >= 1 ? (
-              ""
+              <> <Tables projects={data.projects}/></>
             ) : (
               <Flex justify={"center"}>
                 <NoData title={"No projects found."} />
@@ -55,7 +55,7 @@ function employees() {
         {data &&  <Modal toggle={toggle} setToggle={setToggle} data={data && data}/>}
          <Stack marginTop={"5"}>
          </Stack>
-
+          
           </Container>
         )}
       </>

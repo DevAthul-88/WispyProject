@@ -21,6 +21,8 @@ export default async function handler(req , res){
                   flagged:false,
                   approved:false
               },
+              createdAt:Date.now(),
+              updatedAt:Date.now(),
               comments:[]
           }
         
