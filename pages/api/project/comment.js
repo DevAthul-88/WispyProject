@@ -10,11 +10,10 @@ export default async function handler(req, res) {
         userId: userId,
         username: username,
         comment: comment,
+        createdAt:Date.now()
       };
-      console.log(req.body);
-      const data =  await orgModel.updateOne({_id:orgId , "projects.id":projectId },{$push:{"projects.$.comments":commentData}});
-      console.log(data);
-      res.send({ refresh: true });
+
+       await orgModel.updateOne({_id:orgId , "projects.id":projectId },{$push:{"projects.$.comments":commentData}});
     } catch (error) {
       console.log(error.message);
       res.send({ error: error.message });

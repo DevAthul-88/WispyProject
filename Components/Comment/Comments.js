@@ -1,24 +1,38 @@
 import React from 'react';
 import Message from '../../Components/noData';
-import {Box, Avatar , Text , Flex , Link}  from '@chakra-ui/react'
+import {Box, Avatar , Text , Flex , Link , Button}  from '@chakra-ui/react'
+import { format } from 'timeago.js';
+import NextLink from 'next/link'
+import { useSelector } from "react-redux";
 
 function Comments({comment}) {
-  console.log(comment);
+  const { userInfo } = useSelector((state) => state.auth);
   return (
     <div>
       {
         comment.length <= 0 ? <Message title={"no comments"}/> : <div>
-          <Box borderWidth={"thin"} borderRadius="md" padding={"4"} maxW="xl">
+         {
+           comment.map((e , index) => {
+            return (
+              <Box borderWidth={"thin"} borderRadius="md" padding={"4"} maxW="xl" key={index} marginTop={"2"}>
             <Flex>
-            <Avatar name="comments"/>
-             <Link verticalAlign={"bottom"} margin="2">Comments</Link>
+            <Avatar name={e.username}/>
+             <Link verticalAlign={"bottom"} margin="2" display={"block"} as={NextLink} href={`/profile/${e.userId}`}>{e.username}</Link>
             
             </Flex>
             <Text marginTop={"5"}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis commodi quos possimus sequi beatae placeat maiores non, laborum iure ullam quia. Beatae, nulla? Officia odit repudiandae veniam id laboriosam eveniet.
+            {e.comment}
             </Text>
-            <Text marginTop={"2"}>{Date.now()}</Text>
+            <Flex justify={"space-between"}>
+            <Text marginTop={"2"}>{format(e.createAt)}</Text>
+             {
+               userInfo._id == e.userId ? <Button colorScheme={"red"} size="sm">Delete</Button> : null
+             }
+            </Flex>
           </Box>
+            )
+           })
+         }
         </div>
       }
     </div>
