@@ -5,9 +5,7 @@ import Loader from "../../../../Components/Loader";
 import { useEffect } from "react";
 import { fetchData } from "../../../../redux/org/action";
 import {
-  Heading,
   Container,
-  Text,
   Tab,
   TabList,
   TabPanel,
@@ -35,11 +33,11 @@ function Slug() {
         <Loader />
       ) : (
         <>
-          {proj == undefined || null ? (
+          {proj == undefined || proj == null  || proj.length === 0 ? (
             <Loader />
           ) : (
             <Container maxWidth={"container.lg"} marginRight={"20"}>
-              <Tabs isFitted variant="soft-rounded" colorScheme={"facebook"}>
+              <Tabs isFitted variant="solid-rounded" colorScheme={"messenger"}>
                 <TabList mb="1em">
                   <Tab>Details</Tab>
                   <Tab>Comments</Tab>
@@ -52,7 +50,7 @@ function Slug() {
                    <Details data={proj}/>
                   </TabPanel>
                   <TabPanel>
-                    <Comment comment={proj.comments}/>
+                    <Comment comment={proj[0].comments}/>
                   </TabPanel>
                 </TabPanels>
               </Tabs>

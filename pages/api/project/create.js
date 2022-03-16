@@ -15,7 +15,7 @@ export default async function handler(req , res){
               title,
               description,
               members,
-              todo:[],
+              todo:new Array(),
               priority,
               completed:{
                   flagged:false,
@@ -23,7 +23,7 @@ export default async function handler(req , res){
               },
               createdAt:Date.now(),
               updatedAt:Date.now(),
-              comments:[]
+              comments:new Array()
           }
         
 
