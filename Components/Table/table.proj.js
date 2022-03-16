@@ -4,7 +4,21 @@ import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy} from "react-table";
 import NextLink from 'next/link'
 
-function DataTable({ projects }) {
+function DataTable({ projects , user }) {
+    const colorScheme = (priority) => {
+        if(priority == "high"){
+            return 'red'
+        }
+        else if(priority == "medium"){
+            return "yellow"
+        }
+        else if(priority == "low"){
+            return "green"
+        }
+        else{
+            return "none"
+        }
+    }
   const data = React.useMemo(() => projects, []);
 
   const columns = React.useMemo(
@@ -22,15 +36,22 @@ function DataTable({ projects }) {
       {
         Header: "priority",
         Cell: ({ row }) => (<>
-            <Badge>{row.original.priority}</Badge>
+            <Badge colorScheme={colorScheme(row.original.priority)}>{row.original.priority}</Badge>
             </> )
       },
       {
         Header: "View profile",
         Cell: ({ row }) => (<>
-        <Link as={NextLink} href={`/software/projects/details/${row.original.id}`} >View details</Link>
+        <Link  as={NextLink} href={`/software/projects/details/${row.original.id}`} >View details</Link>
         </> )
-      }
+      },
+
+       user.role === "ADMIN" || user.role === "PROJECT_MANAGER" ?  {
+        Header: "Edit / Delete",
+        Cell: ({ row }) => (<>
+        <Link as={NextLink} href={`/software/projects/edit/${row.original.id}`} >Edit / Delete</Link>
+        </> )
+      } : null
     ],
     []
   );
