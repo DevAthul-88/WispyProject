@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import Details from '../../../../Components/project.details'
 import Comment from '../../../../Components/Comment/Index'
+import Table from '../../../../Components/Table/users'
 
 function Slug() {
   const dispatch = useDispatch();
@@ -24,6 +25,9 @@ function Slug() {
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
   }, []);
+  const org = data && data.projects.filter((e) => e.id == router.query.slug);
+  const users = org && data && data.employees.filter((e) => org[0].members.includes(e.id))
+
   return (
     <div>
       <Head>
@@ -42,7 +46,6 @@ function Slug() {
                   <Tab>Details</Tab>
                   <Tab>Comments</Tab>
                   <Tab>Todos</Tab>
-                  <Tab>Attachments</Tab>
                   <Tab>Users</Tab>
                 </TabList>
                 <TabPanels>
@@ -51,6 +54,12 @@ function Slug() {
                   </TabPanel>
                   <TabPanel>
                     <Comment comment={proj[0].comments}/>
+                  </TabPanel>
+                  <TabPanel>
+
+                  </TabPanel>
+                  <TabPanel>
+                    {/* <Table /> */}
                   </TabPanel>
                 </TabPanels>
               </Tabs>
