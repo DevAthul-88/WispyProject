@@ -82,12 +82,20 @@ function Comments({ comment }) {
                 </Flex>
                 <Text marginTop={"5"}>{e.comment}</Text>
                 <Flex justify={"space-between"}>
-                  <Text marginTop={"2"}>{format(e.createAt)}</Text>
-                  {userInfo._id == e.userId ? (
-                    <Button colorScheme={"red"} size="sm" onClick={onOpen}>
-                      Delete
-                    </Button>
-                  ) : null}
+                  <Text marginTop={"2"}>{format(e.createdAt)}</Text>
+                  {
+                    userInfo.role == "ADMIN" || userInfo.role == "PROJECT_MANAGER" ? 
+                      <Button colorScheme={"red"} size="sm" onClick={onOpen}>
+                        Delete
+                      </Button> : <>
+                      {userInfo._id == e.userId ? (
+                      <Button colorScheme={"red"} size="sm" onClick={onOpen}>
+                        Delete
+                      </Button>
+                    ) : null}
+                      </>
+                     
+                  }
                 </Flex>
 
                 <Modal isOpen={isOpen} onClose={onClose}>

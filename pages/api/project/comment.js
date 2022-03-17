@@ -7,14 +7,13 @@ db();
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      const date = new Date()
       const { userId, orgId, username, projectId, comment } = req.body;
       const commentData = {
         userId: userId,
         username: username,
         comment: comment,
         id:uuidv4(),
-        createdAt:date.getDate()
+        createdAt:Date.now()
       };
 
        await orgModel.updateOne({_id:orgId , "projects.id":projectId },{$push:{"projects.$.comments":commentData}});
