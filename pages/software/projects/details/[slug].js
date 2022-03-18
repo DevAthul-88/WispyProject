@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../../../Components/Loader";
-import { useEffect } from "react";
+import { useEffect  , useState} from "react";
 import { fetchData } from "../../../../redux/org/action";
 import {
   Container,
@@ -18,16 +18,19 @@ import Table from '../../../../Components/Table/users'
 import Todo from '../../../../Components/Todo/Todo'
 
 function Slug() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.org);
   const { userInfo } = useSelector((state) => state.auth);
-  const router = useRouter();
+  
+  
+  
   const proj = data && data.projects.filter((e) => e.id == router.query.slug);
+  const users = proj == undefined || proj == null  || proj.length === 0 ? [] : data && data.employees.filter((e) => proj[0].members.includes(e.id))
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
   }, []);
-  const org = data && data.projects.filter((e) => e.id == router.query.slug);
-  const users = org && data && data.employees.filter((e) => org[0].members.includes(e.id))
+
 
   return (
     <div>
@@ -57,7 +60,7 @@ function Slug() {
                     <Comment comment={proj[0].comments}/>
                   </TabPanel>
                   <TabPanel>
-                    <Todo todo={proj && proj[0].todo}/>
+                    <Todo todo={proj[0].todo}/>
                   </TabPanel>
                   <TabPanel>
                     {users && <Table org={users}/>}

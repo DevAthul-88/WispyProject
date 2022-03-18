@@ -6,7 +6,7 @@ function Todo({todo}) {
   return (
     <div>
       {
-        todo.length <= 1 ? <Alert description={"No todos found!"} type="red" trigger/> : <Index />
+        todo.length <= 1 ? <Alert description={"No todos found!"} type="error" trigger/> : <Index />
       }
     </div>
   )
