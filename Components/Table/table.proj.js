@@ -85,7 +85,7 @@ function DataTable({ projects , user }) {
         {rows.map((row) => {
           prepareRow(row);
           return (
-            <Tr {...row.getRowProps()}>
+            <Tr {...row.getRowProps()} >
               {row.cells.map((cell) => (
                 <Td {...cell.getCellProps()}>{cell.render("Cell")}</Td>
               ))}

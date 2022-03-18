@@ -15,6 +15,7 @@ import {
 import Details from '../../../../Components/project.details'
 import Comment from '../../../../Components/Comment/Index'
 import Table from '../../../../Components/Table/users'
+import Todo from '../../../../Components/Todo/Todo'
 
 function Slug() {
   const dispatch = useDispatch();
@@ -56,7 +57,7 @@ function Slug() {
                     <Comment comment={proj[0].comments}/>
                   </TabPanel>
                   <TabPanel>
-
+                    <Todo />
                   </TabPanel>
                   <TabPanel>
                     {users && <Table org={users}/>}
