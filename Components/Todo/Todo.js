@@ -1,8 +1,14 @@
 import React from 'react'
+import Index from './Index'
+import Alert from '../Alert'
 
-function Todo() {
+function Todo({todo}) {
   return (
-    <div>Todo</div>
+    <div>
+      {
+        todo.length <= 1 ? <Alert description={"No todos found!"} type="red" trigger/> : <Index />
+      }
+    </div>
   )
 }
 
