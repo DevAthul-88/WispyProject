@@ -59,7 +59,7 @@ function Slug() {
 
                   </TabPanel>
                   <TabPanel>
-                    {/* <Table /> */}
+                    {users && <Table org={users}/>}
                   </TabPanel>
                 </TabPanels>
               </Tabs>
