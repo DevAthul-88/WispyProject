@@ -115,13 +115,13 @@ export default function Details({ data }) {
                     <Text as={"span"} fontWeight={"bold"}>
                       Flagged as completed:
                     </Text>{" "}
-                    {data[0].completed.flagged}
+                    {data[0].completed.flagged.toString()}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       Completed:
                     </Text>{" "}
-                    {data[0].completed.approved}
+                    {data[0].completed.approved.toString()}
                   </ListItem>
                 </List>
               </Box>
