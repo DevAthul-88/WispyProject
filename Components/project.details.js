@@ -10,6 +10,7 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import Loader from "../Components/Loader";
+import {format} from 'timeago.js'
 
 export default function Details({ data }) {
   return (
@@ -102,13 +103,13 @@ export default function Details({ data }) {
                     <Text as={"span"} fontWeight={"bold"}>
                       Created At:
                     </Text>{" "}
-                    {data[0].createdAt}
+                    {format(data[0].createdAt)}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
                       updated At:
                     </Text>{" "}
-                    {data[0].updatedAt}
+                    {format(data[0].updatedAt)}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
