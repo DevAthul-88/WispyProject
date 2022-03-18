@@ -28,7 +28,6 @@ export default async function handler(req, res) {
           org,
           role,
           password: hashedPassword,
-          assignedProjects: [],
         };
         await orgModel.updateOne(
           { "owner.id": userId },
