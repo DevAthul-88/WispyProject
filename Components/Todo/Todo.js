@@ -3,6 +3,8 @@ import Index from "./Index";
 import Alert from "../noData";
 import { Flex, Button, Text } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
+import Alerts from '../Alert'
+import axios from 'axios'
 import {
   Modal,
   ModalOverlay,
@@ -26,6 +28,8 @@ function Todo({ todo, users }) {
   const { userInfo } = useSelector((state) => state.auth);
   const { data } = useSelector((state) => state.org);
   const dispatch = useDispatch();
+  const [loading , setLoading] = React.useState(false)
+  const [message , setMessage] = React.useState("")
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
@@ -68,6 +72,9 @@ function Todo({ todo, users }) {
           <ModalHeader>Add a new todo</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
+            {
+              message && <Alerts type={"error"} description={Alerts} trigger/>
+            }
             <Flex justify={"center"}>
               <Formik
                 initialValues={{
@@ -78,8 +85,20 @@ function Todo({ todo, users }) {
                   isCompleted:false
                 }}
                 validationSchema={TodoSchema}
-                onSubmit={(values, { resetForm }) => {
-                  console.log(values);
+                onSubmit={(values, { resetForm } )  =>  {
+                   async function createTodo(){
+                     setLoading(true)
+                    const {data} = await axios.post("/api/org/todo" , values)
+                    if(data.error){
+                      setLoading(false)
+                      setMessage(data.error)
+                    }
+                    if(data.success){
+                      setLoading(false)
+                      resetForm()
+                    }
+                   }
+                   createTodo()
                 }}
               >
                 {({ errors, touched }) => (
@@ -107,7 +126,7 @@ function Todo({ todo, users }) {
                         )}
                       </FormControl>
 
-                      <FormControl id="email" marginTop={"5"}>
+                      <FormControl marginTop={"5"}>
                         <FormLabel>Todo description</FormLabel>
                         <Field
                           name="description"
@@ -132,7 +151,7 @@ function Todo({ todo, users }) {
                         <Button colorScheme="red" mr={3} onClick={onClose}>
                           Close
                         </Button>
-                        <Button colorScheme="messenger">Save</Button>
+                        <Button colorScheme="messenger" type="submit" isLoading={loading}>Create</Button>
                       </ModalFooter>
                     </Form>
                   </Stack>
