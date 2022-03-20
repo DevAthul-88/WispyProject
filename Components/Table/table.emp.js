@@ -76,10 +76,10 @@ function DataTable({ org }) {
  <Flex justify={"space-between"}>
    <div></div>
  <div className="pagination">
-        <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
+        <Button onClick={() => previousPage()} disabled={!canPreviousPage} colorScheme="messenger">
           {'<'}
         </Button>{' '}
-        <Button onClick={() => nextPage()} disabled={!canNextPage}>
+        <Button onClick={() => nextPage()} disabled={!canNextPage} colorScheme="messenger">
           {'>'}
         </Button>{' '}
        
@@ -92,6 +92,7 @@ function DataTable({ org }) {
         <span>
           | Go to page:{' '}
           <Input
+           focusBorderColor="messenger.500"
             type="number"
             defaultValue={pageIndex + 1}
             onChange={e => {
@@ -102,6 +103,8 @@ function DataTable({ org }) {
           />
         </span>{' '}
         <Select
+        marginTop={"4"}
+        focusBorderColor="messenger.500"
           value={pageSize}
           onChange={e => {
             setPageSize(Number(e.target.value))
