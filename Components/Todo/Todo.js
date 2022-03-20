@@ -12,12 +12,20 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
+  Stack,
+  FormControl,
+  FormLabel,
+  Input,
+  Textarea,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import TodoSchema from "../../Validation/todo";
+import { Formik, Form, Field } from "formik";
 
 function Todo({ todo, users }) {
   const { userInfo } = useSelector((state) => state.auth);
-
+  const { data } = useSelector((state) => state.org);
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <div>
@@ -59,18 +67,87 @@ function Todo({ todo, users }) {
         <ModalContent>
           <ModalHeader>Add a new todo</ModalHeader>
           <ModalCloseButton />
-          <ModalBody></ModalBody>
+          <ModalBody>
+            <Flex justify={"center"}>
+              <Formik
+                initialValues={{
+                  title: "",
+                  description: "",
+                  userId:userInfo._id,
+                  orgId: data._id,
+                  isCompleted:false
+                }}
+                validationSchema={TodoSchema}
+                onSubmit={(values, { resetForm }) => {
+                  console.log(values);
+                }}
+              >
+                {({ errors, touched }) => (
+                  <Stack spacing={4} w={"full"} maxW={"md"}>
+                    <Form>
+                      <FormControl marginTop={"5"}>
+                        <FormLabel>Todo title</FormLabel>
+                        <Field
+                          name="title"
+                          as={CustomInputComponent}
+                          type={"text"}
+                          focusBorderColor={"messenger.500"}
+                          borderColor={
+                            errors.title && touched.title
+                              ? "red.500"
+                              : "gray.300"
+                          }
+                        />
+                        {errors.title && touched.title ? (
+                          <FormLabel color={"red.600"}>
+                            {errors.title}
+                          </FormLabel>
+                        ) : (
+                          ""
+                        )}
+                      </FormControl>
 
-          <ModalFooter>
-            <Button colorScheme="red" mr={3} onClick={onClose}>
-              Close
-            </Button>
-            <Button  colorScheme="messenger">Save</Button>
-          </ModalFooter>
+                      <FormControl id="email" marginTop={"5"}>
+                        <FormLabel>Todo description</FormLabel>
+                        <Field
+                          name="description"
+                          as={CustomInputComponent}
+                          focusBorderColor={"messenger.500"}
+                          borderColor={
+                            errors.description && touched.description
+                              ? "red.500"
+                              : "gray.300"
+                          }
+                        />
+                        {errors.description && touched.description ? (
+                          <FormLabel color={"red.600"}>
+                            {errors.description}
+                          </FormLabel>
+                        ) : (
+                          ""
+                        )}
+                      </FormControl>
+
+                      <ModalFooter>
+                        <Button colorScheme="red" mr={3} onClick={onClose}>
+                          Close
+                        </Button>
+                        <Button colorScheme="messenger">Save</Button>
+                      </ModalFooter>
+                    </Form>
+                  </Stack>
+                )}
+              </Formik>
+            </Flex>
+          </ModalBody>
         </ModalContent>
       </Modal>
     </div>
   );
 }
+
+const CustomInputComponent = (props) => (
+  <Input type={props.type} {...props} width={"full"} />
+);
 
 export default Todo;
