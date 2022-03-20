@@ -62,10 +62,10 @@ function Todo({ todo, users }) {
           <ModalBody></ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={onClose}>
+            <Button colorScheme="red" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button variant="ghost">Secondary Action</Button>
+            <Button  colorScheme="messenger">Save</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

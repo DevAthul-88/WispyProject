@@ -28,14 +28,13 @@ function Index() {
 
   return (
     <Flex
-      w="full"
-      p={50}
+      marginTop={"5"}
       alignItems="center"
       justifyContent="center"
     >
       <Table
         w="full"
-        bg={useColorModeValue("white", "gray.800")}
+
         display={{
           base: "block",
           md: "table",

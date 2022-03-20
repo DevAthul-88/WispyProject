@@ -22,7 +22,7 @@ export default async function handler(req, res) {
       } else {
         const hashedPassword = await bcrypt.hash(emp_id, 10);
         const employee = {
-          id: uuidv4(),
+          _id: uuidv4(),
           username,
           email,
           org,
