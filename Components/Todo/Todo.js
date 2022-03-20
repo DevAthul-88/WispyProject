@@ -1,5 +1,6 @@
 import React from "react";
 import Index from "./Index";
+import { useRouter } from "next/router";
 import Alert from "../noData";
 import { Flex, Button, Text } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
@@ -25,6 +26,7 @@ import TodoSchema from "../../Validation/todo";
 import { Formik, Form, Field } from "formik";
 
 function Todo({ todo, users }) {
+  const router = useRouter()
   const { userInfo } = useSelector((state) => state.auth);
   const { data } = useSelector((state) => state.org);
   const dispatch = useDispatch();
@@ -82,6 +84,7 @@ function Todo({ todo, users }) {
                   description: "",
                   userId:userInfo._id,
                   orgId: data._id,
+                  projectId:router.query.slug,
                   isCompleted:false
                 }}
                 validationSchema={TodoSchema}
