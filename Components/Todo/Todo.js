@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Index from "./Index";
 import { useRouter } from "next/router";
 import Alert from "../noData";
@@ -19,20 +19,30 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Textarea,
 } from "@chakra-ui/react";
 import { useSelector, useDispatch } from "react-redux";
 import TodoSchema from "../../Validation/todo";
 import { Formik, Form, Field } from "formik";
 
-function Todo({ todo, users }) {
+function Todo({ users }) {
   const router = useRouter()
   const { userInfo } = useSelector((state) => state.auth);
   const { data } = useSelector((state) => state.org);
   const dispatch = useDispatch();
   const [loading , setLoading] = React.useState(false)
   const [message , setMessage] = React.useState("")
+  const [todo , setTodo] = React.useState([])
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+   async function fetchTodo(){
+      const {data} = await axios.get("/api/org/todo")
+      if(data.error) return console.log(data.error);
+      setTodo(data.todo)
+   }
+   fetchTodo();
+  },[])
+
   return (
     <div>
       <Flex justify={"space-between"}>

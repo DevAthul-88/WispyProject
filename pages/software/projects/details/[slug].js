@@ -60,7 +60,7 @@ function Slug() {
                     <Comment comment={proj[0].comments}/>
                   </TabPanel>
                   <TabPanel>
-                    <Todo todo={proj[0].todo} users={users}/>
+                    <Todo  users={users}/>
                   </TabPanel>
                   <TabPanel>
                     {users && <Table org={users}/>}
