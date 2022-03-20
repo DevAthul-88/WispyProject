@@ -16,8 +16,8 @@ export default async function handler(req, res) {
           isCompleted: req.body.isCompleted,
           projectId: req.body.projectId
       }
-      await orgModel.updateOne({_id:req.body.orgId , "project.id":req.body.projectId} , {
-        $push:{todo:todoModal}
+      await orgModel.updateOne({_id:req.body.orgId , "projects.id":req.body.projectId} , {
+        $push:{"projects.$.todo":todoModal}
       })
       res.send({success: true})
     } catch (error) {
