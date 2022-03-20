@@ -1,19 +1,32 @@
 import React from "react";
-import { Table, Thead, Tbody, Tr, Th, Td, chakra , Link , Avatar} from "@chakra-ui/react";
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  chakra,
+  Select,
+  Link,
+  Flex,
+  Input,
+  Button,
+  Avatar,
+} from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy} from "react-table";
-import NextLink from 'next/link'
+import { useTable, useSortBy, usePagination } from "react-table";
+import NextLink from "next/link";
 
 function DataTable({ org }) {
   const data = React.useMemo(() => org, []);
 
   const columns = React.useMemo(
     () => [
-      
       {
-         Header:"Avatar",
-         accessor: "av",
-         Cell:({row}) => (<Avatar name={row.original.username}/>)
+        Header: "Avatar",
+        accessor: "av",
+        Cell: ({ row }) => <Avatar name={row.original.username} />,
       },
       {
         Header: "username",
@@ -29,18 +42,79 @@ function DataTable({ org }) {
       },
       {
         Header: "View profile",
-        Cell: ({ row }) => (<>
-        <Link as={NextLink} href={`/software/profile/${row.original._id}`} >View profile</Link>
-        </> )
-      }
+        Cell: ({ row }) => (
+          <>
+            <Link as={NextLink} href={`/software/profile/${row.original._id}`}>
+              View profile
+            </Link>
+          </>
+        ),
+      },
     ],
     []
   );
 
-  const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-    useTable({ columns, data }, useSortBy);
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    page, 
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    setPageSize,
+    state: { pageIndex, pageSize },
+    prepareRow,
+  } = useTable({ columns, data }, useSortBy, usePagination);
 
   return (
+  <>
+ <Flex justify={"space-between"}>
+   <div></div>
+ <div className="pagination">
+        <Button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </Button>{' '}
+        <Button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </Button>{' '}
+       
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <span>
+          | Go to page:{' '}
+          <Input
+            type="number"
+            defaultValue={pageIndex + 1}
+            onChange={e => {
+              const page = e.target.value ? Number(e.target.value) - 1 : 0
+              gotoPage(page)
+            }}
+            style={{ width: '100px' }}
+          />
+        </span>{' '}
+        <Select
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value))
+          }}
+        >
+          {[5 , 10, 20, 30, 40, 50].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </Select>
+      </div>
+ </Flex>
     <Table {...getTableProps()}>
       <Thead>
         {headerGroups.map((headerGroup) => (
@@ -63,7 +137,7 @@ function DataTable({ org }) {
         ))}
       </Thead>
       <Tbody {...getTableBodyProps()}>
-        {rows.map((row) => {
+        {page.map((row) => {
           prepareRow(row);
           return (
             <Tr {...row.getRowProps()}>
@@ -74,7 +148,9 @@ function DataTable({ org }) {
           );
         })}
       </Tbody>
+      
     </Table>
+  </>
   );
 }
 
