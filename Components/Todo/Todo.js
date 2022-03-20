@@ -28,7 +28,6 @@ function Todo({ users }) {
   const router = useRouter()
   const { userInfo } = useSelector((state) => state.auth);
   const { data } = useSelector((state) => state.org);
-  const dispatch = useDispatch();
   const [loading , setLoading] = React.useState(false)
   const [message , setMessage] = React.useState("")
   const [todo , setTodo] = React.useState([])
@@ -36,12 +35,14 @@ function Todo({ users }) {
 
   useEffect(() => {
    async function fetchTodo(){
-      const {data} = await axios.get("/api/org/todo")
-      if(data.error) return console.log(data.error);
-      setTodo(data.todo)
+      const omi = await axios.get(`/api/org/todo/?query=${router.query.slug}&orgId=${data._id}`)
+      if(omi.data.error) return console.log(omi.data.error);
+      const  final = omi.data.data !== undefined && omi.data.data !== null ? 
+      omi.data.data.projects.filter((e) => e.id == router.query.slug) : [[]]
+      setTodo(final[0])
    }
    fetchTodo();
-  },[])
+  },[data])
 
   return (
     <div>

@@ -23,5 +23,14 @@ export default async function handler(req, res) {
     } catch (error) {
       res.send({ error: error.message });
     }
+    
+  }
+  else if(req.method === "GET"){
+    try {
+      const todo = await orgModel.findOne({_id:req.query.orgId , "projects.id":req.query.query})
+      res.send({success: true , data: todo})
+    } catch (error) {
+      res.send({ error: error.message });
+    }
   }
 }
