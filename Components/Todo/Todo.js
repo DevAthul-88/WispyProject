@@ -30,19 +30,7 @@ function Todo({ users }) {
   const { data } = useSelector((state) => state.org);
   const [loading , setLoading] = React.useState(false)
   const [message , setMessage] = React.useState("")
-  const [todo , setTodo] = React.useState([])
   const { isOpen, onOpen, onClose } = useDisclosure();
-
-  useEffect(() => {
-   async function fetchTodo(){
-      const omi = await axios.get(`/api/org/todo/?query=${router.query.slug}&orgId=${data._id}`)
-      if(omi.data.error) return console.log(omi.data.error);
-      const  final = omi.data.data !== undefined && omi.data.data !== null ? 
-      omi.data.data.projects.filter((e) => e.id == router.query.slug) : [[]]
-      setTodo(final[0])
-   }
-   fetchTodo();
-  },[data])
 
   return (
     <div>
@@ -77,7 +65,7 @@ function Todo({ users }) {
           </>
         ) : null}
       </Flex>
-      {todo.length <= 1 ? <Alert title={"No todos found!"} /> : <Index />}
+     <Index orgId={data._id}/>
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
