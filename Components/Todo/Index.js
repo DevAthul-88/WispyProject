@@ -51,7 +51,7 @@ function DataTable({orgId}) {
         Header: "Edit",
         Cell: ({ row }) => (
           <>
-            <Button>
+            <Button colorScheme={"messenger"}>
                 <FaPen />
             </Button>
           </>
@@ -61,7 +61,7 @@ function DataTable({orgId}) {
         Header: "Delete",
         Cell: ({ row }) => (
           <>
-            <Button>
+            <Button colorScheme="red">
                 <FaTrash />
             </Button>
           </>
