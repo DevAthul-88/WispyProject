@@ -23,7 +23,7 @@ import {
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import axios from "axios";
-import { FaPen, FaTrash , FaCheck } from "react-icons/fa";
+import { FaPen, FaTrash, FaCheck } from "react-icons/fa";
 import { fetchData } from "../../redux/org/action";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
@@ -66,7 +66,7 @@ function DataTable({ orgId }) {
         Header: "Edit",
         Cell: ({ row }) => (
           <>
-            <Button colorScheme={"messenger"}>
+            <Button size={"sm"} colorScheme={"messenger"}>
               <FaPen />
             </Button>
           </>
@@ -79,8 +79,10 @@ function DataTable({ orgId }) {
             {userInfo.role === "ADMIN" ||
             userInfo.role === "PROJECT_MANAGER" ? (
               <Button
+                size={"sm"}
                 colorScheme="green"
                 onClick={() => handleComplete(row.original.id)}
+                disabled={row.original.isCompleted}
               >
                 <FaCheck />
               </Button>
@@ -88,13 +90,15 @@ function DataTable({ orgId }) {
               <>
                 {row.original.userId === userInfo._id ? (
                   <Button
+                    size={"sm"}
                     colorScheme="red"
                     onClick={() => handleComplete(row.original.id)}
+                    disabled={row.original.isCompleted}
                   >
                     <FaCheck />
                   </Button>
                 ) : (
-                  <Button colorScheme="red" disabled={true}>
+                  <Button size={"sm"} colorScheme="red" disabled={true}>
                     <FaCheck />
                   </Button>
                 )}
@@ -110,6 +114,7 @@ function DataTable({ orgId }) {
             {userInfo.role === "ADMIN" ||
             userInfo.role === "PROJECT_MANAGER" ? (
               <Button
+                size={"sm"}
                 colorScheme="red"
                 onClick={() => handleId(row.original.id)}
               >
@@ -119,13 +124,14 @@ function DataTable({ orgId }) {
               <>
                 {row.original.userId === userInfo._id ? (
                   <Button
+                    size={"sm"}
                     colorScheme="red"
                     onClick={() => handleId(row.original.id)}
                   >
                     <FaTrash />
                   </Button>
                 ) : (
-                  <Button colorScheme="red" disabled={true}>
+                  <Button size={"sm"} colorScheme="red" disabled={true}>
                     <FaTrash />
                   </Button>
                 )}
@@ -157,11 +163,18 @@ function DataTable({ orgId }) {
 
   const handleId = (id) => {
     setId(id);
+
     onOpen();
   };
-  const handleComplete = (id) => {
-    setId(id)
-  }
+  const handleComplete = async (id) => {
+    setId(id);
+    const omi = await axios.patch(
+      `/api/org/todo/?query=${router.query.slug}&orgId=${orgId}&todo=${id}`
+    );
+    if (omi.data.reload) {
+      dispatch(fetchData(userInfo._id));
+    }
+  };
   const handleDelete = async () => {
     const omi = await axios.delete(
       `/api/org/todo/?query=${router.query.slug}&orgId=${orgId}&todo=${id}`

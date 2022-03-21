@@ -39,6 +39,16 @@ export default async function handler(req, res) {
       })
       res.send({reload:true})
     } catch (error) {
+      res.send({ error: error.message });
+    }
+  }
+  else if(req.method === "PATCH"){
+    try {
+      await orgModel.updateOne({_id:req.query.orgId , "projects.id":req.query.query} , {
+        $set:{"projects.$.todo.0.isCompleted":true}
+      })
+      res.send({reload:true})
+    } catch (error) {
       console.log(error.message);
       res.send({ error: error.message });
     }
