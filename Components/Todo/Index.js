@@ -31,6 +31,7 @@ import { useSelector } from "react-redux";
 function DataTable({ orgId }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
+  const [id  , setId] = useState("")
   const org = useSelector((state) => state.org);
   const [todo, setTodo] = React.useState([]);
   useEffect(() => {
@@ -48,8 +49,8 @@ function DataTable({ orgId }) {
       setTodo(final[0].todo);
     }
     fetchTodo();
-  }, [todo, org, orgId]);
-  const data = React.useMemo(() => todo, [orgId, org, todo]);
+  }, []);
+  const data = React.useMemo(() => todo, [todo]);
   const columns = React.useMemo(
     () => [
       {
@@ -74,7 +75,7 @@ function DataTable({ orgId }) {
         Header: "Delete",
         Cell: ({ row }) => (
           <>
-            <Button colorScheme="red" onClick={onOpen}>
+            <Button colorScheme="red" onClick={() => handleId(row.original.id)}>
               <FaTrash />
             </Button>
           </>
@@ -100,6 +101,14 @@ function DataTable({ orgId }) {
     state: { pageIndex, pageSize },
     prepareRow,
   } = useTable({ columns, data }, useSortBy, usePagination);
+
+  const handleId = (id) => {
+    setId(id)
+    onOpen()
+  }
+  const handleDelete = () => {
+    console.log(id);
+  }
 
   return (
     <>
@@ -201,7 +210,7 @@ function DataTable({ orgId }) {
             <Button colorScheme="messenger" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme={"red"}>Delete</Button>
+            <Button colorScheme={"red"} onClick={handleDelete}>Delete</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

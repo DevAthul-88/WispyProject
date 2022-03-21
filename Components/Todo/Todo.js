@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import Index from "./Index";
 import { useRouter } from "next/router";
-import Alert from "../noData";
 import { Flex, Button, Text } from "@chakra-ui/react";
+import { fetchData } from "../../redux/org/action";
 import { AddIcon } from "@chakra-ui/icons";
 import Alerts from '../Alert'
 import axios from 'axios'
@@ -26,6 +26,7 @@ import { Formik, Form, Field } from "formik";
 
 function Todo({ users }) {
   const router = useRouter()
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { data } = useSelector((state) => state.org);
   const [loading , setLoading] = React.useState(false)
@@ -96,6 +97,7 @@ function Todo({ users }) {
                       setMessage(data.error)
                     }
                     if(data.success){
+                     dispatch(fetchData(userInfo._id));
                       setLoading(false)
                       resetForm()
                     }
