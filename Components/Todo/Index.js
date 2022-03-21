@@ -22,17 +22,19 @@ import {
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
-import NextLink from "next/link";
 import axios from "axios";
 import { FaPen, FaTrash } from "react-icons/fa";
+import { fetchData } from "../../redux/org/action";
 import { useRouter } from "next/router";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
+
 
 function DataTable({ orgId }) {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const [id  , setId] = useState("")
-  const org = useSelector((state) => state.org);
+  const {userInfo} = useSelector((state) => state.auth)
   const [todo, setTodo] = React.useState([]);
   useEffect(() => {
     async function fetchTodo() {
@@ -106,8 +108,11 @@ function DataTable({ orgId }) {
     setId(id)
     onOpen()
   }
-  const handleDelete = () => {
-    console.log(id);
+  const handleDelete  = async () => {
+    const omi = await axios.delete(`/api/org/todo/?query=${router.query.slug}&orgId=${orgId}&todo=${id}`)
+    if(omi.data.reload){
+      dispatch(fetchData(userInfo._id))
+    }
   }
 
   return (
