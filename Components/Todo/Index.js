@@ -19,6 +19,7 @@ import {
   useDisclosure,
   ModalHeader,
   ModalCloseButton,
+  Badge
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
@@ -61,6 +62,17 @@ function DataTable({ orgId }) {
       {
         Header: "Description",
         accessor: "description",
+      },
+      {
+        Header: "Completed",
+        accessor:"completed",
+        Cell: ({ row }) => (
+          <>
+            <Badge size={"sm"} colorScheme={row.original.isCompleted == true ? "green" : "yellow"}>
+              {row.original.isCompleted.toString()}
+            </Badge>
+          </>
+        ),
       },
       {
         Header: "Edit",
