@@ -26,7 +26,7 @@ function Slug() {
   
   
   const proj = data && data.projects.filter((e) => e.id == router.query.slug);
-  const users = proj == undefined || proj == null  || proj.length === 0 ? [] : data && data.employees.filter((e) => proj[0].members.includes(e.id))
+  const users = proj == undefined || proj == null  || proj.length === 0 ? [] : data && data.employees.filter((e) => proj[0].members.includes(e._id))
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
   }, []);

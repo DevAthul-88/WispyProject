@@ -44,7 +44,7 @@ function DataTable({ org }) {
         Header: "View profile",
         Cell: ({ row }) => (
           <>
-            <Link as={NextLink} href={`/software/profile/${row.original.id}`}>
+            <Link as={NextLink} href={`/software/profile/${row.original._id}`}>
               View profile
             </Link>
           </>

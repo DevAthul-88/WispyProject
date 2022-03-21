@@ -39,7 +39,19 @@ function DataTable({ projects, user }) {
         accessor: "title",
       },
       {
+        Header:"Completed",
+        accessor:"approved",
+        Cell: ({ row }) => (
+          <>
+            <Badge colorScheme={row.original.completed.approved == false ? "yellow" : "green"}>
+              {row.original.completed.approved.toString()}
+            </Badge>
+          </>
+        ),
+      },
+      {
         Header:"Flagged as completed",
+        accessor:"completed",
         Cell: ({ row }) => (
           <>
             <Badge colorScheme={row.original.completed.flagged == false ? "yellow" : "green"}>
@@ -50,6 +62,7 @@ function DataTable({ projects, user }) {
       },
       {
         Header: "priority",
+        accessor:"priority",
         Cell: ({ row }) => (
           <>
             <Badge colorScheme={colorScheme(row.original.priority)}>
@@ -59,7 +72,7 @@ function DataTable({ projects, user }) {
         ),
       },
       {
-        Header: "View profile",
+        Header: "View details",
         Cell: ({ row }) => (
           <>
             <Link

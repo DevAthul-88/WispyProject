@@ -32,7 +32,7 @@ function Model({ toggle, setToggle, data }) {
 
   const members = data.employees.map((e) => {
     return {
-      value: e.id,
+      value: e._id,
       label: e.username,
     };
   });
