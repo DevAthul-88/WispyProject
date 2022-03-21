@@ -34,8 +34,12 @@ export default async function handler(req, res) {
   }
   else if(req.method === "DELETE"){
     try {
-      console.log(req.query);
+      await orgModel.updateOne({_id:req.query.orgId , "projects.id":req.query.query} , {
+        $pull:{"projects.$.todo":{id:req.query.todo}}
+      })
+      res.send({reload:true})
     } catch (error) {
+      console.log(error.message);
       res.send({ error: error.message });
     }
   }

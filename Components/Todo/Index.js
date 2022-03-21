@@ -26,15 +26,14 @@ import axios from "axios";
 import { FaPen, FaTrash } from "react-icons/fa";
 import { fetchData } from "../../redux/org/action";
 import { useRouter } from "next/router";
-import { useSelector , useDispatch } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
 
 function DataTable({ orgId }) {
   const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
-  const [id  , setId] = useState("")
-  const {userInfo} = useSelector((state) => state.auth)
+  const [id, setId] = useState("");
+  const { userInfo } = useSelector((state) => state.auth);
   const [todo, setTodo] = React.useState([]);
   useEffect(() => {
     async function fetchTodo() {
@@ -77,9 +76,30 @@ function DataTable({ orgId }) {
         Header: "Delete",
         Cell: ({ row }) => (
           <>
-            <Button colorScheme="red" onClick={() => handleId(row.original.id)}>
-              <FaTrash />
-            </Button>
+            {userInfo.role === "ADMIN" ||
+            userInfo.role === "PROJECT_MANAGER" ? (
+              <Button
+                colorScheme="red"
+                onClick={() => handleId(row.original.id)}
+              >
+                <FaTrash />
+              </Button>
+            ) : (
+              <>
+                {row.original.userId === userInfo._id ? (
+                  <Button
+                    colorScheme="red"
+                    onClick={() => handleId(row.original.id)}
+                  >
+                    <FaTrash />
+                  </Button>
+                ) : (
+                  <Button colorScheme="red" disabled={true}>
+                    <FaTrash />
+                  </Button>
+                )}
+              </>
+            )}
           </>
         ),
       },
@@ -105,15 +125,17 @@ function DataTable({ orgId }) {
   } = useTable({ columns, data }, useSortBy, usePagination);
 
   const handleId = (id) => {
-    setId(id)
-    onOpen()
-  }
-  const handleDelete  = async () => {
-    const omi = await axios.delete(`/api/org/todo/?query=${router.query.slug}&orgId=${orgId}&todo=${id}`)
-    if(omi.data.reload){
-      dispatch(fetchData(userInfo._id))
+    setId(id);
+    onOpen();
+  };
+  const handleDelete = async () => {
+    const omi = await axios.delete(
+      `/api/org/todo/?query=${router.query.slug}&orgId=${orgId}&todo=${id}`
+    );
+    if (omi.data.reload) {
+      dispatch(fetchData(userInfo._id));
     }
-  }
+  };
 
   return (
     <>
@@ -215,7 +237,9 @@ function DataTable({ orgId }) {
             <Button colorScheme="messenger" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme={"red"} onClick={handleDelete}>Delete</Button>
+            <Button colorScheme={"red"} onClick={handleDelete}>
+              Delete
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
