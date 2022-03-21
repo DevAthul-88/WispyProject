@@ -23,7 +23,7 @@ import {
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import axios from "axios";
-import { FaPen, FaTrash } from "react-icons/fa";
+import { FaPen, FaTrash , FaCheck } from "react-icons/fa";
 import { fetchData } from "../../redux/org/action";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
@@ -69,6 +69,37 @@ function DataTable({ orgId }) {
             <Button colorScheme={"messenger"}>
               <FaPen />
             </Button>
+          </>
+        ),
+      },
+      {
+        Header: "Complete",
+        Cell: ({ row }) => (
+          <>
+            {userInfo.role === "ADMIN" ||
+            userInfo.role === "PROJECT_MANAGER" ? (
+              <Button
+                colorScheme="green"
+                onClick={() => handleComplete(row.original.id)}
+              >
+                <FaCheck />
+              </Button>
+            ) : (
+              <>
+                {row.original.userId === userInfo._id ? (
+                  <Button
+                    colorScheme="red"
+                    onClick={() => handleComplete(row.original.id)}
+                  >
+                    <FaCheck />
+                  </Button>
+                ) : (
+                  <Button colorScheme="red" disabled={true}>
+                    <FaCheck />
+                  </Button>
+                )}
+              </>
+            )}
           </>
         ),
       },
@@ -128,6 +159,9 @@ function DataTable({ orgId }) {
     setId(id);
     onOpen();
   };
+  const handleComplete = (id) => {
+    setId(id)
+  }
   const handleDelete = async () => {
     const omi = await axios.delete(
       `/api/org/todo/?query=${router.query.slug}&orgId=${orgId}&todo=${id}`

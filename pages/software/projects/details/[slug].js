@@ -45,7 +45,7 @@ function Slug() {
             <Loader />
           ) : (
             <Container maxWidth={"container.lg"} marginRight={"20"}>
-              <Tabs isFitted variant="solid-rounded" colorScheme={"messenger"}>
+              <Tabs isFitted variant="enclosed-colored" colorScheme={"messenger"}>
                 <TabList mb="1em">
                   <Tab>Details</Tab>
                   <Tab>Comments</Tab>
