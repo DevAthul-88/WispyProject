@@ -39,8 +39,14 @@ function DataTable({ projects, user }) {
         accessor: "title",
       },
       {
-        Header: "description",
-        accessor: "description",
+        Header:"Flagged as completed",
+        Cell: ({ row }) => (
+          <>
+            <Badge colorScheme={row.original.completed.flagged == false ? "yellow" : "green"}>
+              {row.original.completed.flagged.toString()}
+            </Badge>
+          </>
+        ),
       },
       {
         Header: "priority",
