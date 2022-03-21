@@ -71,8 +71,8 @@ function Comments({ comment }) {
                 <Flex>
                   <Avatar name={e.username} />
                   <Link
-                    verticalAlign={"bottom"}
-                    margin="2"
+                   
+                    margin="4"
                     display={"block"}
                     as={NextLink}
                     href={`/profile/${e.userId}`}

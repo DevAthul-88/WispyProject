@@ -1,4 +1,4 @@
-import React,{useState , useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   Thead,
@@ -8,35 +8,48 @@ import {
   Td,
   chakra,
   Select,
-  Link,
   Flex,
   Input,
   Button,
-  Avatar,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  useDisclosure,
+  ModalHeader,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
-import axios from 'axios'
-import {FaPen , FaTrash} from 'react-icons/fa'
-import {useRouter} from 'next/router'
-import {useSelector} from 'react-redux'
+import axios from "axios";
+import { FaPen, FaTrash } from "react-icons/fa";
+import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
 
-function DataTable({orgId}) {
+function DataTable({ orgId }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const router = useRouter();
   const org = useSelector((state) => state.org);
-  const [todo , setTodo] = React.useState([])
+  const [todo, setTodo] = React.useState([]);
   useEffect(() => {
-    async function fetchTodo(){
-       const omi = await axios.get(`/api/org/todo/?query=${router.query.slug}&orgId=${orgId}`)
-       if(omi.data.error) return console.log(omi.data.error);
-       const  final = omi.data.data !== undefined && omi.data.data !== null ? 
-       omi.data.data.projects.filter((e) => {return e.id === router.query.slug}) : [[]]
-       setTodo(final[0].todo)
+    async function fetchTodo() {
+      const omi = await axios.get(
+        `/api/org/todo/?query=${router.query.slug}&orgId=${orgId}`
+      );
+      if (omi.data.error) return console.log(omi.data.error);
+      const final =
+        omi.data.data !== undefined && omi.data.data !== null
+          ? omi.data.data.projects.filter((e) => {
+              return e.id === router.query.slug;
+            })
+          : [[]];
+      setTodo(final[0].todo);
     }
     fetchTodo();
-   },[todo , org , orgId])
-  const data = React.useMemo(() => todo , [orgId , org , todo]);
+  }, [todo, org, orgId]);
+  const data = React.useMemo(() => todo, [orgId, org, todo]);
   const columns = React.useMemo(
     () => [
       {
@@ -52,7 +65,7 @@ function DataTable({orgId}) {
         Cell: ({ row }) => (
           <>
             <Button colorScheme={"messenger"}>
-                <FaPen />
+              <FaPen />
             </Button>
           </>
         ),
@@ -61,8 +74,8 @@ function DataTable({orgId}) {
         Header: "Delete",
         Cell: ({ row }) => (
           <>
-            <Button colorScheme="red">
-                <FaTrash />
+            <Button colorScheme="red" onClick={onOpen}>
+              <FaTrash />
             </Button>
           </>
         ),
@@ -176,6 +189,22 @@ function DataTable({orgId}) {
           })}
         </Tbody>
       </Table>
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Alert</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Are sure want to delete this todo</ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="messenger" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button colorScheme={"red"}>Delete</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }
