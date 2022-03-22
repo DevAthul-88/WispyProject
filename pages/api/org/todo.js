@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import orgModel from "../../../Schema/orgSchema";
 db();
 
+const objectId = mongoose.Types.ObjectId
+
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
@@ -15,8 +17,8 @@ export default async function handler(req, res) {
         isCompleted: req.body.isCompleted,
         projectId: req.body.projectId,
       };
-      await orgModel.updateOne(
-        { _id: req.body.orgId, "projects._id": req.body.projectId },
+     const d = await orgModel.updateOne(
+        { _id: req.body.orgId, "projects._id": objectId(req.body.projectId)},
         {
           $push: { "projects.$.todo": todoModal },
         }
@@ -29,7 +31,7 @@ export default async function handler(req, res) {
     try {
       const todo = await orgModel.findOne({
         _id: req.query.orgId,
-        "projects._id": req.query.query,
+        "projects._id":objectId(req.query.query),
       });
       res.send({ success: true, data: todo });
     } catch (error) {

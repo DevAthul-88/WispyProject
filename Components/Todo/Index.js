@@ -48,7 +48,7 @@ function DataTable({ orgId }) {
               return e._id == router.query.slug;
             })
           : [];
-      setTodo(final[0].todo === undefined ? final : final[0].todo);
+      setTodo(final == undefined || final == null || final.length <= 0 ? [] : final[0].todo);
     }
     fetchTodo();
   }, []);
