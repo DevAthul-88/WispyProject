@@ -5,6 +5,7 @@ import {
   Text,
   SimpleGrid,
   StackDivider,
+  Button,
   useColorModeValue,
   List,
   ListItem,
@@ -107,12 +108,6 @@ export default function Details({ data }) {
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      updated At:
-                    </Text>{" "}
-                    {format(data[0].updatedAt)}
-                  </ListItem>
-                  <ListItem>
-                    <Text as={"span"} fontWeight={"bold"}>
                       Flagged as completed:
                     </Text>{" "}
                     {data[0].completed.flagged.toString()}
@@ -127,8 +122,11 @@ export default function Details({ data }) {
               </Box>
             </Stack>
           </Stack>
+          
         </SimpleGrid>
       )}
+      <hr />
+      <Button marginTop="5" variant={"outline"} colorScheme={"messenger"}>Flag as completed</Button>
     </Container>
   );
 }
