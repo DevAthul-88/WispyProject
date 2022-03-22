@@ -1,5 +1,5 @@
 import db from "../../../utils/dbConnect";
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 import orgModel from "../../../Schema/orgSchema";
 db();
 
@@ -49,20 +49,18 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "PATCH") {
     try {
-
-    const s = await orgModel.updateOne(
+      const s = await orgModel.updateOne(
         {
           _id: req.query.orgId,
           "projects._id": req.query.query,
-         
         },
         { $set: { "projects.$[i].todo.$[elem].isCompleted": true } },
-        { "arrayFilters": [
-          { "i._id": req.query.query},
-          {"elem._id": req.query.todo}
-          ]
+        {
+          arrayFilters: [
+            { "i._id": req.query.query },
+            { "elem._id": req.query.todo },
+          ],
         }
-        
       );
       console.log(s);
       res.send({ reload: true });

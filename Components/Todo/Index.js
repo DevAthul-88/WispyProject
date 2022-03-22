@@ -43,13 +43,12 @@ function DataTable({ orgId }) {
       );
       if (omi.data.error) return console.log(omi.data.error);
       const final =
-        omi.data.data !== undefined && omi.data.data !== null
+        omi.data.data !== undefined && omi.data.data !== null && omi.data.data.length > 0
           ? omi.data.data.projects.filter((e) => {
-              return e.id === router.query.slug;
+              return e._id == router.query.slug;
             })
-          : [[]];
-      setTodo(final[0].todo);
-      console.log(final);
+          : [];
+      setTodo(final[0].todo === undefined ? final : final[0].todo);
     }
     fetchTodo();
   }, []);
@@ -94,7 +93,7 @@ function DataTable({ orgId }) {
               <Button
                 size={"sm"}
                 colorScheme="green"
-                onClick={() => handleComplete(row.original.id)}
+                onClick={() => handleComplete(row.original._id)}
                 disabled={row.original.isCompleted}
               >
                 <FaCheck />
@@ -105,7 +104,7 @@ function DataTable({ orgId }) {
                   <Button
                     size={"sm"}
                     colorScheme="red"
-                    onClick={() => handleComplete(row.original.id)}
+                    onClick={() => handleComplete(row.original._id)}
                     disabled={row.original.isCompleted}
                   >
                     <FaCheck />
@@ -139,7 +138,7 @@ function DataTable({ orgId }) {
                   <Button
                     size={"sm"}
                     colorScheme="red"
-                    onClick={() => handleId(row.original.id)}
+                    onClick={() => handleId(row.original._id)}
                   >
                     <FaTrash />
                   </Button>

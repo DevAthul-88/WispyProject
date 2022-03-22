@@ -77,7 +77,7 @@ function DataTable({ projects, user }) {
           <>
             <Link
               as={NextLink}
-              href={`/software/projects/details/${row.original.id}`}
+              href={`/software/projects/details/${row.original._id}`}
             >
               View details
             </Link>
