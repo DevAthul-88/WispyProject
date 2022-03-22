@@ -11,9 +11,11 @@ import {
   ListItem,
 } from "@chakra-ui/react";
 import Loader from "../Components/Loader";
-import {format} from 'timeago.js'
+import { format } from "timeago.js";
+import { useSelector } from "react-redux";
 
 export default function Details({ data }) {
+  const { userInfo } = useSelector((state) => state.auth);
   return (
     <Container maxW={"7xl"}>
       {data == undefined || data == null ? (
@@ -122,11 +124,22 @@ export default function Details({ data }) {
               </Box>
             </Stack>
           </Stack>
-          
         </SimpleGrid>
       )}
       <hr />
-      <Button marginTop="5" variant={"outline"} colorScheme={"messenger"}>Flag as completed</Button>
+      {userInfo.role === "ADMIN" || userInfo.role === "PROJECT_MANAGER" ? (
+        <Button marginTop="5" variant={"outline"} colorScheme={"messenger"}>
+          Flag as completed
+        </Button>
+      ) : (
+        <>
+          {data[0].members.includes(userInfo._id) ? (
+            <Button marginTop="5" variant={"outline"} colorScheme={"messenger"}>
+              Flag as completed
+            </Button>
+          ) : null}
+        </>
+      )}
     </Container>
   );
 }

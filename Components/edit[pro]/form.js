@@ -1,12 +1,5 @@
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
     Button,
-    Flex,
     FormControl,
     FormLabel,
     Input,
@@ -56,14 +49,13 @@ import {
                   initialValues={{
                     title: de.title,
                     description: de.description,
-                    members: new Array(),
+                    members: de.members,
                     priority: de.priority,
                     ordId: de._id,
                   }}
                   validationSchema={ProjectSchema}
                   onSubmit={(values, { resetForm }) => {
-                    dispatch(createProject(values));
-                    resetForm()
+                    console.log(values);
                   }}
                 >
                   {({ errors, touched }) => (
@@ -127,7 +119,7 @@ import {
                           >
                             {members.map((e, index) => {
                               return (
-                                <option value={e.value} key={index}>
+                                <option value={e.value} key={index} selected={de.members}>
                                   {e.label}
                                 </option>
                               );
