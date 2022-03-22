@@ -49,6 +49,7 @@ function DataTable({ orgId }) {
             })
           : [[]];
       setTodo(final[0].todo);
+      console.log(final);
     }
     fetchTodo();
   }, []);

@@ -1,6 +1,6 @@
 import db from "../../../utils/dbConnect";
 import orgModel from "../../../Schema/orgSchema";
-import userModal from "../../../Schema/userSchema";
+import mongoose from 'mongoose'
 import { v4 as uuidv4 } from "uuid";
 db();
 
@@ -9,7 +9,7 @@ export default async function handler(req, res) {
     try {
       const { title, description, members, priority, ordId } = req.body;
       const project = {
-        id: uuidv4(),
+        _id: new mongoose.Types.ObjectId(),
         title,
         description,
         members,

@@ -16,7 +16,7 @@ export default async function handler(req, res) {
         createdAt:Date.now()
       };
 
-       await orgModel.updateOne({_id:orgId , "projects.id":projectId },{$push:{"projects.$.comments":commentData}});
+       await orgModel.updateOne({_id:orgId , "projects._id":projectId },{$push:{"projects.$.comments":commentData}});
        res.send({refresh: true})
     } catch (error) {
       res.send({ error: error.message });

@@ -9,7 +9,7 @@ export default async function handler(req, res) {
       const { id, orgId, projectId } = req.body;
 
       await orgModel.updateOne(
-        { _id: orgId, "projects.id": projectId },
+        { _id: orgId, "projects._id": projectId },
         { $pull: { "projects.$.comments": {id:id}} }
       );
       res.send({ refresh: true });
