@@ -40,9 +40,9 @@ export default async function handler(req, res) {
   } else if (req.method === "DELETE") {
     try {
       await orgModel.updateOne(
-        { _id: req.query.orgId, "projects._id": req.query.query },
+        { _id: req.query.orgId, "projects._id": objectId(req.query.query) },
         {
-          $pull: { "projects.$.todo": { _id: req.query.todo } },
+          $pull: { "projects.$.todo": { _id: objectId(req.query.todo) } },
         }
       );
       res.send({ reload: true });
@@ -54,13 +54,13 @@ export default async function handler(req, res) {
       const s = await orgModel.updateOne(
         {
           _id: req.query.orgId,
-          "projects._id": req.query.query,
+          "projects._id": objectId(req.query.query),
         },
         { $set: { "projects.$[i].todo.$[elem].isCompleted": true } },
         {
           arrayFilters: [
-            { "i._id": req.query.query },
-            { "elem._id": req.query.todo },
+            { "i._id": objectId(req.query.query) },
+            { "elem._id": objectId(req.query.todo)},
           ],
         }
       );

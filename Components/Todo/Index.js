@@ -43,12 +43,12 @@ function DataTable({ orgId }) {
       );
       if (omi.data.error) return console.log(omi.data.error);
       const final =
-        omi.data.data !== undefined && omi.data.data !== null && omi.data.data.length > 0
+        omi.data.data !== undefined && omi.data.data !== null 
           ? omi.data.data.projects.filter((e) => {
-              return e._id == router.query.slug;
+              return e._id+"" === router.query.slug;
             })
           : [];
-      setTodo(final == undefined || final == null || final.length <= 0 ? [] : final[0].todo);
+      setTodo(final[0].todo);
     }
     fetchTodo();
   }, []);
