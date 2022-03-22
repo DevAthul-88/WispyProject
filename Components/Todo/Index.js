@@ -128,7 +128,7 @@ function DataTable({ orgId }) {
               <Button
                 size={"sm"}
                 colorScheme="red"
-                onClick={() => handleId(row.original.id)}
+                onClick={() => handleId(row.original._id)}
               >
                 <FaTrash />
               </Button>
@@ -175,7 +175,6 @@ function DataTable({ orgId }) {
 
   const handleId = (id) => {
     setId(id);
-
     onOpen();
   };
   const handleComplete = async (id) => {

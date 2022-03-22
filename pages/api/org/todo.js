@@ -40,7 +40,7 @@ export default async function handler(req, res) {
   } else if (req.method === "DELETE") {
     try {
       await orgModel.updateOne(
-        { _id: req.query.orgId, "projects._id": objectId(req.query.query) },
+        { _id: req.query.orgId, "projects._id": objectId(req.query.query)},
         {
           $pull: { "projects.$.todo": { _id: objectId(req.query.todo) } },
         }
@@ -51,10 +51,10 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "PATCH") {
     try {
-      const s = await orgModel.updateOne(
+      console.log(req.query);
+      const s = await orgModel.findByIdAndUpdate(
         {
           _id: req.query.orgId,
-          "projects._id": objectId(req.query.query),
         },
         { $set: { "projects.$[i].todo.$[elem].isCompleted": true } },
         {
@@ -62,9 +62,10 @@ export default async function handler(req, res) {
             { "i._id": objectId(req.query.query) },
             { "elem._id": objectId(req.query.todo)},
           ],
-        }
+          
+        },
+        
       );
-      console.log(s);
       res.send({ reload: true });
     } catch (error) {
       console.log(error.message);
