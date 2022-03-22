@@ -92,7 +92,7 @@ function DataTable({ projects, user }) {
               <>
                 <Link
                   as={NextLink}
-                  href={`/software/projects/edit/${row.original.id}`}
+                  href={`/software/projects/edit/${row.original._id}`}
                 >
                   Edit / Delete
                 </Link>

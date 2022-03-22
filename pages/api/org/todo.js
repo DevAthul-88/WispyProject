@@ -17,7 +17,7 @@ export default async function handler(req, res) {
         isCompleted: req.body.isCompleted,
         projectId: req.body.projectId,
       };
-     const d = await orgModel.updateOne(
+      await orgModel.updateOne(
         { _id: req.body.orgId, "projects._id": objectId(req.body.projectId)},
         {
           $push: { "projects.$.todo": todoModal },

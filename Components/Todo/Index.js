@@ -74,16 +74,7 @@ function DataTable({ orgId }) {
           </>
         ),
       },
-      {
-        Header: "Edit",
-        Cell: ({ row }) => (
-          <>
-            <Button size={"sm"} colorScheme={"messenger"}>
-              <FaPen />
-            </Button>
-          </>
-        ),
-      },
+      
       {
         Header: "Complete",
         Cell: ({ row }) => (
