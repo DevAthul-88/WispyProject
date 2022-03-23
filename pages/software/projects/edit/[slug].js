@@ -13,6 +13,7 @@ import { fetchData } from "../../../../redux/org/action";
 import Form from "../../../../Components/edit[pro]/form";
 import Loader from "../../../../Components/Loader";
 import { useRouter } from "next/router";
+import Other from '../../../../Components/edit[pro]/other'
 
 function Slug() {
   const router = useRouter();
@@ -52,7 +53,7 @@ function Slug() {
                   <TabPanel>
                     <Form data={data && data.employees} de={data && proj && proj} org={data && data}/>
                   </TabPanel>
-                  <TabPanel></TabPanel>
+                  <TabPanel><Other data={data && data.employees} de={data && proj && proj} org={data && data}/></TabPanel>
                 </TabPanels>
               </Tabs>
             </Container>
