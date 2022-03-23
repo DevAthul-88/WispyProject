@@ -4,7 +4,7 @@ import {
   SET_PROJECT_ERROR,
   SET_PROJECT_EDIT_REQUEST,
   SET_PROJECT_EDIT_SUCCESS,
-  SET_PROJECT_EDIT_ERROR
+  SET_PROJECT_EDIT_ERROR,
 } from "./type";
 
 const initialState = {};
@@ -17,6 +17,12 @@ export const projectReducer = (state = initialState, action) => {
       return { loading: false, reload: true };
     case SET_PROJECT_ERROR:
       return { loading: false, error: action.payload };
+    case SET_PROJECT_EDIT_REQUEST:
+      return { loading_project: true };
+    case SET_PROJECT_EDIT_SUCCESS:
+      return { loading_project: false, reload: true };
+    case SET_PROJECT_EDIT_ERROR:
+      return { loading_project: false, error_project: action.payload };
     default:
       return state;
   }
