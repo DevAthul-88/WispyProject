@@ -27,7 +27,7 @@ import {FaFlag} from 'react-icons/fa'
 import {useRouter} from 'next/router'
 import axios from 'axios'
 
-export default function Details(props) {
+export default function Details({data}) {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const org = useSelector((state) => state.org);
@@ -36,7 +36,7 @@ export default function Details(props) {
   const router = useRouter();
 
   const handleComplete =  async () => {
-    const omi = await axios.patch("/api/org/create" , {orgId:org.data._id , projectId:router.query.slug})
+    const omi = await axios.patch("/api/project/create" , {orgId:org.data._id , projectId:router.query.slug})
     if(omi.data.error) return console.error(omi.data.error)
     if(omi.data.reload) return setReload(omi.data.reload)
   }

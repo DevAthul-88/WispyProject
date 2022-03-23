@@ -62,4 +62,26 @@ export default async function handler(req, res) {
       res.send({ error: error.message });
     }
   }
+  else if (req.method === "PATCH") {
+    try {
+      const {orgId , projectId}  =req.body;
+
+      await orgModel.findByIdAndUpdate(
+        {
+          _id: orgId,
+        },
+        {
+          $set: {
+            "projects.$[i].completed.flagged":true,
+          },
+        },
+        {
+          arrayFilters: [{ "i._id": objectId(projectId) }],
+        }
+      );
+      res.send({ reload: true });
+    } catch (error) {
+      res.send({ error: error.message });
+    }
+  }
 }
