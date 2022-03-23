@@ -38,13 +38,21 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "PUT") {
     try {
-      const { ordId, project_id } = req.body;
+      const { title, description, members, priority, ordId, project_id } =
+        req.body;
 
       await orgModel.findByIdAndUpdate(
         {
           _id: ordId,
         },
-        { $set: { "projects.$[i]": req.body } },
+        {
+          $set: {
+            "projects.$[i].title": title,
+            "projects.$[i].description": description,
+            "projects.$[i].members": members,
+            "projects.$[i].priority": priority,
+          },
+        },
         {
           arrayFilters: [{ "i._id": objectId(project_id) }],
         }

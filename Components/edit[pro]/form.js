@@ -66,7 +66,7 @@ function Model({ data, de , org }) {
                 <FormLabel>Project title</FormLabel>
                 <Field
                   name="title"
-                  value={de.title}
+                  defaultValue={de.title}
                   as={CustomInputComponent}
                   type={"text"}
                   focusBorderColor={"messenger.500"}
@@ -85,7 +85,7 @@ function Model({ data, de , org }) {
                 <FormLabel>Project description</FormLabel>
                 <Field
                   name="description"
-                  value={de.description}
+                  defaultValue={de.description}
                   as={CustomInputComponent}
                   focusBorderColor={"messenger.500"}
                   borderColor={
