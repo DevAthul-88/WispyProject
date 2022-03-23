@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 import orgModel from "../../../Schema/orgSchema";
 db();
 
-const objectId = mongoose.Types.ObjectId
+const objectId = mongoose.Types.ObjectId;
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
         projectId: req.body.projectId,
       };
       await orgModel.updateOne(
-        { _id: req.body.orgId, "projects._id": objectId(req.body.projectId)},
+        { _id: req.body.orgId, "projects._id": objectId(req.body.projectId) },
         {
           $push: { "projects.$.todo": todoModal },
         }
@@ -31,7 +31,7 @@ export default async function handler(req, res) {
     try {
       const todo = await orgModel.findOne({
         _id: req.query.orgId,
-        "projects._id":objectId(req.query.query),
+        "projects._id": objectId(req.query.query),
       });
       res.send({ success: true, data: todo });
     } catch (error) {
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
   } else if (req.method === "DELETE") {
     try {
       await orgModel.updateOne(
-        { _id: req.query.orgId, "projects._id": objectId(req.query.query)},
+        { _id: req.query.orgId, "projects._id": objectId(req.query.query) },
         {
           $pull: { "projects.$.todo": { _id: objectId(req.query.todo) } },
         }
@@ -60,11 +60,9 @@ export default async function handler(req, res) {
         {
           arrayFilters: [
             { "i._id": objectId(req.query.query) },
-            { "elem._id": objectId(req.query.todo)},
+            { "elem._id": objectId(req.query.todo) },
           ],
-          
-        },
-        
+        }
       );
       res.send({ reload: true });
     } catch (error) {

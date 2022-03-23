@@ -1,8 +1,10 @@
 import db from "../../../utils/dbConnect";
 import orgModel from "../../../Schema/orgSchema";
-import mongoose from 'mongoose'
-import { v4 as uuidv4 } from "uuid";
+import mongoose from "mongoose";
+
 db();
+
+const objectId = mongoose.Types.ObjectId;
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -34,12 +36,21 @@ export default async function handler(req, res) {
       console.log(error.message);
       res.send({ error: error.message });
     }
-  }
-  else if(req.method === "PUT"){
-    try{
-      const { title, description, members, priority, ordId , project_id } = req.body;
-       console.log(req.body);
-    }catch(error){
+  } else if (req.method === "PUT") {
+    try {
+      const { ordId, project_id } = req.body;
+
+      await orgModel.findByIdAndUpdate(
+        {
+          _id: ordId,
+        },
+        { $set: { "projects.$[i]": req.body } },
+        {
+          arrayFilters: [{ "i._id": objectId(project_id) }],
+        }
+      );
+      res.send({ refresh: true });
+    } catch (error) {
       res.send({ error: error.message });
     }
   }
