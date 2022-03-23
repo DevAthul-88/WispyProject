@@ -9,6 +9,14 @@ import {
   useColorModeValue,
   List,
   ListItem,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalOverlay,
+  useDisclosure,
+  ModalHeader,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import Loader from "../Components/Loader";
 import { format } from "timeago.js";
@@ -16,6 +24,7 @@ import { useSelector } from "react-redux";
 
 export default function Details({ data }) {
   const { userInfo } = useSelector((state) => state.auth);
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Container maxW={"7xl"}>
       {data == undefined || data == null ? (
@@ -128,18 +137,36 @@ export default function Details({ data }) {
       )}
       <hr />
       {userInfo.role === "ADMIN" || userInfo.role === "PROJECT_MANAGER" ? (
-        <Button marginTop="5" variant={"outline"} colorScheme={"messenger"}>
+        <Button marginTop="5" variant={"outline"} colorScheme={"messenger"} onClick={onOpen}>
           Flag as completed
         </Button>
       ) : (
         <>
           {data[0].members.includes(userInfo._id) ? (
-            <Button marginTop="5" variant={"outline"} colorScheme={"messenger"}>
+            <Button marginTop="5" variant={"outline"} colorScheme={"messenger"} onClick={onOpen}>
               Flag as completed
             </Button>
           ) : null}
         </>
       )}
+
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Alert</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>Are sure want to mark this project as completed</ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme="messenger" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button colorScheme={"green"} >
+              Yes
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Container>
   );
 }
