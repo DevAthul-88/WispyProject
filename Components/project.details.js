@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react'
 import {
   Box,
   Container,
@@ -18,13 +19,34 @@ import {
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
+import { fetchData } from "../redux/org/action";
 import Loader from "../Components/Loader";
 import { format } from "timeago.js";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch } from "react-redux";
+import {FaFlag} from 'react-icons/fa'
+import {useRouter} from 'next/router'
+import axios from 'axios'
 
-export default function Details({ data }) {
+export default function Details(props) {
+  const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
+  const org = useSelector((state) => state.org);
+  const [reload , setReload] = React.useState(false)
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const router = useRouter();
+
+  const handleComplete =  async () => {
+    const omi = await axios.patch("/api/org/create" , {orgId:org.data._id , projectId:router.query.slug})
+    if(omi.data.error) return console.error(omi.data.error)
+    if(omi.data.reload) return setReload(omi.data.reload)
+  }
+
+  useEffect(() => {
+       if(reload === true) {
+         dispatch(fetchData(userInfo._id))
+       }
+  },[reload])
+
   return (
     <Container maxW={"7xl"}>
       {data == undefined || data == null ? (
@@ -137,13 +159,13 @@ export default function Details({ data }) {
       )}
       <hr />
       {userInfo.role === "ADMIN" || userInfo.role === "PROJECT_MANAGER" ? (
-        <Button marginTop="5" variant={"outline"} colorScheme={"messenger"} onClick={onOpen}>
+        <Button marginTop="5" variant={"outline"} colorScheme={"messenger"} onClick={onOpen} rightIcon={<FaFlag />}>
           Flag as completed
         </Button>
       ) : (
         <>
           {data[0].members.includes(userInfo._id) ? (
-            <Button marginTop="5" variant={"outline"} colorScheme={"messenger"} onClick={onOpen}>
+            <Button marginTop="5" variant={"outline"} colorScheme={"messenger"} onClick={onOpen} rightIcon={<FaFlag />}>
               Flag as completed
             </Button>
           ) : null}
@@ -155,13 +177,13 @@ export default function Details({ data }) {
         <ModalContent>
           <ModalHeader>Alert</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Are sure want to mark this project as completed</ModalBody>
+          <ModalBody>Are sure want to flag this project as completed</ModalBody>
 
           <ModalFooter>
             <Button colorScheme="messenger" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme={"green"} >
+            <Button colorScheme={"green"} onClick={handleComplete}>
               Yes
             </Button>
           </ModalFooter>
