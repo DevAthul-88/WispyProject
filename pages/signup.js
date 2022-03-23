@@ -153,13 +153,15 @@ export default function SplitScreen() {
 const CustomInputComponent = (props) => <Input type={props.type} {...props} />;
 
 export const getServerSideProps = () => {
-  if (User() !== undefined || User() !== null) {
+ 
+  if (User() !== undefined) {
     return {
       redirect: {
         destination: "/software/",
         permanent: false,
       },
       props: {},
+      
     };
   }
   return { props: {} };

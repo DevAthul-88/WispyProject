@@ -10,7 +10,7 @@ function other({ data, de, org }) {
         <>
           {de.completed.flagged ? (
             <>
-              <Heading fontSize={"2xl"}>
+              <Heading fontSize={"xl"}>
                 This project is flagged as completed
               </Heading>
               {userInfo.role === "ADMIN" || userInfo.role === "PROJECT_MANAGER" ? (
