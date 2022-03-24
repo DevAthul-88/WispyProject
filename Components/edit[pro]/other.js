@@ -12,16 +12,34 @@ import {
   ModalHeader,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import axios from "axios";
+import { fetchData } from "../../redux/org/action";
+import { useRouter } from "next/router";
 
 function other({ data, de, org }) {
+  const dispatch = useDispatch();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { userInfo } = useSelector((state) => state.auth);
+  const [reload, setReload] = React.useState(false);
 
-  const handleFinish = () => {
+  const router = useRouter();
 
-  }
+  const handleFinish = async () => {
+    const omi = await axios.put("/api/project/finish", {
+      orgId: org.data._id,
+      projectId: router.query.slug,
+    });
+    if(omi.data.error) return console.error(omi.data.error);
+    if(omi.data.success) return setReload(true)
+  };
+
+  useEffect(() => {
+    if (reload === true) {
+      dispatch(fetchData(userInfo._id));
+    }
+  }, [reload]);
 
   return (
     <div>
@@ -65,19 +83,20 @@ function other({ data, de, org }) {
         <ModalContent>
           <ModalHeader>Alert</ModalHeader>
           <ModalCloseButton />
-          <ModalBody>Are sure want to finish this project as completed</ModalBody>
+          <ModalBody>
+            Are sure want to finish this project as completed
+          </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="messenger" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme={"green"} >
+            <Button colorScheme={"green"} onClick={handleFinish}>
               Yes
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-
     </div>
   );
 }
