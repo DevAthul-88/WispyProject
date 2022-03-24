@@ -27,8 +27,8 @@ function other({ data, de, org }) {
   const router = useRouter();
 
   const handleFinish = async () => {
-    const omi = await axios.put("/api/project/finish", {
-      orgId: org.data._id,
+    const omi = await axios.patch("/api/project/finish", {
+      orgId:org._id,
       projectId: router.query.slug,
     });
     if(omi.data.error) return console.error(omi.data.error);
