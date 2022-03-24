@@ -25,7 +25,7 @@ function deleteProject({ userInfo, de, org }) {
 
   const handleFinish = async () => {
     setLoading(true);
-    const omi = await axios.delete("/api/project/create", {
+    const omi = await axios.patch("/api/project/finish", {
       orgId: org._id,
       projectId: router.query.slug,
     });
@@ -38,7 +38,7 @@ function deleteProject({ userInfo, de, org }) {
 
   React.useEffect(() => {
     if (reload === true) {
-      dispatch(fetchData(userInfo._id));
+      window.location.href = "/software/projects"
     }
   }, [reload]);
 
@@ -47,7 +47,7 @@ function deleteProject({ userInfo, de, org }) {
       {userInfo.role === "ADMIN" || userInfo.role === "PROJECT_MANAGER" ? (
         <>
           <Divider marginTop={"5"} />
-          <Button colorScheme={"red"} marginTop={"5"} variant="outline">
+          <Button colorScheme={"red"} marginTop={"5"} variant="outline" onClick={onOpen}>
             Delete project
           </Button>
         </>

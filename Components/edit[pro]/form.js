@@ -14,7 +14,6 @@ import { editProject } from "../../redux/Project/action";
 import { useEffect } from "react";
 
 function Model({ data, de , org }) {
-  console.log(de);
   const dispatch = useDispatch();
   const { loading_project, error_project, reload } = useSelector(
     (state) => state.project
