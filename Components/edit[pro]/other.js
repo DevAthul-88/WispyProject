@@ -23,15 +23,20 @@ function other({ data, de, org }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { userInfo } = useSelector((state) => state.auth);
   const [reload, setReload] = React.useState(false);
+  const [loading , setLoading] = React.useState(false)
 
   const router = useRouter();
 
   const handleFinish = async () => {
+    setLoading(true);
     const omi = await axios.patch("/api/project/finish", {
       orgId:org._id,
       projectId: router.query.slug,
     });
-    if(omi.data.error) return console.error(omi.data.error);
+    if(omi.data.error) {
+      console.error(omi.data.error);
+      setLoading(false);
+    }
     if(omi.data.success) return setReload(true)
   };
 
@@ -45,6 +50,11 @@ function other({ data, de, org }) {
     <div>
       {userInfo && (
         <>
+          {de.completed.approved == true  ? <>
+            <Heading fontSize={"xl"}>
+                This project is completed successfully
+              </Heading>
+          </> : <>
           {de.completed.flagged ? (
             <>
               <Heading fontSize={"xl"}>
@@ -67,6 +77,7 @@ function other({ data, de, org }) {
           ) : (
             "This project is not completed yet"
           )}
+          </>}
           {userInfo.role === "ADMIN" || userInfo.role === "PROJECT_MANAGER" ? (
             <>
               <Divider marginTop={"5"} />
@@ -91,7 +102,7 @@ function other({ data, de, org }) {
             <Button colorScheme="messenger" mr={3} onClick={onClose}>
               Close
             </Button>
-            <Button colorScheme={"green"} onClick={handleFinish}>
+            <Button colorScheme={"green"} onClick={handleFinish} isLoading={loading}>
               Yes
             </Button>
           </ModalFooter>
