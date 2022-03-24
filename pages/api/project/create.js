@@ -61,10 +61,9 @@ export default async function handler(req, res) {
     } catch (error) {
       res.send({ error: error.message });
     }
-  }
-  else if (req.method === "PATCH") {
+  } else if (req.method === "PATCH") {
     try {
-      const {orgId , projectId}  =req.body;
+      const { orgId, projectId } = req.body;
 
       await orgModel.findByIdAndUpdate(
         {
@@ -72,7 +71,7 @@ export default async function handler(req, res) {
         },
         {
           $set: {
-            "projects.$[i].completed.flagged":true,
+            "projects.$[i].completed.flagged": true,
           },
         },
         {
