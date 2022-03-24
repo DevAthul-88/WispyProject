@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       res.send({ error: error.message });
     }
   }
-  else if(req.method === "PATCH") {
+  else if(req.method === "PUT") {
     try {
       console.log(req.body);
       const { orgId, projectId } = req.body;

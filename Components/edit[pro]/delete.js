@@ -25,7 +25,7 @@ function deleteProject({ userInfo, de, org }) {
 
   const handleFinish = async () => {
     setLoading(true);
-    const omi = await axios.patch("/api/project/finish", {
+    const omi = await axios.put("/api/project/finish", {
       orgId: org._id,
       projectId: router.query.slug,
     });
