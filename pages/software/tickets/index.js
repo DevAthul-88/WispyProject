@@ -6,7 +6,7 @@ import Loader from "../../../Components/Loader";
 import Head from "next/head";
 import NoData from "../../../Components/noData";
 import { FaPlus } from "react-icons/fa";
-import Modal from "../.../../../../Components/Modal/Modal.project";
+import Modal from "../.../../../../Components/Modal/Modal.ticket";
 import Tables from "../../../Components/Table/table.proj";
 
 function employees() {
@@ -44,7 +44,7 @@ function employees() {
                         colorScheme={"messenger"}
                         onClick={() => setToggle(true)}
                       >
-                        New project
+                        New ticket
                       </Button>
                     </Stack>
                   ) : null}
