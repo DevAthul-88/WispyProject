@@ -17,6 +17,7 @@ import {
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
+import dateFormat from "dateformat"
 
 function DataTable({ projects, user }) {
   const colorScheme = (priority) => {
@@ -38,6 +39,7 @@ function DataTable({ projects, user }) {
         Header: "title",
         accessor: "title",
       },
+      
       {
         Header:"Completed",
         accessor:"approved",
@@ -50,7 +52,7 @@ function DataTable({ projects, user }) {
         ),
       },
       {
-        Header:"Flagged as completed",
+        Header:"Flagged",
         accessor:"completed",
         Cell: ({ row }) => (
           <>
@@ -68,6 +70,15 @@ function DataTable({ projects, user }) {
             <Badge colorScheme={colorScheme(row.original.priority)}>
               {row.original.priority}
             </Badge>
+          </>
+        ),
+      },
+      {
+        Header: "created",
+        accessor: "createdAt",
+        Cell: ({ row }) => (
+          <>
+            {dateFormat(row.original.createdAt)}
           </>
         ),
       },
