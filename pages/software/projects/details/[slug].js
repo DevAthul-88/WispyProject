@@ -16,6 +16,7 @@ import Details from '../../../../Components/project.details'
 import Comment from '../../../../Components/Comment/Index'
 import Table from '../../../../Components/Table/users'
 import Todo from '../../../../Components/Todo/Todo'
+import Ticket from '../../../../Components/Ticket.project/index'
 
 function Slug() {
   const router = useRouter();
@@ -48,6 +49,7 @@ function Slug() {
               <Tabs isFitted variant="enclosed-colored" colorScheme={"messenger"}>
                 <TabList mb="1em">
                   <Tab>Details</Tab>
+                  <Tab>Tickets</Tab>
                   <Tab>Comments</Tab>
                   <Tab>Todos</Tab>
                   <Tab>Users</Tab>
@@ -55,6 +57,9 @@ function Slug() {
                 <TabPanels>
                   <TabPanel>
                    <Details data={proj}/>
+                  </TabPanel>
+                  <TabPanel>
+                   <Ticket data={proj}/>
                   </TabPanel>
                   <TabPanel>
                     <Comment comment={proj[0].comments}/>

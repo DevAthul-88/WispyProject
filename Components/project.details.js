@@ -138,9 +138,15 @@ export default function Details({ data }) {
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
-                      Created At:
+                      Created:
                     </Text>{" "}
                     {format(data[0].createdAt)}
+                  </ListItem>
+                  <ListItem>
+                    <Text as={"span"} fontWeight={"bold"}>
+                      Created At:
+                    </Text>{" "}
+                    {data[0].createdAt}
                   </ListItem>
                   <ListItem>
                     <Text as={"span"} fontWeight={"bold"}>
