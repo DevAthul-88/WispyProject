@@ -48,7 +48,7 @@ import {
         <Modal isOpen={toggle} size={"xl"}>
           <ModalOverlay />
           <ModalContent>
-            <ModalHeader>New project</ModalHeader>
+            <ModalHeader>New ticket</ModalHeader>
             <ModalBody>
               {error && (
                 <Alert trigger={true} type={"error"} description={error} />
