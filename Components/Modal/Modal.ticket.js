@@ -29,6 +29,23 @@ import {
       { value: "low", label: "Low" },
       { value: "none", label: "None" },
     ];
+
+    const options2 = [
+      { value: "issue", label: "Issue" },
+      { value: "bug", label: "Bug" },
+      { value: "error", label: "Error" },
+      { value: "high", label: "High" },
+      { value: "feature_request", label: "Feature Request" },
+      { value: "other", label: "Other" },
+    ];
+
+    const options3 = [
+      { value: "new", label: "Issue" },
+      { value: "open", label: "Bug" },
+      { value: "in_progress", label: "Error" },
+      { value: "resolve", label: "High" },
+
+    ];
   
     const members = data.employees.map((e) => {
       return {
@@ -60,6 +77,8 @@ import {
                     description: "",
                     members: new Array(),
                     priority: "",
+                    type:"",
+                    status: "",
                     ordId: data._id,
                   }}
                   validationSchema={ProjectSchema}
@@ -72,7 +91,7 @@ import {
                     <Stack spacing={4} w={"full"} maxW={"md"}>
                       <Form>
                         <FormControl marginTop={"5"}>
-                          <FormLabel>Project title</FormLabel>
+                          <FormLabel>Ticket title</FormLabel>
                           <Field
                             name="title"
                             as={CustomInputComponent}
@@ -94,7 +113,7 @@ import {
                         </FormControl>
   
                         <FormControl id="email" marginTop={"5"}>
-                          <FormLabel>Project description</FormLabel>
+                          <FormLabel>Ticket description</FormLabel>
                           <Field
                             name="description"
                             as={CustomInputComponent}
@@ -113,6 +132,8 @@ import {
                             ""
                           )}
                         </FormControl>
+                        
+                        
                         <FormControl marginTop={"5"}>
                           <FormLabel>Select members to assign</FormLabel>
                           <Field
@@ -136,6 +157,35 @@ import {
                           {errors.members && touched.members ? (
                             <FormLabel color={"red.600"}>
                               {errors.members}
+                            </FormLabel>
+                          ) : (
+                            ""
+                          )}
+                        </FormControl>
+                        <Flex>
+                        <FormControl marginTop={"5"}>
+                          <FormLabel>Select type</FormLabel>
+                          <Field
+                            as={customSelectorComponent3}
+                            name={"type"}
+                            borderColor={
+                              errors.type && touched.type
+                                ? "red.500"
+                                : "gray.300"
+                            }
+                          >
+                             {options2.map((e, index) => {
+                              return (
+                                <option value={e.value} key={index}>
+                                  {e.label}
+                                </option>
+                              );
+                            })}
+                          </Field>
+  
+                          {errors.type && touched.type ? (
+                            <FormLabel color={"red.600"}>
+                              {errors.type}
                             </FormLabel>
                           ) : (
                             ""
@@ -170,6 +220,37 @@ import {
                             ""
                           )}
                         </FormControl>
+
+                        <FormControl marginTop={"5"}>
+                          <FormLabel>Select status</FormLabel>
+                          <Field
+                            as={customSelectorComponent2}
+                            name={"status"}
+                            borderColor={
+                              errors.status && touched.status
+                                ? "red.500"
+                                : "gray.300"
+                            }
+                          >
+                            {options3.map((e, index) => {
+                              return (
+                                <option value={e.value} key={index}>
+                                  {e.label}
+                                </option>
+                              );
+                            })}
+                          </Field>
+  
+                          {errors.status && touched.status ? (
+                            <FormLabel color={"red.600"}>
+                              {errors.status}
+                            </FormLabel>
+                          ) : (
+                            ""
+                          )}
+                        </FormControl>
+
+                        </Flex>
   
                         <ModalFooter>
                           <Button
@@ -206,4 +287,10 @@ import {
   );
   const customSelectorComponent2 = (props) => (
     <Select {...props} placeholder="Select priority" />
+  );
+  const customSelectorComponent3 = (props) => (
+    <Select {...props} placeholder="Select type" />
+  );
+  const customSelectorComponent4 = (props) => (
+    <Select {...props} placeholder="Select status" />
   );
