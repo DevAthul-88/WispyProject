@@ -69,11 +69,10 @@ function Comments({ comment }) {
                 marginTop={"2"}
               >
                 <Flex>
-                  <Avatar name={e.username} />
+                  <Avatar name={e.username} marginRight={"2"} />
                   <Link
-                   
-                    margin="4"
-                    display={"block"}
+                    display={"inline-block"}
+                    marginTop={"2"}
                     as={NextLink}
                     href={`/profile/${e.userId}`}
                   >

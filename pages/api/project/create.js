@@ -17,6 +17,7 @@ export default async function handler(req, res) {
         members,
         todo: new Array(),
         priority,
+        tickets:[],
         completed: {
           flagged: false,
           approved: false,
