@@ -1,168 +1,200 @@
 import {
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalFooter,
-    ModalBody,
-    Button,
-    Flex,
-    FormControl,
-    FormLabel,
-    Input,
-    Stack,
-    Select,
-  } from "@chakra-ui/react";
-  import { Formik, Form, Field } from "formik";
-  import TicketSchema from "../../Validation/ticket.create";
-  import { useDispatch, useSelector } from "react-redux";
-  import Alert from "../../Components/Alert";
-  import { createProject } from "../../redux/Project/action";
-  import { useEffect } from "react";
-  
-  function Model({ toggle, setToggle, data }) {
-    const dispatch = useDispatch();
-    const { loading, error  , reload} = useSelector((state) => state.project);
-    const options = [
-      { value: "high", label: "High" },
-      { value: "medium", label: "Medium" },
-      { value: "low", label: "Low" },
-      { value: "none", label: "None" },
-    ];
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  Button,
+  Flex,
+  FormControl,
+  FormLabel,
+  Input,
+  Stack,
+  Select,
+} from "@chakra-ui/react";
+import { Formik, Form, Field } from "formik";
+import TicketSchema from "../../Validation/ticket.create";
+import { useDispatch, useSelector } from "react-redux";
+import Alert from "../../Components/Alert";
+import { createProject } from "../../redux/Project/action";
+import { useEffect } from "react";
 
-    const options2 = [
-      { value: "issue", label: "Issue" },
-      { value: "bug", label: "Bug" },
-      { value: "error", label: "Error" },
-      { value: "high", label: "High" },
-      { value: "feature_request", label: "Feature Request" },
-      { value: "other", label: "Other" },
-    ];
+function Model({ toggle, setToggle, data }) {
+  const dispatch = useDispatch();
+  const { loading, error, reload } = useSelector((state) => state.project);
+  const options = [
+    { value: "high", label: "High" },
+    { value: "medium", label: "Medium" },
+    { value: "low", label: "Low" },
+    { value: "none", label: "None" },
+  ];
 
-    const options3 = [
-      { value: "new", label: "Issue" },
-      { value: "open", label: "Bug" },
-      { value: "in_progress", label: "Error" },
-      { value: "resolve", label: "High" },
+  const options2 = [
+    { value: "issue", label: "Issue" },
+    { value: "bug", label: "Bug" },
+    { value: "error", label: "Error" },
+    { value: "high", label: "High" },
+    { value: "feature_request", label: "Feature Request" },
+    { value: "other", label: "Other" },
+  ];
 
-    ];
-  
-    const members = data.employees.map((e) => {
-      return {
-        value: e._id,
-        label: e.username,
-      };
-    });
-  
-    useEffect(() => {
-       if(reload){
-         window.location.reload()
-       }
-    },[reload])
-  
-    return (
-      <>
-        <Modal isOpen={toggle} size={"xl"}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>New ticket</ModalHeader>
-            <ModalBody>
-              {error && (
-                <Alert trigger={true} type={"error"} description={error} />
-              )}
-              <Flex justify={"center"}>
-                <Formik
-                  initialValues={{
-                    title: "",
-                    description: "",
-                    members: new Array(),
-                    project:"",
-                    priority: "",
-                    type:"",
-                    status: "",
-                    ordId: data._id,
-                  }}
-                  validationSchema={TicketSchema}
-                  onSubmit={(values, { resetForm }) => {
-                    console.log(values);
-                  }}
-                >
-                  {({ errors, touched }) => (
-                    <Stack spacing={4} w={"full"} maxW={"md"}>
-                      <Form>
-                        <FormControl marginTop={"5"}>
-                          <FormLabel>Ticket title</FormLabel>
-                          <Field
-                            name="title"
-                            as={CustomInputComponent}
-                            type={"text"}
-                            focusBorderColor={"messenger.500"}
-                            borderColor={
-                              errors.title && touched.title
-                                ? "red.500"
-                                : "gray.300"
-                            }
-                          />
-                          {errors.title && touched.title ? (
-                            <FormLabel color={"red.600"}>
-                              {errors.title}
-                            </FormLabel>
-                          ) : (
-                            ""
-                          )}
-                        </FormControl>
-  
-                        <FormControl id="email" marginTop={"5"}>
-                          <FormLabel>Ticket description</FormLabel>
-                          <Field
-                            name="description"
-                            as={CustomInputComponent}
-                            focusBorderColor={"messenger.500"}
-                            borderColor={
-                              errors.description && touched.description
-                                ? "red.500"
-                                : "gray.300"
-                            }
-                          />
-                          {errors.description && touched.description ? (
-                            <FormLabel color={"red.600"}>
-                              {errors.description}
-                            </FormLabel>
-                          ) : (
-                            ""
-                          )}
-                        </FormControl>
-                        
-                        
-                        <FormControl marginTop={"5"}>
-                          <FormLabel>Select members to assign</FormLabel>
-                          <Field
-                            as={customSelectorComponent}
-                            name={"members"}
-                            borderColor={
-                              errors.members && touched.members
-                                ? "red.500"
-                                : "gray.300"
-                            }
-                          >
-                            {members.map((e, index) => {
-                              return (
-                                <option value={e.value} key={index}>
-                                  {e.label}
-                                </option>
-                              );
-                            })}
-                          </Field>
-  
-                          {errors.members && touched.members ? (
-                            <FormLabel color={"red.600"}>
-                              {errors.members}
-                            </FormLabel>
-                          ) : (
-                            ""
-                          )}
-                        </FormControl>
-                        <Flex>
+  const options3 = [
+    { value: "new", label: "Issue" },
+    { value: "open", label: "Bug" },
+    { value: "in_progress", label: "Error" },
+    { value: "resolve", label: "High" },
+  ];
+
+  const members = data.employees.map((e) => {
+    return {
+      value: e._id,
+      label: e.username,
+    };
+  });
+  const projects = data.projects.map((e) => {
+    return {
+      value: e._id,
+      label: e.title,
+    };
+  });
+
+  useEffect(() => {
+    if (reload) {
+      window.location.reload();
+    }
+  }, [reload]);
+
+  return (
+    <>
+      <Modal isOpen={toggle} size={"xl"}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>New ticket</ModalHeader>
+          <ModalBody>
+            {error && (
+              <Alert trigger={true} type={"error"} description={error} />
+            )}
+            <Flex justify={"center"}>
+              <Formik
+                initialValues={{
+                  title: "",
+                  description: "",
+                  members: new Array(),
+                  project: "",
+                  priority: "",
+                  type: "",
+                  status: "",
+                  ordId: data._id,
+                }}
+                validationSchema={TicketSchema}
+                onSubmit={(values, { resetForm }) => {
+                  console.log(values);
+                }}
+              >
+                {({ errors, touched }) => (
+                  <Stack spacing={4} w={"full"} maxW={"md"}>
+                    <Form>
+                      <FormControl marginTop={"5"}>
+                        <FormLabel>Ticket title</FormLabel>
+                        <Field
+                          name="title"
+                          as={CustomInputComponent}
+                          type={"text"}
+                          focusBorderColor={"messenger.500"}
+                          borderColor={
+                            errors.title && touched.title
+                              ? "red.500"
+                              : "gray.300"
+                          }
+                        />
+                        {errors.title && touched.title ? (
+                          <FormLabel color={"red.600"}>
+                            {errors.title}
+                          </FormLabel>
+                        ) : (
+                          ""
+                        )}
+                      </FormControl>
+
+                      <FormControl id="email" marginTop={"5"}>
+                        <FormLabel>Ticket description</FormLabel>
+                        <Field
+                          name="description"
+                          as={CustomInputComponent}
+                          focusBorderColor={"messenger.500"}
+                          borderColor={
+                            errors.description && touched.description
+                              ? "red.500"
+                              : "gray.300"
+                          }
+                        />
+                        {errors.description && touched.description ? (
+                          <FormLabel color={"red.600"}>
+                            {errors.description}
+                          </FormLabel>
+                        ) : (
+                          ""
+                        )}
+                      </FormControl>
+
+                      <FormControl marginTop={"5"}>
+                        <FormLabel>Select members to assign</FormLabel>
+                        <Field
+                          as={customSelectorComponent}
+                          name={"members"}
+                          borderColor={
+                            errors.members && touched.members
+                              ? "red.500"
+                              : "gray.300"
+                          }
+                        >
+                          {members.map((e, index) => {
+                            return (
+                              <option value={e.value} key={index}>
+                                {e.label}
+                              </option>
+                            );
+                          })}
+                        </Field>
+
+                        {errors.members && touched.members ? (
+                          <FormLabel color={"red.600"}>
+                            {errors.members}
+                          </FormLabel>
+                        ) : (
+                          ""
+                        )}
+                      </FormControl>
+                      <FormControl marginTop={"5"}>
+                        <FormLabel>Select project</FormLabel>
+                        <Field
+                          as={customSelectorComponent5}
+                          name={"project"}
+                          borderColor={
+                            errors.project && touched.project
+                              ? "red.500"
+                              : "gray.300"
+                          }
+                        >
+                          {projects.map((e, index) => {
+                            return (
+                              <option value={e.value} key={index}>
+                                {e.label}
+                              </option>
+                            );
+                          })}
+                        </Field>
+
+                        {errors.project && touched.project ? (
+                          <FormLabel color={"red.600"}>
+                            {errors.project}
+                          </FormLabel>
+                        ) : (
+                          ""
+                        )}
+                      </FormControl>
+                      <Flex>
                         <FormControl marginTop={"5"}>
                           <FormLabel>Select type</FormLabel>
                           <Field
@@ -174,7 +206,7 @@ import {
                                 : "gray.300"
                             }
                           >
-                             {options2.map((e, index) => {
+                            {options2.map((e, index) => {
                               return (
                                 <option value={e.value} key={index}>
                                   {e.label}
@@ -182,7 +214,7 @@ import {
                               );
                             })}
                           </Field>
-  
+
                           {errors.type && touched.type ? (
                             <FormLabel color={"red.600"}>
                               {errors.type}
@@ -191,7 +223,7 @@ import {
                             ""
                           )}
                         </FormControl>
-  
+
                         <FormControl marginTop={"5"}>
                           <FormLabel>Select priority</FormLabel>
                           <Field
@@ -211,7 +243,7 @@ import {
                               );
                             })}
                           </Field>
-  
+
                           {errors.priority && touched.priority ? (
                             <FormLabel color={"red.600"}>
                               {errors.priority}
@@ -224,7 +256,7 @@ import {
                         <FormControl marginTop={"5"}>
                           <FormLabel>Select status</FormLabel>
                           <Field
-                            as={customSelectorComponent2}
+                            as={customSelectorComponent4}
                             name={"status"}
                             borderColor={
                               errors.status && touched.status
@@ -240,7 +272,7 @@ import {
                               );
                             })}
                           </Field>
-  
+
                           {errors.status && touched.status ? (
                             <FormLabel color={"red.600"}>
                               {errors.status}
@@ -249,48 +281,54 @@ import {
                             ""
                           )}
                         </FormControl>
+                      </Flex>
 
-                        </Flex>
-  
-                        <ModalFooter>
-                          <Button
-                            colorScheme="red"
-                            mr={3}
-                            onClick={() => setToggle(!toggle)}
-                          >
-                            Close
-                          </Button>
-                          <Button colorScheme={"messenger"} type="submit" isLoading={loading}>
-                            Save
-                          </Button>
-                        </ModalFooter>
-                      </Form>
-                    </Stack>
-                  )}
-                </Formik>
-              </Flex>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
-      </>
-    );
-  }
-  
-  export default Model;
-  
-  const CustomInputComponent = (props) => (
-    <Input type={props.type} {...props} width={"full"} />
+                      <ModalFooter>
+                        <Button
+                          colorScheme="red"
+                          mr={3}
+                          onClick={() => setToggle(!toggle)}
+                        >
+                          Close
+                        </Button>
+                        <Button
+                          colorScheme={"messenger"}
+                          type="submit"
+                          isLoading={loading}
+                        >
+                          Save
+                        </Button>
+                      </ModalFooter>
+                    </Form>
+                  </Stack>
+                )}
+              </Formik>
+            </Flex>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+    </>
   );
-  
-  const customSelectorComponent = (props) => (
-    <Select {...props} icon={"none"} height={"8rem"} required multiple />
-  );
-  const customSelectorComponent2 = (props) => (
-    <Select {...props} placeholder="Select priority" />
-  );
-  const customSelectorComponent3 = (props) => (
-    <Select {...props} placeholder="Select type" />
-  );
-  const customSelectorComponent4 = (props) => (
-    <Select {...props} placeholder="Select status" />
-  );
+}
+
+export default Model;
+
+const CustomInputComponent = (props) => (
+  <Input type={props.type} {...props} width={"full"} />
+);
+
+const customSelectorComponent = (props) => (
+  <Select {...props} icon={"none"} height={"8rem"} required multiple />
+);
+const customSelectorComponent2 = (props) => (
+  <Select {...props} placeholder="Select priority" />
+);
+const customSelectorComponent3 = (props) => (
+  <Select {...props} placeholder="Select type" />
+);
+const customSelectorComponent4 = (props) => (
+  <Select {...props} placeholder="Select status" />
+);
+const customSelectorComponent5 = (props) => (
+  <Select {...props} placeholder="Select project" />
+);
