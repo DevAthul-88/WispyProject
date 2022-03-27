@@ -8,11 +8,11 @@ import axios from "axios";
 export const ticketCreateAction = (credentials) => async (dispatch) => {
   try {
     dispatch({ type: TICKET_CREATE_LOADING });
-    const { data } = await axios.post("/api/ticket/index", credentials);
+    const { data } = await axios.post("/api/ticket/", credentials);
     if (data.error) {
       return dispatch({ type: TICKET_CREATE_FAILURE, payload: data.error });
     }
-    if (data.reload) {
+    if (data.refresh) {
       dispatch({ type: TICKET_CREATE_SUCCESS });
     }
   } catch (error) {

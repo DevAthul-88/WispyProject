@@ -17,12 +17,14 @@ import { Formik, Form, Field } from "formik";
 import TicketSchema from "../../Validation/ticket.create";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
-import { createProject } from "../../redux/Project/action";
+import {ticketCreateAction } from "../../redux/ticket/action";
 import { useEffect } from "react";
+import { fetchData } from "../../redux/org/action";
 
 function Model({ toggle, setToggle, data }) {
   const dispatch = useDispatch();
-  const { loading, error, reload } = useSelector((state) => state.project);
+  const { loading, error, reload } = useSelector((state) => state.ticket);
+  const { userInfo } = useSelector((state) => state.auth);
   const options = [
     { value: "high", label: "High" },
     { value: "medium", label: "Medium" },
@@ -40,10 +42,10 @@ function Model({ toggle, setToggle, data }) {
   ];
 
   const options3 = [
-    { value: "new", label: "Issue" },
-    { value: "open", label: "Bug" },
-    { value: "in_progress", label: "Error" },
-    { value: "resolve", label: "High" },
+    { value: "new", label: "New" },
+    { value: "open", label: "Open" },
+    { value: "in_progress", label: "In progress" },
+    { value: "resolve", label: "Resolve" },
   ];
 
   const members = data.employees.map((e) => {
@@ -61,7 +63,7 @@ function Model({ toggle, setToggle, data }) {
 
   useEffect(() => {
     if (reload) {
-      window.location.reload();
+      dispatch(fetchData(userInfo._id));
     }
   }, [reload]);
 
@@ -89,7 +91,10 @@ function Model({ toggle, setToggle, data }) {
                 }}
                 validationSchema={TicketSchema}
                 onSubmit={(values, { resetForm }) => {
-                  console.log(values);
+                  dispatch(ticketCreateAction(values))
+                  if(!error){
+                    resetForm()
+                  }
                 }}
               >
                 {({ errors, touched }) => (

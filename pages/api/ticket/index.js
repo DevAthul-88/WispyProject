@@ -10,30 +10,29 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
         console.log(req.body);
-    //   const { title, description, members, priority, ordId } = req.body;
-    //   const project = {
-    //     _id: new mongoose.Types.ObjectId(),
-    //     title,
-    //     description,
-    //     members,
-    //     todo: new Array(),
-    //     priority,
-    //     tickets:[],
-    //     completed: {
-    //       flagged: false,
-    //       approved: false,
-    //     },
-    //     createdAt: Date.now(),
-    //     updatedAt: Date.now(),
-    //     comments: new Array(),
-    //   };
+      const { title  , description , members , project , priority , type , status , ordId } = req.body;
+      const ticket = {
+        _id: new mongoose.Types.ObjectId(),
+        title,
+        description,
+        members,
+        priority,
+        tickets:[],
+        completed: {
+          flagged: false,
+          approved: false,
+        },
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+        comments: new Array(),
+      };
 
-    //   await orgModel.updateOne(
-    //     { _id: ordId },
-    //     { $push: { projects: project } }
-    //   );
+      await orgModel.updateOne(
+        { _id: ordId },
+        { $push: { tickets: ticket} }
+      );
 
-    //   res.send({ refresh: true });
+      res.send({ refresh: true });
     } catch (error) {
       console.log(error.message);
       res.send({ error: error.message });
