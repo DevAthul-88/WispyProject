@@ -14,7 +14,7 @@ import {
     Select,
   } from "@chakra-ui/react";
   import { Formik, Form, Field } from "formik";
-  import ProjectSchema from "../../Validation/project_add";
+  import TicketSchema from "../../Validation/ticket.create";
   import { useDispatch, useSelector } from "react-redux";
   import Alert from "../../Components/Alert";
   import { createProject } from "../../redux/Project/action";
@@ -81,10 +81,9 @@ import {
                     status: "",
                     ordId: data._id,
                   }}
-                  validationSchema={ProjectSchema}
+                  validationSchema={TicketSchema}
                   onSubmit={(values, { resetForm }) => {
-                    dispatch(createProject(values));
-                    resetForm()
+                    console.log(values);
                   }}
                 >
                   {({ errors, touched }) => (
