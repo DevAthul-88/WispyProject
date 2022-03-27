@@ -76,6 +76,7 @@ import {
                     title: "",
                     description: "",
                     members: new Array(),
+                    project:"",
                     priority: "",
                     type:"",
                     status: "",

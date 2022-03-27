@@ -13,11 +13,21 @@ import {
   Button,
   Link,
   Badge,
+  Menu,
+  MenuButton,
+  MenuItem,
+  Portal,
+  MenuList,
+  IconButton,
 } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import {
+  TriangleDownIcon,
+  TriangleUpIcon,
+  SettingsIcon,
+} from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
-import dateFormat from "dateformat"
+import dateFormat from "dateformat";
 
 function DataTable({ projects, user }) {
   const colorScheme = (priority) => {
@@ -39,24 +49,32 @@ function DataTable({ projects, user }) {
         Header: "title",
         accessor: "title",
       },
-      
+
       {
-        Header:"Completed",
-        accessor:"approved",
+        Header: "Completed",
+        accessor: "approved",
         Cell: ({ row }) => (
           <>
-            <Badge colorScheme={row.original.completed.approved == false ? "yellow" : "green"}>
+            <Badge
+              colorScheme={
+                row.original.completed.approved == false ? "yellow" : "green"
+              }
+            >
               {row.original.completed.approved.toString()}
             </Badge>
           </>
         ),
       },
       {
-        Header:"Flagged",
-        accessor:"completed",
+        Header: "Flagged",
+        accessor: "completed",
         Cell: ({ row }) => (
           <>
-            <Badge colorScheme={row.original.completed.flagged == false ? "yellow" : "green"}>
+            <Badge
+              colorScheme={
+                row.original.completed.flagged == false ? "yellow" : "green"
+              }
+            >
               {row.original.completed.flagged.toString()}
             </Badge>
           </>
@@ -64,7 +82,7 @@ function DataTable({ projects, user }) {
       },
       {
         Header: "priority",
-        accessor:"priority",
+        accessor: "priority",
         Cell: ({ row }) => (
           <>
             <Badge colorScheme={colorScheme(row.original.priority)}>
@@ -76,11 +94,7 @@ function DataTable({ projects, user }) {
       {
         Header: "created",
         accessor: "createdAt",
-        Cell: ({ row }) => (
-          <>
-            {dateFormat(row.original.createdAt)}
-          </>
-        ),
+        Cell: ({ row }) => <>{dateFormat(row.original.createdAt)}</>,
       },
       {
         Header: "View details",
@@ -98,15 +112,29 @@ function DataTable({ projects, user }) {
 
       user.role === "ADMIN" || user.role === "PROJECT_MANAGER"
         ? {
-            Header: "Edit / Delete",
+            accessor: "edit",
             Cell: ({ row }) => (
               <>
-                <Link
-                  as={NextLink}
-                  href={`/software/projects/edit/${row.original._id}`}
-                >
-                  Edit / Delete
-                </Link>
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label="Options"
+                    icon={<SettingsIcon/>}
+                    variant="outline"
+                  />
+                  <Portal>
+                    <MenuList>
+                      <MenuItem>
+                        <Link
+                          as={NextLink}
+                          href={`/software/projects/edit/${row.original._id}`}
+                        >
+                          Edit / Delete
+                        </Link>
+                      </MenuItem>
+                    </MenuList>
+                  </Portal>
+                </Menu>
               </>
             ),
           }
