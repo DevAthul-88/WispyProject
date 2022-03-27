@@ -7,7 +7,7 @@ import Head from "next/head";
 import NoData from "../../../Components/noData";
 import { FaPlus } from "react-icons/fa";
 import Modal from "../.../../../../Components/Modal/Modal.ticket";
-import Tables from "../../../Components/Table/table.proj";
+import Tables from "../../../Components/Table/table.ticket";
 
 function employees() {
   const dispatch = useDispatch();
@@ -56,7 +56,7 @@ function employees() {
             {data && data.tickets.length >= 1 ? (
               <>
                 {" "}
-                <Tables projects={data.projects} user={userInfo} />
+                <Tables projects={data.tickets} user={userInfo} />
               </>
             ) : (
               <Flex justify={"center"}>

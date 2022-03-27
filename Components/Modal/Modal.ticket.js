@@ -19,12 +19,10 @@ import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
 import {ticketCreateAction } from "../../redux/ticket/action";
 import { useEffect } from "react";
-import { fetchData } from "../../redux/org/action";
 
 function Model({ toggle, setToggle, data }) {
   const dispatch = useDispatch();
   const { loading, error, reload } = useSelector((state) => state.ticket);
-  const { userInfo } = useSelector((state) => state.auth);
   const options = [
     { value: "high", label: "High" },
     { value: "medium", label: "Medium" },
@@ -63,7 +61,7 @@ function Model({ toggle, setToggle, data }) {
 
   useEffect(() => {
     if (reload) {
-      dispatch(fetchData(userInfo._id));
+      window.location.reload();
     }
   }, [reload]);
 

@@ -17,6 +17,9 @@ export default async function handler(req, res) {
         description,
         members,
         priority,
+        type:type,
+        status:status,
+        project:project,
         tickets:[],
         completed: {
           flagged: false,
