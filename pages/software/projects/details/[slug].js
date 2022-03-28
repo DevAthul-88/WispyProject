@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../../../Components/Loader";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { fetchData } from "../../../../redux/org/action";
 import {
   Container,
@@ -63,7 +63,7 @@ function Slug() {
                     <Details data={proj} />
                   </TabPanel>
                   <TabPanel>
-                    <Ticket data={proj} />
+                    <Ticket data={data} />
                   </TabPanel>
                   <TabPanel>
                     <Comment comment={proj[0].comments} />
