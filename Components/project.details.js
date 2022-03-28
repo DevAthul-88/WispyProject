@@ -125,7 +125,7 @@ export default function Details({ data }) {
                 </Text>
 
                 <List spacing={2}>
-                  <ListItem>
+                  <ListItem textTransform="capitalize">
                     <Text as={"span"} fontWeight={"bold"}>
                       Priority:
                     </Text>{" "}
@@ -149,13 +149,13 @@ export default function Details({ data }) {
                     </Text>{" "}
                     {dateFormat(data[0].createdAt)}
                   </ListItem>
-                  <ListItem>
+                  <ListItem textTransform="capitalize">
                     <Text as={"span"} fontWeight={"bold"}>
                       Flagged as completed:
                     </Text>{" "}
                     {data[0].completed.flagged.toString()}
                   </ListItem>
-                  <ListItem>
+                  <ListItem textTransform="capitalize">
                     <Text as={"span"} fontWeight={"bold"}>
                       Completed:
                     </Text>{" "}
