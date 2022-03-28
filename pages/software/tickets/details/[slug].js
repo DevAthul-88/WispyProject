@@ -12,7 +12,7 @@ import {
   TabPanels,
   Tabs,
 } from "@chakra-ui/react";
-import Details from "../../../../Components/project.details";
+import Details from "../../../../Components/ticket.details";
 import Comment from "../../../../Components/Comment/Index";
 import Table from "../../../../Components/Table/users";
 import Ticket from "../../../../Components/Ticket.project/index";
@@ -52,7 +52,7 @@ function Slug() {
               >
                 <TabList mb="1em">
                   <Tab>Details</Tab>
-                  <Tab>Tickets</Tab>
+                  <Tab>Attachments</Tab>
                   <Tab>Comments</Tab>
                   <Tab>Users</Tab>
                 </TabList>
