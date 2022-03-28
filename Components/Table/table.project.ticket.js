@@ -30,6 +30,7 @@ import NextLink from "next/link";
 import dateFormat from "dateformat";
 
 function DataTable({ projects, user }) {
+  console.log(projects);
   const colorScheme = (priority) => {
     if (priority == "high") {
       return "red";

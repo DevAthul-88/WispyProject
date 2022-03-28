@@ -63,7 +63,7 @@ function Slug() {
                     <Details data={proj} />
                   </TabPanel>
                   <TabPanel>
-                    <Ticket data={data} />
+                    <Ticket data={data} id={router.query.slug}/>
                   </TabPanel>
                   <TabPanel>
                     <Comment comment={proj[0].comments} />
