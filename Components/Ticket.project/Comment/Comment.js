@@ -31,7 +31,7 @@ function Comments({ comment }) {
 
   const handleDelete = async (id) => {
     setLoading(true);
-    const dir = await axios.post("/api/project/deleteComment", {
+    const dir = await axios.post("/api/ticket/deleteComment", {
       id: id,
       orgId: data._id,
       projectId: router.query.slug,
