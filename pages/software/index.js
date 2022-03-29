@@ -51,7 +51,11 @@ function index() {
               padding={"2"}
               width={"full"}
             >
-              <PieChart />
+              {
+                data && data.tickets && (
+                  <PieChart ticket={data.tickets}/>
+                )
+              }
             </Box>
           </Flex>
         </>

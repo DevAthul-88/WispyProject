@@ -2,10 +2,13 @@ import React from 'react';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { Pie } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-export const options = {
+export function PieChart({ticket}) {
+  ChartJS.register(ArcElement, Tooltip, Legend);
+
+
+ const options = {
   maintainAspectRatio : false,
   title: {
     display: true,
@@ -13,7 +16,7 @@ export const options = {
   },
 }
 
-export const data = {
+ const data = {
 
   labels: ['In progress', 'Completed', 'Waiting', 'Decline'],
   datasets: [
@@ -38,7 +41,5 @@ export const data = {
     },
   ],
 };
-
-export function PieChart() {
   return <Pie data={data} options={options}/>;
 }
