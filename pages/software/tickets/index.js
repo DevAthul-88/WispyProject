@@ -19,7 +19,6 @@ function employees() {
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
   }, [refresh]);
-  console.log(data);
   return (
     <>
       <Head>

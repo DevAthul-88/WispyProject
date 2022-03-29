@@ -8,15 +8,15 @@ import {
     StatNumber,
     useColorModeValue,
   } from '@chakra-ui/react';
-  import { ReactNode } from 'react';
-  import { BsPerson } from 'react-icons/bs';
-  import { FiServer } from 'react-icons/fi';
+  import { BsPerson  } from 'react-icons/bs';
+  import {  FiFile } from 'react-icons/fi';
   import { GoLocation } from 'react-icons/go';
+  import {TiTicket} from 'react-icons/Ti'
   
   const StatsCardProps  = {
     title: String,
     stat: String,
-    icon: ReactNode,
+    icon: "",
   }
   function StatsCard(props = StatsCardProps) {
     const { title, stat, icon } = props;
@@ -48,24 +48,24 @@ import {
     );
   }
   
-  export default function BasicStatistics({p}) {
+  export default function BasicStatistics({p , e , t}) {
     return (
       <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }} marginBottom="5">
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
           <StatsCard
-            title={'Projects'}
-            stat={p}
+            title={'Users'}
+            stat={e}
             icon={<BsPerson size={'3em'} />}
           />
           <StatsCard
-            title={'Servers'}
-            stat={'1,000'}
-            icon={<FiServer size={'3em'} />}
+            title={'Projects'}
+            stat={p}
+            icon={<FiFile size={'3em'} />}
           />
           <StatsCard
-            title={'Datacenters'}
-            stat={'7'}
-            icon={<GoLocation size={'3em'} />}
+            title={'Tickets'}
+            stat={t}
+            icon={<TiTicket size={'3em'} />}
           />
         </SimpleGrid>
       </Box>
