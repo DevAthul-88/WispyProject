@@ -35,7 +35,7 @@ function Model({ toggle, setToggle, data }) {
     { value: "bug", label: "Bug" },
     { value: "error", label: "Error" },
     { value: "high", label: "High" },
-    { value: "feature_request", label: "Feature Request" },
+    { value: "request", label: "Request" },
     { value: "other", label: "Other" },
   ];
 
