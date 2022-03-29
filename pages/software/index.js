@@ -1,10 +1,10 @@
-import React , {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Container, Flex, Box } from "@chakra-ui/react";
 import Head from "next/head";
 import { BarChart } from "../../Components/Charts/Bar";
 import { PieChart } from "../../Components/Charts/Pie";
 import Status from "../../Components/status";
-import { useSelector , useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../Components/Loader";
 import { fetchData } from "../../redux/org/action";
 
@@ -27,10 +27,16 @@ function index() {
         <Loader />
       ) : (
         <>
-          <Status p={data && data.projects.length} e={data && data.employees.length} t={data && data.tickets.length}/>
-          <Box borderWidth={"thin"} padding={"2"}>
-            <BarChart />
-          </Box>
+          <Status
+            p={data && data.projects.length}
+            e={data && data.employees.length}
+            t={data && data.tickets.length}
+          />
+          {data && data.projects && (
+            <Box borderWidth={"thin"} padding={"2"}>
+              <BarChart project={data && data.projects} />
+            </Box>
+          )}
 
           <Flex marginTop={"10"}>
             <Box borderWidth={"thin"} padding={"2"} width={"full"}>

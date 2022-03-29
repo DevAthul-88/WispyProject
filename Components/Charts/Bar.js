@@ -30,7 +30,7 @@ export const options = {
     },
     title: {
       display: true,
-      text: "Tickets by priority",
+      text: "Projects by priority",
     },
   },
   
@@ -42,18 +42,28 @@ export const data = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
+      label: "None",
       data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      backgroundColor: "#A0AEC0",
     },
     {
-      label: "Dataset 2",
+      label: "Low",
       data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
+      backgroundColor: "#48BB78",
+    },
+    {
+      label: "Medium",
+      data: labels.map(() => Math.floor(Math.random() * 10)),
+      backgroundColor: "#F6E05E",
+    },
+    {
+      label: "High",
+      data: labels.map(() => Math.floor(Math.random() * 10)),
+      backgroundColor: "#E53E3E",
     },
   ],
 };
 
-export function BarChart() {
+export function BarChart({project}) {
   return <Bar options={options} data={data} />;
 }
