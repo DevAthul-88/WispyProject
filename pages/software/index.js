@@ -34,13 +34,13 @@ function index() {
           />
           {data && data.projects && (
             <Box borderWidth={"thin"} padding={"2"}>
-              <BarChart project={data && data.projects} />
+              <BarChart projects={data.projects} />
             </Box>
           )}
 
           <Flex marginTop={"10"}>
             <Box borderWidth={"thin"} padding={"2"} width={"full"}>
-              <BarChart />
+             
             </Box>
             <Box
               height={"sm"}

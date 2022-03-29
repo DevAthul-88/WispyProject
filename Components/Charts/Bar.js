@@ -10,60 +10,44 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+export function BarChart({ projects }) {
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
-export const options = {
-  responsive: true,
-  scales: {
-    xAxes: [{ barPercentage: 0.5 }]
-},
-  plugins: {
-    legend: {
-      position: "top",
+  const options = {
+    responsive: true,
+    scales: {
+      xAxes: [{ barPercentage: 0.5 }],
     },
-    title: {
-      display: true,
-      text: "Projects by priority",
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Projects by priority",
+      },
     },
-  },
-  
-};
+  };
 
-const labels = ["None" , "Low" , "Medium" , "High" ];
+  const labels = projects.map(e => {return e.priority});
 
-export const data = {
-  labels,
-  datasets: [
-    {
-      label: "None",
-      data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "#A0AEC0",
-    },
-    {
-      label: "Low",
-      data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "#48BB78",
-    },
-    {
-      label: "Medium",
-      data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "#F6E05E",
-    },
-    {
-      label: "High",
-      data: labels.map(() => Math.floor(Math.random() * 10)),
-      backgroundColor: "#E53E3E",
-    },
-  ],
-};
-
-export function BarChart({project}) {
+  const data = {
+    labels,
+    datasets: [
+     
+      {
+        data: projects.map(e => {return e.priority}),
+        backgroundColor: "#48BB78",
+      },
+      
+    ],
+  };
   return <Bar options={options} data={data} />;
 }
