@@ -9,7 +9,7 @@ function users({ data }) {
       key: "_id",
     },
     {
-      label: "Username",
+      label: "User Name",
       key: "username",
     },
 
@@ -20,6 +20,10 @@ function users({ data }) {
     {
       label: "Role",
       key: "role",
+    },
+    {
+      label: "Organization",
+      key: "org",
     },
   ];
   return (
@@ -35,12 +39,12 @@ function users({ data }) {
           Export data
         </MenuButton>
         <MenuList>
-          <MenuItem icon={<FaFileCsv />}>
+          <MenuItem as={Button} leftIcon={<FaFileCsv />} variant={"link"}>
             <CSVLink
               data={data}
               headers={headers}
               filename="Employees_data.csv"
-            >
+            >             
               Export to CSV
             </CSVLink>
           </MenuItem>
