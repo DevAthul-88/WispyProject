@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { CSVLink } from "react-csv";
 import { FaArrowDown } from "react-icons/fa";
 
-function project({ data }) {
+function ticket({ data }) {
   const headers = [
     {
       label: "Id",
@@ -18,12 +18,12 @@ function project({ data }) {
       key: "description",
     },
     {
-      label: "Approved",
-      key: "completed.approved",
+      label: "Status",
+      key: "status",
     },
     {
-      label: "Flagged",
-      key: "completed.flagged",
+      label: "Type",
+      key: "type",
     },
     {
       label: "Priority",
@@ -62,4 +62,4 @@ function project({ data }) {
   );
 }
 
-export default project;
+export default ticket;
