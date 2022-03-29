@@ -2,6 +2,8 @@ import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { CSVLink } from "react-csv";
 import { FaFileCsv, FaArrowDown } from "react-icons/fa";
+
+
 function users({ data }) {
   const headers = [
     {
@@ -39,7 +41,7 @@ function users({ data }) {
           Export data
         </MenuButton>
         <MenuList>
-          <MenuItem as={Button} leftIcon={<FaFileCsv />} variant={"link"}>
+          <MenuItem   >
             <CSVLink
               data={data}
               headers={headers}
@@ -49,6 +51,11 @@ function users({ data }) {
             </CSVLink>
           </MenuItem>
         </MenuList>
+
+ 
+       
+      
+
       </Menu>
     </div>
   );
