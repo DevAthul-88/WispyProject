@@ -26,7 +26,7 @@ export const ticketCreateAction = (credentials) => async (dispatch) => {
 export const editTicket = (credentials) => async (dispatch) => {
   try {
     dispatch({ type: TICKET_EDIT_LOADING });
-    const { data } = await axios.put("/api/ticket/create", credentials);
+    const { data } = await axios.put("/api/ticket", credentials);
     if (data.refresh) {
       dispatch({ type: TICKET_EDIT_SUCCESS });
     }

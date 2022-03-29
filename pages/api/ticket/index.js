@@ -9,18 +9,27 @@ const objectId = mongoose.Types.ObjectId;
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-        console.log(req.body);
-      const { title  , description , members , project , priority , type , status , ordId } = req.body;
+      console.log(req.body);
+      const {
+        title,
+        description,
+        members,
+        project,
+        priority,
+        type,
+        status,
+        ordId,
+      } = req.body;
       const ticket = {
         _id: new mongoose.Types.ObjectId(),
         title,
         description,
         members,
         priority,
-        type:type,
-        status:status,
-        project:project,
-        tickets:[],
+        type: type,
+        status: status,
+        project: project,
+        tickets: [],
         completed: {
           flagged: false,
           approved: false,
@@ -30,10 +39,7 @@ export default async function handler(req, res) {
         comments: new Array(),
       };
 
-      await orgModel.updateOne(
-        { _id: ordId },
-        { $push: { tickets: ticket} }
-      );
+      await orgModel.updateOne({ _id: ordId }, { $push: { tickets: ticket } });
 
       res.send({ refresh: true });
     } catch (error) {
