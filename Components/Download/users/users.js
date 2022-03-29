@@ -5,9 +5,14 @@ import { FaFileCsv, FaArrowDown } from "react-icons/fa";
 function users({ data }) {
   const headers = [
     {
+      label: "Id",
+      key: "_id",
+    },
+    {
       label: "Username",
       key: "username",
     },
+
     {
       label: "Email",
       key: "email",
@@ -16,11 +21,12 @@ function users({ data }) {
       label: "Role",
       key: "role",
     },
-  ]
+  ];
   return (
     <div>
       <Menu>
         <MenuButton
+          colorScheme={"whatsapp"}
           as={Button}
           aria-label="Options"
           rightIcon={<FaArrowDown />}
@@ -29,13 +35,15 @@ function users({ data }) {
           Export data
         </MenuButton>
         <MenuList>
-          <MenuItem icon={<FaFileCsv />} onClick={() => (
-            <CSVLink 
-            headers={headers} 
-            filename="employees.csv"
-            data={data}
-            />
-          )}>Export to csv</MenuItem>
+          <MenuItem icon={<FaFileCsv />}>
+            <CSVLink
+              data={data}
+              headers={headers}
+              filename="Employees_data.csv"
+            >
+              Export to CSV
+            </CSVLink>
+          </MenuItem>
         </MenuList>
       </Menu>
     </div>
