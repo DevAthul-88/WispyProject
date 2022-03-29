@@ -48,8 +48,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "PUT") {
     try {
-      const { title, description, members, priority, ordId, project_id } =
-        req.body;
+      const { title, description, members, priority, ordId, ticket , type , status , project } = req.body;
 
       await orgModel.findByIdAndUpdate(
         {
@@ -57,38 +56,20 @@ export default async function handler(req, res) {
         },
         {
           $set: {
-            "projects.$[i].title": title,
-            "projects.$[i].description": description,
-            "projects.$[i].members": members,
-            "projects.$[i].priority": priority,
+            "tickets.$[i].title": title,
+            "tickets.$[i].description": description,
+            "tickets.$[i].members": members,
+            "tickets.$[i].priority": priority,
+            "tickets.$[i].type": type,
+            "tickets.$[i].status": status,
+            "tickets.$[i].project": project,
           },
         },
         {
-          arrayFilters: [{ "i._id": objectId(project_id) }],
+          arrayFilters: [{ "i._id": objectId(ticket) }],
         }
       );
       res.send({ refresh: true });
-    } catch (error) {
-      res.send({ error: error.message });
-    }
-  } else if (req.method === "PATCH") {
-    try {
-      const { orgId, projectId } = req.body;
-
-      await orgModel.findByIdAndUpdate(
-        {
-          _id: orgId,
-        },
-        {
-          $set: {
-            "projects.$[i].completed.flagged": true,
-          },
-        },
-        {
-          arrayFilters: [{ "i._id": objectId(projectId) }],
-        }
-      );
-      res.send({ reload: true });
     } catch (error) {
       res.send({ error: error.message });
     }
