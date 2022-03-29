@@ -21,11 +21,11 @@ function Form() {
       userId: userInfo._id,
       orgId: data._id,
       username: userInfo.username,
-      projectId: router.query.slug,
+      ticket: router.query.slug,
       comment: comment,
     };
 
-    const dir = await axios.post("/api/project/comment", commentObj);
+    const dir = await axios.post("/api/ticket/comment", commentObj);
     if(dir.data.error) {
       setLoading(false)
       return setError(dir.data.error)
