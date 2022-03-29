@@ -13,7 +13,7 @@ import { fetchData } from "../../../../redux/org/action";
 import Form from "../../../../Components/Ticket.project/edit/Form";
 import Loader from "../../../../Components/Loader";
 import { useRouter } from "next/router";
-import Other from '../../../../Components/edit[pro]/other'
+import Other from "../../../../Components/Ticket.project/edit/other";
 
 function Slug() {
   const router = useRouter();
@@ -51,9 +51,19 @@ function Slug() {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <Form data={data && data.employees} de={data && proj && proj} org={data && data}/>
+                    <Form
+                      data={data && data.employees}
+                      de={data && proj && proj}
+                      org={data && data}
+                    />
                   </TabPanel>
-                  <TabPanel><Other data={data && data.employees} de={data && proj && proj} org={data && data}/></TabPanel>
+                  <TabPanel>
+                    <Other
+                      userInfo={userInfo}
+                      de={data && proj && proj}
+                      org={data && data}
+                    />
+                  </TabPanel>
                 </TabPanels>
               </Tabs>
             </Container>
