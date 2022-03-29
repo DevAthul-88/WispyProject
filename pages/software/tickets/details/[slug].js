@@ -13,9 +13,8 @@ import {
   Tabs,
 } from "@chakra-ui/react";
 import Details from "../../../../Components/ticket.details";
-import Comment from "../../../../Components/Comment/Index";
+import Comment from "../../../../Components/Ticket.project/Comment/index";
 import Table from "../../../../Components/Table/users";
-import Ticket from "../../../../Components/Ticket.project/index";
 
 function Slug() {
   const router = useRouter();

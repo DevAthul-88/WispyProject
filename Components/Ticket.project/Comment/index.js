@@ -1,6 +1,6 @@
 import React from "react";
 import { Flex, Stack } from "@chakra-ui/react";
-import Comments from "./Comments";
+import Comments from "./Comment";
 import Form from "./Form";
 
 function Index({ comment }) {
