@@ -9,7 +9,6 @@ const objectId = mongoose.Types.ObjectId;
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
-      console.log(req.body);
       const {
         title,
         description,

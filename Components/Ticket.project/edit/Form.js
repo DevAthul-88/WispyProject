@@ -11,7 +11,7 @@ import { Formik, Form, Field } from "formik";
 import TicketSchema from "../../../Validation/ticket.create";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../../Components/Alert";
-import { ticketCreateAction } from "../../../redux/ticket/action";
+import { editTicket } from "../../../redux/ticket/action";
 import { useEffect } from "react";
 
 function Model({ data, de , org }) {
@@ -75,7 +75,7 @@ function Model({ data, de , org }) {
         }}
         validationSchema={TicketSchema}
         onSubmit={(values, { resetForm }) => {
-          dispatch(ticketCreateAction(values));
+          dispatch(editTicket(values));
           if (!edit_error) {
             resetForm();
           }
