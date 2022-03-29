@@ -1,30 +1,37 @@
 import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { CSVLink } from "react-csv";
-import { FaFileCsv, FaArrowDown } from "react-icons/fa";
+import { FaArrowDown } from "react-icons/fa";
 
-function users({ data }) {
+function project({ data }) {
   const headers = [
     {
       label: "Id",
       key: "_id",
     },
     {
-      label: "User Name",
-      key: "username",
-    },
-
-    {
-      label: "Email",
-      key: "email",
+      label: "Title",
+      key: "title",
     },
     {
-      label: "Role",
-      key: "role",
+      label: "Description",
+      key: "description",
     },
     {
-      label: "Organization",
-      key: "org",
+      label: "Approved",
+      key: "completed.approved",
+    },
+    {
+      label: "Flagged",
+      key: "completed.flagged",
+    },
+    {
+      label: "Priority",
+      key: "priority",
+    },
+    {
+      label: "Created",
+      key: "createdAt",
     },
   ];
   return (
@@ -55,4 +62,4 @@ function users({ data }) {
   );
 }
 
-export default users;
+export default project;
