@@ -1,11 +1,12 @@
 import React from 'react'
-import {Input , Heading} from '@chakra-ui/react'
+import {Text} from '@chakra-ui/react'
+import Input from './input'
 
 function ticket() {
   return (
     <div>
-          <Heading>Add attachments</Heading>
-        <Input placeholder='Basic usage' type="file"/>
+          <Text fontSize={"2xl"} fontWeight={"bold"}>Tickets attachments</Text>
+          <Input />
     </div>
   )
 }
