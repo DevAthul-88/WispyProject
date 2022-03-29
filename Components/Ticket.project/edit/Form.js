@@ -1,10 +1,4 @@
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
   Button,
   Flex,
   FormControl,
@@ -69,13 +63,13 @@ function Model({ data, de , org }) {
     <>
       <Formik
         initialValues={{
-          title: "",
-          description: "",
-          members: new Array(),
-          project: "",
-          priority: "",
-          type: "",
-          status: "",
+          title: de.title,
+          description: de.description,
+          members: de.members,
+          ticket: de._id,
+          priority:de.priority,
+          type: de.type,
+          status: de.status,
           ordId: de._id,
         }}
         validationSchema={TicketSchema}
@@ -95,6 +89,7 @@ function Model({ data, de , org }) {
                   name="title"
                   as={CustomInputComponent}
                   type={"text"}
+                  defaultValue={de.title}
                   focusBorderColor={"messenger.500"}
                   borderColor={
                     errors.title && touched.title ? "red.500" : "gray.300"
@@ -112,6 +107,7 @@ function Model({ data, de , org }) {
                 <Field
                   name="description"
                   as={CustomInputComponent}
+                  defaultValue={de.description}
                   focusBorderColor={"messenger.500"}
                   borderColor={
                     errors.description && touched.description
@@ -137,7 +133,7 @@ function Model({ data, de , org }) {
                 >
                   {members.map((e, index) => {
                     return (
-                      <option value={e.value} key={index}>
+                      <option value={e.value} key={index} selected={de.members}>
                         {e.label}
                       </option>
                     );
@@ -161,7 +157,7 @@ function Model({ data, de , org }) {
                 >
                   {projects.map((e, index) => {
                     return (
-                      <option value={e.value} key={index}>
+                      <option value={e.value} key={index} selected={de.project}>
                         {e.label}
                       </option>
                     );
@@ -186,7 +182,7 @@ function Model({ data, de , org }) {
                   >
                     {options2.map((e, index) => {
                       return (
-                        <option value={e.value} key={index}>
+                        <option value={e.value} key={index} selected={de.type}>
                           {e.label}
                         </option>
                       );
@@ -213,7 +209,7 @@ function Model({ data, de , org }) {
                   >
                     {options.map((e, index) => {
                       return (
-                        <option value={e.value} key={index}>
+                        <option value={e.value} key={index} selected={de.priority}>
                           {e.label}
                         </option>
                       );
@@ -238,7 +234,7 @@ function Model({ data, de , org }) {
                   >
                     {options3.map((e, index) => {
                       return (
-                        <option value={e.value} key={index}>
+                        <option value={e.value} key={index} selected={de.status}>
                           {e.label}
                         </option>
                       );
@@ -253,22 +249,17 @@ function Model({ data, de , org }) {
                 </FormControl>
               </Flex>
 
-              <ModalFooter>
+ 
+               
                 <Button
-                  colorScheme="red"
-                  mr={3}
-                  onClick={() => setToggle(!toggle)}
-                >
-                  Close
-                </Button>
-                <Button
+                marginTop={"5"}
                   colorScheme={"messenger"}
                   type="submit"
                   isLoading={loading}
                 >
                   Save
                 </Button>
-              </ModalFooter>
+
             </Form>
           </Stack>
         )}
