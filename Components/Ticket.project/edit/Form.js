@@ -16,7 +16,7 @@ import { useEffect } from "react";
 
 function Model({ data, de , org }) {
   const dispatch = useDispatch();
-  const { loading, error, reload } = useSelector((state) => state.ticket);
+  const { edit_loading, edit_error, edit_reload } = useSelector((state) => state.ticket);
   const options = [
     { value: "high", label: "High" },
     { value: "medium", label: "Medium" },
@@ -54,10 +54,10 @@ function Model({ data, de , org }) {
   });
 
   useEffect(() => {
-    if (reload) {
+    if(edit_reload) {
       window.location.reload();
     }
-  }, [reload]);
+  }, [edit_reload]);
 
   return (
     <>
@@ -66,16 +66,17 @@ function Model({ data, de , org }) {
           title: de.title,
           description: de.description,
           members: de.members,
-          ticket: de._id,
+          project: de.project,
           priority:de.priority,
           type: de.type,
           status: de.status,
-          ordId: de._id,
+          ordId: org._id,
+          ticket:de._id,
         }}
         validationSchema={TicketSchema}
         onSubmit={(values, { resetForm }) => {
           dispatch(ticketCreateAction(values));
-          if (!error) {
+          if (!edit_error) {
             resetForm();
           }
         }}
@@ -255,7 +256,7 @@ function Model({ data, de , org }) {
                 marginTop={"5"}
                   colorScheme={"messenger"}
                   type="submit"
-                  isLoading={loading}
+                  isLoading={edit_loading}
                 >
                   Save
                 </Button>
