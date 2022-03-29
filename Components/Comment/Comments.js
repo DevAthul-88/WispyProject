@@ -4,6 +4,7 @@ import { Box, Avatar, Text, Flex, Link, Button } from "@chakra-ui/react";
 import { format } from "timeago.js";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
+import Markdown from 'markdown-to-jsx';
 import { useSelector, useDispatch } from "react-redux";
 import {
   Modal,
