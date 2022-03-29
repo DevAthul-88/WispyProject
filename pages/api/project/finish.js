@@ -30,7 +30,6 @@ export default async function handler(req, res) {
   }
   else if(req.method === "PUT") {
     try {
-      console.log(req.body);
       const { orgId, projectId } = req.body;
 
       await orgModel.findByIdAndUpdate(

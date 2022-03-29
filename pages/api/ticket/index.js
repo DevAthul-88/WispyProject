@@ -73,4 +73,19 @@ export default async function handler(req, res) {
       res.send({ error: error.message });
     }
   }
+  else if(req.method === "PATCH"){
+    try {
+      const { orgId, ticket } = req.body;
+
+      await orgModel.findByIdAndUpdate(
+        {
+          _id: orgId,
+        },
+        { $pull: { "tickets":{_id:objectId(ticket)}} }
+      )
+      res.send({ success: true });
+    } catch (error) {
+      res.send({ error: error.message });
+    }
+  }
 }

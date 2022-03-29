@@ -27,7 +27,7 @@ function deleteProject({ userInfo, de, org }) {
     setLoading(true);
     const omi = await axios.patch("/api/ticket/", {
       orgId: org._id,
-      projectId: router.query.slug,
+      ticket: router.query.slug,
     });
     if (omi.data.error) {
       console.error(omi.data.error);
