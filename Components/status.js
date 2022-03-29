@@ -18,7 +18,7 @@ import {
     stat: String,
     icon: ReactNode,
   }
-  function StatsCard(props: StatsCardProps) {
+  function StatsCard(props = StatsCardProps) {
     const { title, stat, icon } = props;
     return (
       <Stat
@@ -50,14 +50,7 @@ import {
   
   export default function BasicStatistics() {
     return (
-      <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }}>
-        <chakra.h1
-          textAlign={'center'}
-          fontSize={'4xl'}
-          py={10}
-          fontWeight={'bold'}>
-          Our company is expanding, you could be too.
-        </chakra.h1>
+      <Box maxW="7xl" mx={'auto'} pt={5} px={{ base: 2, sm: 12, md: 17 }} marginBottom="5">
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={{ base: 5, lg: 8 }}>
           <StatsCard
             title={'Users'}
