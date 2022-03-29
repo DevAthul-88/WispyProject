@@ -1,45 +1,53 @@
-import React from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
+import React from "react";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
+export function TicketCharts({ projects }) {
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
 
-
-export function PieChart({ticket}) {
-  ChartJS.register(ArcElement, Tooltip, Legend);
-
-
- const options = {
-  maintainAspectRatio : false,
-  title: {
-    display: true,
-    text: "Tickets by priority",
-  },
-}
-
- const data = {
-
-  labels: ['In progress', 'Completed', 'Waiting', 'Decline'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5],
-      backgroundColor: [
-        'rgba(255, 99, 132, 0.2)',
-        'rgba(54, 162, 235, 0.2)',
-        'rgba(255, 206, 86, 0.2)',
-        'rgba(75, 192, 192, 0.2)',
-        
-      ],
-      borderColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        
-      ],
-      borderWidth: 1,
+  const options = {
+    responsive: true,
+   
+    plugins: {
+      legend: {
+        position: "top",
+      },
+      title: {
+        display: true,
+        text: "Projects by priority",
+      },
     },
-  ],
-};
-  return <Pie data={data} options={options}/>;
+  };
+  const counts = {};
+  const pri = projects.map(e => {return e.priority});
+  pri.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; })
+  const label = pri
+  const data = {
+    label,
+    datasets: [
+     
+      {
+        label:"Projects found",
+        data:counts,
+        backgroundColor: "#ED64A6",
+      },
+      
+    ],
+  };
+  return <Bar options={options} data={data} />;
 }

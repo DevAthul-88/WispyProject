@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Container, Flex, Box } from "@chakra-ui/react";
 import Head from "next/head";
 import { BarChart } from "../../Components/Charts/Bar";
-import { PieChart } from "../../Components/Charts/Pie";
+import { TicketCharts } from "../../Components/Charts/Pie";
 import Status from "../../Components/status";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../Components/Loader";
@@ -53,7 +53,7 @@ function index() {
             >
               {
                 data && data.tickets && (
-                  <PieChart ticket={data.tickets}/>
+                  <TicketCharts projects={data.tickets}/>
                 )
               }
             </Box>

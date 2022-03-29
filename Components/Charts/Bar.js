@@ -37,7 +37,6 @@ export function BarChart({ projects }) {
   const pri = projects.map(e => {return e.priority});
   pri.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; })
   const label = pri
-  console.log(pri);
   const data = {
     label,
     datasets: [
