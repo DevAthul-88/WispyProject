@@ -28,6 +28,7 @@ import {
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
 import dateFormat from "dateformat";
+import Export from '../Download/project'
 
 function DataTable({ projects, user }) {
   const colorScheme = (priority) => {
@@ -163,7 +164,7 @@ function DataTable({ projects, user }) {
   return (
     <>
       <Flex justify={"space-between"} marginTop="5">
-        <div></div>
+        <Export data={projects}/>
         <div className="pagination">
           <Button
             onClick={() => previousPage()}
