@@ -26,7 +26,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { FaFlag } from "react-icons/fa";
 import { useRouter } from "next/router";
 import axios from "axios";
-import dateFormat from "dateformat"
+import dateFormat from "dateformat";
 
 export default function Details({ data }) {
   const dispatch = useDispatch();
@@ -150,29 +150,25 @@ export default function Details({ data }) {
                     {dateFormat(data[0].createdAt)}
                   </ListItem>
 
-
                   <ListItem textTransform="capitalize">
                     <Text as={"span"} fontWeight={"bold"}>
                       Type:
                     </Text>{" "}
-                    {dateFormat(data[0].type)}
+                    {data[0].type}
                   </ListItem>
 
                   <ListItem textTransform="capitalize">
                     <Text as={"span"} fontWeight={"bold"}>
                       Status:
                     </Text>{" "}
-                    {dateFormat(data[0].status)}
+                    {data[0].status}
                   </ListItem>
-
                 </List>
               </Box>
             </Stack>
           </Stack>
         </SimpleGrid>
       )}
-  
-
     </Container>
   );
 }

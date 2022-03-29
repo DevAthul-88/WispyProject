@@ -60,7 +60,9 @@ function Slug() {
                   <TabPanel>
                     <Details data={proj} />
                   </TabPanel>
-                 
+                 <TabPanel>
+
+                 </TabPanel>
                   <TabPanel>
                     <Comment comment={proj[0].comments} />
                   </TabPanel>
