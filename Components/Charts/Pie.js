@@ -29,12 +29,12 @@ export function TicketCharts({ projects }) {
       },
       title: {
         display: true,
-        text: "Projects by priority",
+        text: "Tickets by type",
       },
     },
   };
   const counts = {};
-  const pri = projects.map(e => {return e.priority});
+  const pri = projects.map(e => {return e.type});
   pri.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; })
   const label = pri
   const data = {
@@ -42,9 +42,9 @@ export function TicketCharts({ projects }) {
     datasets: [
      
       {
-        label:"Projects found",
+        label:"Tickets found",
         data:counts,
-        backgroundColor: "#ED64A6",
+        backgroundColor: "#805AD5",
       },
       
     ],
