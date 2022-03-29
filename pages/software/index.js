@@ -19,7 +19,7 @@ function index() {
         <Loader />
       ) : (
         <>
-          <Status />
+          <Status p={data && data.projects.length}/>
           <Box borderWidth={"thin"} padding={"2"}>
             <BarChart />
           </Box>
