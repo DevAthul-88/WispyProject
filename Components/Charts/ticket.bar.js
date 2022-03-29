@@ -29,7 +29,7 @@ export function TicketChart({ projects }) {
       },
       title: {
         display: true,
-        text: "Projects by priority",
+        text: "Tickets by priority",
       },
     },
   };
@@ -43,9 +43,9 @@ export function TicketChart({ projects }) {
     datasets: [
      
       {
-        label:"Projects found",
+        label:"Tickets found",
         data:counts,
-        backgroundColor: "#ED64A6",
+        backgroundColor: "#0BC5EA",
       },
       
     ],

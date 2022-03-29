@@ -40,9 +40,9 @@ function index() {
           )}
 
           <Flex marginTop={"10"}>
-          {data && data.projects && (
+          {data && data.tickets && (
             <Box borderWidth={"thin"} padding={"2"} width={"full"}>
-              <TicketChart projects={data.projects}/>
+              <TicketChart projects={data.tickets}/>
             </Box>
           )}
             <Box
