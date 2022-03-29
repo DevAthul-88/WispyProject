@@ -42,7 +42,7 @@ function Form() {
   }, [change]);
 
   return (
-    <div>
+    <div >
    {error && <Alert trigger={true} type="error" description={error} />}
       <form onSubmit={handleSubmit}>
         <Textarea
