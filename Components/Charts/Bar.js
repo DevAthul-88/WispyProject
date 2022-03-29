@@ -22,9 +22,7 @@ export function BarChart({ projects }) {
 
   const options = {
     responsive: true,
-    scales: {
-      xAxes: [{ barPercentage: 0.5 }],
-    },
+   
     plugins: {
       legend: {
         position: "top",
@@ -35,15 +33,18 @@ export function BarChart({ projects }) {
       },
     },
   };
-
-  const labels = projects.map(e => {return e.priority});
-
+  const counts = {};
+  const pri = projects.map(e => {return e.priority});
+  pri.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; })
+  const label = pri
+  console.log(pri);
   const data = {
-    labels,
+    label,
     datasets: [
      
       {
-        data: projects.map(e => {return e.priority}),
+        label:"# of priority",
+        data:counts,
         backgroundColor: "#48BB78",
       },
       
