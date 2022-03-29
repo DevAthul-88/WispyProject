@@ -15,6 +15,7 @@ import {
 import Details from "../../../../Components/ticket.details";
 import Comment from "../../../../Components/Ticket.project/Comment/index";
 import Table from "../../../../Components/Table/users";
+import Attachments from '../../../../Components/attachments/ticket'
 
 function Slug() {
   const router = useRouter();
@@ -60,7 +61,7 @@ function Slug() {
                     <Details data={proj} />
                   </TabPanel>
                  <TabPanel>
-
+                  <Attachments />
                  </TabPanel>
                   <TabPanel>
                     <Comment comment={proj[0].comments} />
