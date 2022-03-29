@@ -43,9 +43,9 @@ export function BarChart({ projects }) {
     datasets: [
      
       {
-        label:"# of priority",
+        label:"Projects found",
         data:counts,
-        backgroundColor: "#48BB78",
+        backgroundColor: "#ED64A6",
       },
       
     ],
