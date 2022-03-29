@@ -4,8 +4,10 @@ import { Box, Avatar, Text, Flex, Link, Button } from "@chakra-ui/react";
 import { format } from "timeago.js";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import Markdown from 'markdown-to-jsx';
+import ReactMarkdown from "react-markdown";
 import { useSelector, useDispatch } from "react-redux";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+
 import {
   Modal,
   ModalOverlay,
@@ -80,7 +82,31 @@ function Comments({ comment }) {
                     {e.username}
                   </Link>
                 </Flex>
-                <Text marginTop={"5"}>{e.comment}</Text>
+                <Text marginTop={"5"}>
+                  <ReactMarkdown
+                    children={e.comment}
+                    components={{
+                      code({ node, inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || "");
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            children={String(children).replace(/\n$/, "")}
+                            
+                            showLineNumbers
+                            language={match[1]}
+                            PreTag="div"
+                            customStyle={{ background: "none" }}
+                            {...props}
+                          />
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  />
+                </Text>
                 <Flex justify={"space-between"}>
                   <Text marginTop={"2"}>{format(e.createdAt)}</Text>
                   {userInfo !== null && userInfo !== undefined ? (
