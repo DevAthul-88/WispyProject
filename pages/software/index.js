@@ -7,6 +7,7 @@ import Status from "../../Components/status";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../Components/Loader";
 import { fetchData } from "../../redux/org/action";
+import  {TicketChart} from '../../Components/Charts/ticket.bar'
 
 function index() {
   const { data, error, loading } = useSelector((state) => state.org);
@@ -39,9 +40,11 @@ function index() {
           )}
 
           <Flex marginTop={"10"}>
+          {data && data.projects && (
             <Box borderWidth={"thin"} padding={"2"} width={"full"}>
-             
+              <TicketChart projects={data.projects}/>
             </Box>
+          )}
             <Box
               height={"sm"}
               borderWidth={"thin"}
