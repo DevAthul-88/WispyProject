@@ -1,18 +1,22 @@
 import React from "react";
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuItemOption,
-  IconButton,
-  MenuGroup,
-  Button,
-  MenuOptionGroup,
-  MenuDivider,
-} from "@chakra-ui/react";
+import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
+import { CSVLink } from "react-csv";
 import { FaFileCsv, FaArrowDown } from "react-icons/fa";
-function users() {
+function users({ data }) {
+  const headers = [
+    {
+      label: "Username",
+      key: "username",
+    },
+    {
+      label: "Email",
+      key: "email",
+    },
+    {
+      label: "Role",
+      key: "role",
+    },
+  ]
   return (
     <div>
       <Menu>
@@ -25,7 +29,13 @@ function users() {
           Export data
         </MenuButton>
         <MenuList>
-          <MenuItem icon={<FaFileCsv />}>Export to csv</MenuItem>
+          <MenuItem icon={<FaFileCsv />} onClick={() => (
+            <CSVLink 
+            headers={headers} 
+            filename="employees.csv"
+            data={data}
+            />
+          )}>Export to csv</MenuItem>
         </MenuList>
       </Menu>
     </div>

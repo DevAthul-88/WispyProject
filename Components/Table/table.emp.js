@@ -17,6 +17,7 @@ import {
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
+import Export from '../Download/users/users'
 
 function DataTable({ org }) {
   const data = React.useMemo(() => org, []);
@@ -74,7 +75,7 @@ function DataTable({ org }) {
   return (
     <>
       <Flex justify={"space-between"}>
-        <div></div>
+        <Export data={org}/>
         <div className="pagination">
           <Button
             onClick={() => previousPage()}
