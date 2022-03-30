@@ -4,14 +4,14 @@ import { useDropzone } from "react-dropzone";
 import axios from "axios";
 import getConfig from "next/config";
 import { fetchData } from "../../redux/org/action";
-import {useDispatch , useSelector} from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 function Accept({ ticket, orgId }) {
   const { publicRuntimeConfig } = getConfig();
   const [loading, setLoading] = React.useState(false);
   const dispatch = useDispatch();
 
-  const {userInfo} = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.auth);
 
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({

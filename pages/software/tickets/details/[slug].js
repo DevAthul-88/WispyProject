@@ -15,7 +15,7 @@ import {
 import Details from "../../../../Components/ticket.details";
 import Comment from "../../../../Components/Ticket.project/Comment/index";
 import Table from "../../../../Components/Table/users";
-import Attachments from '../../../../Components/attachments/ticket'
+import Attachments from "../../../../Components/attachments/ticket";
 
 function Slug() {
   const router = useRouter();
@@ -30,7 +30,6 @@ function Slug() {
       : data && data.employees.filter((e) => proj[0].members.includes(e._id));
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
-
   }, []);
 
   return (
@@ -61,9 +60,13 @@ function Slug() {
                   <TabPanel>
                     <Details data={proj} />
                   </TabPanel>
-                 <TabPanel>
-                  <Attachments ticket={router.query.slug} orgId={data._id} data={proj && proj[0].attachments}/>
-                 </TabPanel>
+                  <TabPanel>
+                    <Attachments
+                      ticket={router.query.slug}
+                      orgId={data._id}
+                      data={proj && proj[0].attachments}
+                    />
+                  </TabPanel>
                   <TabPanel>
                     <Comment comment={proj[0].comments} />
                   </TabPanel>

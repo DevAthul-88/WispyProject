@@ -24,10 +24,18 @@ import {
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import { format } from "timeago.js";
+import axios from "axios"
+import {useSelector , useDispatch} from 'react-redux'
+import { fetchData } from "../../redux/org/action";
 
-function DataTable({ org }) {
+function DataTable({ org , ticket  , orgId}) {
+  const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
   const data = React.useMemo(() => org, []);
   const [image, setImage] = React.useState("");
+  const [loading , setLoading] = React.useState(false);
+  const [number , setNumber] = React.useState("");
+  const [toggle,  setToggle] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
   const open = (params) => {
     onOpen();
@@ -36,8 +44,22 @@ function DataTable({ org }) {
 
   const open2 = (params) => {
     onOpen();
-    setImage(params);
+    setToggle(true)
+    setNumber(params)
   };
+
+  const handleDelete = async (params) => {
+     try {
+       const da = {
+         ticket:ticket,
+         orgId:orgId,
+         attachId:number
+       }
+       const omi = await axios.put("/api/ticket/upload" , da) 
+     } catch (error) {
+       console.error(error.message);
+     }
+  }
 
   const columns = React.useMemo(
     () => [
@@ -67,7 +89,7 @@ function DataTable({ org }) {
         accessor: "delete",
         Cell: ({ row }) => (
           <>
-            <Button variant={"link"} color={"red"} onClick={() => open(row.original.url)}>
+            <Button variant={"link"} color={"red"} onClick={() => open2(row.original._id)}>
               Delete attachment
             </Button>
           </>
@@ -186,6 +208,7 @@ function DataTable({ org }) {
       <Modal onClose={onClose} size={"xl"} isOpen={isOpen}>
         <ModalOverlay />
         <ModalContent>
+        <ModalHeader>Attachment</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Image src={image} objectFit="cover" />
@@ -195,6 +218,29 @@ function DataTable({ org }) {
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+                  <Modal isOpen={toggle} onClose={onClose}>
+                  <ModalOverlay />
+                  <ModalContent>
+                    <ModalHeader>Alert</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>Are sure want to delete this attachment</ModalBody>
+
+                    <ModalFooter>
+                      <Button colorScheme="messenger" mr={3} onClick={() => setToggle(false)}>
+                        Close
+                      </Button>
+                      <Button
+                        colorScheme={"red"}
+                        onClick={() => handleDelete()}
+                        isLoading={loading}
+                      >
+                        Delete
+                      </Button>
+                    </ModalFooter>
+                  </ModalContent>
+                </Modal>
+
     </>
   );
 }
