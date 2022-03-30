@@ -51,8 +51,7 @@ export default async function handler(req, res) {
     }
   } else if (req.method === "PATCH") {
     try {
-      console.log(req.query);
-      const s = await orgModel.findByIdAndUpdate(
+      await orgModel.findByIdAndUpdate(
         {
           _id: req.query.orgId,
         },

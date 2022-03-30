@@ -38,7 +38,13 @@ export default async function handler(req, res) {
   } 
   else if(req.method === "PUT"){
     try {
-      console.log(req.body);
+      await orgModel.updateOne(
+        { _id: req.body.orgId, "tickets._id": objectId(req.body.ticket) },
+        {
+          $pull: { "tickets.$.attachments": { _id: objectId(req.body.attachId) } },
+        }
+      );
+      res.send({reload:true})
     } catch (error) {
       res.send({ error: error.message });
     }
