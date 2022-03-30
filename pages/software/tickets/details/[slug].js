@@ -64,7 +64,7 @@ function Slug() {
                   <Attachments ticket={router.query.slug} orgId={data._id}/>
                  </TabPanel>
                   <TabPanel>
-                    <Comment comment={proj[0].comments} />
+                    <Comment comment={proj[0].comments} data={proj}/>
                   </TabPanel>
                   <TabPanel>{users && <Table org={users} />}</TabPanel>
                 </TabPanels>
