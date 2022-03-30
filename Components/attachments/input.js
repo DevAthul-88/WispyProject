@@ -7,7 +7,7 @@ import getConfig from 'next/config';
 
 function Accept() {
 
-  const {publicRuntimeConfig} = getConfig();
+  const publicRuntimeConfig = getConfig();
   console.log(publicRuntimeConfig);
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({
