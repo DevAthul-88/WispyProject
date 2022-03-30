@@ -34,6 +34,7 @@ function DataTable({ org , ticket  , orgId}) {
   const data = React.useMemo(() => org, []);
   const [image, setImage] = React.useState("");
   const [loading , setLoading] = React.useState(false);
+  const [change , setChange] = React.useState(false);
   const [number , setNumber] = React.useState("");
   const [toggle,  setToggle] = React.useState(false);
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,23 +44,34 @@ function DataTable({ org , ticket  , orgId}) {
   };
 
   const open2 = (params) => {
-    onOpen();
     setToggle(true)
     setNumber(params)
   };
 
   const handleDelete = async (params) => {
      try {
+       setLoading(true)
        const da = {
          ticket:ticket,
          orgId:orgId,
          attachId:number
        }
        const omi = await axios.put("/api/ticket/upload" , da) 
+       if(omi.data.reload){
+         setChange(true)
+       }
      } catch (error) {
+       setLoading(false)
        console.error(error.message);
      }
   }
+
+  React.useEffect(() => {
+    if (change) {
+      dispatch(fetchData(userInfo._id));
+    }
+  }, [change]);
+
 
   const columns = React.useMemo(
     () => [
@@ -223,7 +235,6 @@ function DataTable({ org , ticket  , orgId}) {
                   <ModalOverlay />
                   <ModalContent>
                     <ModalHeader>Alert</ModalHeader>
-                    <ModalCloseButton />
                     <ModalBody>Are sure want to delete this attachment</ModalBody>
 
                     <ModalFooter>
