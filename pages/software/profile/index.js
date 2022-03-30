@@ -111,7 +111,7 @@ function index() {
                               window.location.reload()
                             }
                             
-                            resetForm();
+                            
                           }
                         }
                         createTodo();

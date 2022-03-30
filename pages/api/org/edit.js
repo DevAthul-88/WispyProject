@@ -7,17 +7,17 @@ const objectId = mongoose.Types.ObjectId;
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
-    console.log(req.body);
     try {
-      const User = await userModel.findByIdAndUpdate(
+      await userModel.findByIdAndUpdate(
         { _id: objectId(req.body.userId) },
         {
           $set: {
-            "userName": req.body.username,
-            "email": req.body.email,
+            userName: req.body.username,
+            email: req.body.email,
           },
         }
       );
+      const User = await userModel.findById({ _id: objectId(req.body.userId) });
       const userCredentials = {
         _id: User._id,
         username: User.userName,
@@ -27,7 +27,8 @@ export default async function handler(req, res) {
         createdAt: User.createdAt,
         updatedAt: User.updatedAt,
       };
-      res.send({ success: true , user:userCredentials });
+      console.log(User);
+      res.send({ success: true, user: userCredentials });
     } catch (error) {
       res.send({ error: error.message });
     }

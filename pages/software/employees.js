@@ -46,7 +46,7 @@ function employees() {
            <hr />
             
             {data && data.employees.length >= 1 ? (
-              ""
+              <>{data && <Tables org={data.employees}/>}</>
             ) : (
               <Flex justify={"center"}>
                 <NoData title={"No users found."} />
@@ -54,7 +54,7 @@ function employees() {
             )}
          <Modal toggle={toggle} setToggle={setToggle} name={data && data.name}/>
          <Stack marginTop={"5"}>
-         {data && <Tables org={data.employees}/>}
+         
          </Stack>
 
           </Container>
