@@ -30,6 +30,7 @@ function Slug() {
       : data && data.employees.filter((e) => proj[0].members.includes(e._id));
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
+
   }, []);
 
   return (
