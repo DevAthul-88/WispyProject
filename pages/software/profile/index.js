@@ -9,11 +9,13 @@ import {
   TabPanels,
   Tab,
   TabPanel,
+  Button,
 } from "@chakra-ui/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import Head from "next/head";
 import { format } from "timeago.js";
+import { FaHammer } from "react-icons/fa";
 
 function index() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -40,6 +42,14 @@ function index() {
                 Created: {userInfo && format(userInfo.createdAt)}
               </ListItem>
             </List>
+            <Divider marginTop={"5"} />
+            <Button
+              marginTop={"5"}
+              leftIcon={<FaHammer />}
+              colorScheme={"messenger"}
+            >
+              Edit Profile
+            </Button>
           </>
         ) : (
           <>
@@ -64,8 +74,6 @@ function index() {
             </Tabs>
           </>
         )}
-
-        <Divider marginTop={"5"} />
       </Container>
     </>
   );
