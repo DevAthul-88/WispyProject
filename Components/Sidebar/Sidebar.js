@@ -40,7 +40,6 @@ const LinkItems = [
   { name: 'Projects', icon: FiBriefcase , href: '/software/projects'},
   { name: 'Employees', icon: FiUsers  , href: '/software/employees'},
   { name: 'Tickets', icon: FaTicketAlt , href: '/software/tickets'},
-  { name: 'Settings', icon: FiSettings , href: '/software/settings'},
   { name: 'Profile', icon: FaUser , href: '/software/profile'},
 ];
 
