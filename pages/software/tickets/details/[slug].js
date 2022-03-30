@@ -61,10 +61,10 @@ function Slug() {
                     <Details data={proj} />
                   </TabPanel>
                  <TabPanel>
-                  <Attachments ticket={router.query.slug} orgId={data._id}/>
+                  <Attachments ticket={router.query.slug} orgId={data._id} data={proj}/>
                  </TabPanel>
                   <TabPanel>
-                    <Comment comment={proj[0].comments} data={proj}/>
+                    <Comment comment={proj[0].comments} />
                   </TabPanel>
                   <TabPanel>{users && <Table org={users} />}</TabPanel>
                 </TabPanels>

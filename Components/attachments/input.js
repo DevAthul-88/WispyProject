@@ -55,6 +55,12 @@ function Accept({ ticket, orgId }) {
           url: fileURL,
           ticketId: ticket,
           ordId: orgId,
+          filename:acceptedFiles.map((file) => {
+            return file.name;
+          })[0],
+          fileSize:acceptedFiles.map((file) => {
+            return file.size;
+          })[0]
         };
 
         axios.post("/api/ticket/upload", attachment).then((response) => {

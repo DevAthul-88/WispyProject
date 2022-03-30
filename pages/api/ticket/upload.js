@@ -12,11 +12,15 @@ export default async function handler(req, res) {
       const {
         url,
         ticketId,
+        filename,
         ordId,
+        fileSize,
       } = req.body;
       const ticket = {
         _id: new mongoose.Types.ObjectId(),
-        url:url      ,
+        url:url,
+        filename:filename,
+        fileSize:fileSize,
         createdAt: Date.now(),
         updatedAt: Date.now(),
       };
