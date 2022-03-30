@@ -48,7 +48,12 @@ export default function SplitScreen() {
           validationSchema={LoginSchema}
           onSubmit={(values, { resetForm }) => {
             dispatch(adminLoginAction(values));
-            resetForm();
+            if(admin_error){
+
+            }else{
+              resetForm();
+            }
+
           }}
         >
           {({ errors, touched }) => (
