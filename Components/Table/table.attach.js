@@ -10,22 +10,48 @@ import {
   Flex,
   Input,
   Select,
-  Button
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
+  useDisclosure,
+  Image,
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
-import { useTable, useSortBy , usePagination } from "react-table";
+import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
 import { format } from "timeago.js";
 
 function DataTable({ org }) {
   const data = React.useMemo(() => org, []);
+  const [image, setImage] = React.useState("");
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const open = (params) => {
+    onOpen();
+    setImage(params);
+  };
+
+  const open2 = (params) => {
+    onOpen();
+    setImage(params);
+  };
 
   const columns = React.useMemo(
     () => [
-      
       {
         Header: "filename",
-        accessor: "filename",
+        accessor:"filename",
+        Cell: ({ row }) => (
+          <>
+            <Button variant={"link"} onClick={() => open(row.original.url)}>
+              {row.original.filename}
+            </Button>
+          </>
+        ),
       },
       {
         Header: "size",
@@ -33,12 +59,21 @@ function DataTable({ org }) {
         Cell: ({ row }) => `${row.original.fileSize} bytes`,
       },
       {
-        Header:"Uploaded",
+        Header: "Uploaded",
         accessor: "Uploaded",
         Cell: ({ row }) => `${format(row.original.createdAt)}.`,
+      },
+
+      {
+        accessor: "delete",
+        Cell: ({ row }) => (
+          <>
+            <Button variant={"link"} color={"red"} onClick={() => open(row.original.url)}>
+              Delete attachment
+            </Button>
+          </>
+        ),
       }
-
-
     ],
     []
   );
@@ -62,7 +97,7 @@ function DataTable({ org }) {
 
   return (
     <>
-    <Flex justify={"space-between"} marginTop="5">
+      <Flex justify={"space-between"} marginTop="5">
         <div></div>
         <div className="pagination">
           <Button
@@ -148,6 +183,19 @@ function DataTable({ org }) {
           })}
         </Tbody>
       </Table>
+
+      <Modal onClose={onClose} size={"xl"} isOpen={isOpen}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalCloseButton />
+          <ModalBody>
+            <Image src={image} objectFit="cover" />
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Close</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 }
