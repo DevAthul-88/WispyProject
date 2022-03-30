@@ -17,11 +17,12 @@ import {
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
-import Export from '../Download/users/users'
+import Export from "../Download/users/users";
+import { useSelector } from "react-redux";
 
 function DataTable({ org }) {
   const data = React.useMemo(() => org, []);
-
+  const { userInfo } = useSelector((state) => state.auth);
   const columns = React.useMemo(
     () => [
       {
@@ -45,7 +46,14 @@ function DataTable({ org }) {
         Header: "View profile",
         Cell: ({ row }) => (
           <>
-            <Link as={NextLink} href={`/software/profile/${row.original._id}`}>
+            <Link
+              as={NextLink}
+              href={
+                userInfo._id === row.original._id
+                  ? `/software/profile`
+                  : `/software/profile/${row.original._id}`
+              }
+            >
               View profile
             </Link>
           </>
@@ -75,7 +83,7 @@ function DataTable({ org }) {
   return (
     <>
       <Flex justify={"space-between"}>
-        <Export data={org}/>
+        <Export data={org} />
         <div className="pagination">
           <Button
             onClick={() => previousPage()}
