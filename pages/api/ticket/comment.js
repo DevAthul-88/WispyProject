@@ -22,7 +22,6 @@ export default async function handler(req, res) {
         { _id: orgId, "tickets._id": objectId(ticket) },
         { $push: { "tickets.$.comments": commentData } }
       );
-      console.log(p);
       res.send({ refresh: true });
     } catch (error) {
       res.send({ error: error.message });

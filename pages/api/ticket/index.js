@@ -29,10 +29,7 @@ export default async function handler(req, res) {
         status: status,
         project: project,
         tickets: [],
-        completed: {
-          flagged: false,
-          approved: false,
-        },
+        attachments:[],
         createdAt: Date.now(),
         updatedAt: Date.now(),
         comments: new Array(),
