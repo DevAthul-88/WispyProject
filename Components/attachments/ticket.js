@@ -2,11 +2,11 @@ import React from 'react'
 import {Text} from '@chakra-ui/react'
 import Input from './input'
 
-function ticket() {
+function ticket({ticket , orgId}) {
   return (
     <div>
           <Text fontSize={"2xl"} fontWeight={"bold"}>Tickets attachments</Text>
-          <Input />
+          <Input ticket={ticket} orgId={orgId}/>
     </div>
   )
 }

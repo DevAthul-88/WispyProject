@@ -2,13 +2,11 @@ import { Box, Button } from "@chakra-ui/react";
 import React from "react";
 import { useDropzone } from "react-dropzone";
 import axios from "axios";
-import getConfig from 'next/config';
+import getConfig from "next/config";
 
-
-function Accept() {
-
-  const {publicRuntimeConfig} = getConfig();
-  const [loading, setLoading] = React.useState(false)
+function Accept({ ticket, orgId }) {
+  const { publicRuntimeConfig } = getConfig();
+  const [loading, setLoading] = React.useState(false);
 
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({
@@ -36,7 +34,7 @@ function Accept() {
   })[0];
 
   const handleUpload = () => {
-     setLoading(true);
+    setLoading(true);
     const formData = new FormData();
     formData.append("file", path);
     formData.append("upload_preset", "xzsccl4t");
@@ -53,11 +51,20 @@ function Accept() {
       .then((response) => {
         const data = response.data;
         const fileURL = data.secure_url;
-        console.log(data);
-        setLoading(false)
+        const attachment = {
+          url: fileURL,
+          ticketId: ticket,
+          ordId: orgId,
+        };
+
+        axios.post("/api/ticket/upload", attachment).then((response) => {
+          if (response.data.refresh) {
+            setLoading(false);
+          }
+        });
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err.message);
       });
   };
@@ -77,8 +84,13 @@ function Accept() {
         <p>Drag 'n' drop some files here, or click to select files</p>
         <em>(Only *.jpeg and *.png images will be accepted)</em>
       </Box>
-      <Button colorScheme="messenger" marginTop={"5"} onClick={handleUpload} isLoading={loading}>
-        {loading ? 'Uploading....' : "Upload"}
+      <Button
+        colorScheme="messenger"
+        marginTop={"5"}
+        onClick={handleUpload}
+        isLoading={loading}
+      >
+        {loading ? "Uploading...." : "Upload"}
       </Button>
       <aside>
         <h4 style={{ marginTop: "0.4rem" }}>Accepted files</h4>
@@ -91,4 +103,3 @@ function Accept() {
 }
 
 export default Accept;
-
