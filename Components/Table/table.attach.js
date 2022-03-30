@@ -23,7 +23,6 @@ import {
 } from "@chakra-ui/react";
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
-import NextLink from "next/link";
 import { format } from "timeago.js";
 
 function DataTable({ org }) {
