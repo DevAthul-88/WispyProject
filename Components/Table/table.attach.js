@@ -7,8 +7,6 @@ import {
   Th,
   Td,
   chakra,
-  Link,
-  Avatar,
   Flex,
   Input,
   Select,
@@ -17,6 +15,7 @@ import {
 import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { useTable, useSortBy , usePagination } from "react-table";
 import NextLink from "next/link";
+import { format } from "timeago.js";
 
 function DataTable({ org }) {
   const data = React.useMemo(() => org, []);
@@ -31,7 +30,13 @@ function DataTable({ org }) {
       {
         Header: "size",
         accessor: "fileSize",
+        Cell: ({ row }) => `${row.original.fileSize} bytes`,
       },
+      {
+        Header:"Uploaded",
+        accessor: "Uploaded",
+        Cell: ({ row }) => `${format(row.original.createdAt)}.`,
+      }
 
 
     ],

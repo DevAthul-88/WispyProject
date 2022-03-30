@@ -23,7 +23,6 @@ import { fetchData } from "../redux/org/action";
 import Loader from "../Components/Loader";
 import { format } from "timeago.js";
 import { useSelector, useDispatch } from "react-redux";
-import { FaFlag } from "react-icons/fa";
 import { useRouter } from "next/router";
 import axios from "axios";
 import dateFormat from "dateformat";
