@@ -46,7 +46,7 @@ function employees() {
            <hr />
             
             {data && data.employees.length >= 1 ? (
-              <>{data && <Tables org={data.employees}/>}</>
+              <>{data && <Tables  org={data.employees} user={userInfo && userInfo}/>}</>
             ) : (
               <Flex justify={"center"}>
                 <NoData title={"No users found."} />

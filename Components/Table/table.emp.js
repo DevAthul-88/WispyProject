@@ -13,14 +13,21 @@ import {
   Input,
   Button,
   Avatar,
+  Menu,
+  MenuButton,
+  MenuItem,
+  Portal,
+  MenuList,
+  IconButton,
 } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
+import { TriangleDownIcon, TriangleUpIcon , SettingsIcon, } from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
 import Export from "../Download/users/users";
 import { useSelector } from "react-redux";
 
-function DataTable({ org }) {
+
+function DataTable({ org , user}) {
   const data = React.useMemo(() => org, []);
   const { userInfo } = useSelector((state) => state.auth);
   const columns = React.useMemo(
@@ -59,6 +66,35 @@ function DataTable({ org }) {
           </>
         ),
       },
+      user.role === "ADMIN" || user.role === "PROJECT_MANAGER"
+        ? {
+            accessor: "edit",
+            Cell: ({ row }) => (
+              <>
+                <Menu>
+                  <MenuButton
+                    as={IconButton}
+                    aria-label="Options"
+                    icon={<SettingsIcon/>}
+                    variant="outline"
+                  />
+                  <Portal>
+                    <MenuList>
+                      <MenuItem>
+                        <Link
+                          as={NextLink}
+                          href={`/software/projects/edit/${row.original._id}`}
+                        >
+                          Edit / Delete
+                        </Link>
+                      </MenuItem>
+                    </MenuList>
+                  </Portal>
+                </Menu>
+              </>
+            ),
+          }
+        : null,
     ],
     []
   );
@@ -82,7 +118,7 @@ function DataTable({ org }) {
 
   return (
     <>
-      <Flex justify={"space-between"}>
+      <Flex justify={"space-between"} marginTop="5">
         <Export data={org} />
         <div className="pagination">
           <Button
