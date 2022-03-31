@@ -28,7 +28,7 @@ function Slug() {
     data && data.projects.find((e) => e._id + "" == router.query.slug);
 
   useEffect(() => {
-    dispatch(fetchData(userInfo._id));
+    dispatch(fetchData(userInfo.org));
   }, [reload]);
   return (
     <div>

@@ -20,14 +20,17 @@ import {
   MenuList,
   IconButton,
 } from "@chakra-ui/react";
-import { TriangleDownIcon, TriangleUpIcon , SettingsIcon, } from "@chakra-ui/icons";
+import {
+  TriangleDownIcon,
+  TriangleUpIcon,
+  SettingsIcon,
+} from "@chakra-ui/icons";
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
 import Export from "../Download/users/users";
 import { useSelector } from "react-redux";
 
-
-function DataTable({ org , user}) {
+function DataTable({ org, user }) {
   const data = React.useMemo(() => org, []);
   const { userInfo } = useSelector((state) => state.auth);
   const columns = React.useMemo(
@@ -51,6 +54,7 @@ function DataTable({ org , user}) {
       },
       {
         Header: "View profile",
+        accessor: "profile",
         Cell: ({ row }) => (
           <>
             <Link
@@ -66,16 +70,18 @@ function DataTable({ org , user}) {
           </>
         ),
       },
-      user.role === "ADMIN" || user.role === "PROJECT_MANAGER"
-        ? {
-            accessor: "edit",
-            Cell: ({ row }) => (
-              <>
+
+      {
+        accessor: "edit",
+        Cell: ({ row }) => (
+          <>
+            {user.role === "ADMIN" ||
+              (user.role === "PROJECT_MANAGER" && (
                 <Menu>
                   <MenuButton
                     as={IconButton}
                     aria-label="Options"
-                    icon={<SettingsIcon/>}
+                    icon={<SettingsIcon />}
                     variant="outline"
                   />
                   <Portal>
@@ -91,10 +97,10 @@ function DataTable({ org , user}) {
                     </MenuList>
                   </Portal>
                 </Menu>
-              </>
-            ),
-          }
-        : null,
+              ))}
+          </>
+        ),
+      },
     ],
     []
   );

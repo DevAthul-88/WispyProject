@@ -71,7 +71,7 @@ function Accept({ ticket, orgId }) {
         axios.post("/api/ticket/upload", attachment).then((response) => {
           if (response.data.refresh) {
             setLoading(false);
-            dispatch(fetchData(userInfo._id));
+            dispatch(fetchData(userInfo.org));
           }
         });
       })

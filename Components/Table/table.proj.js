@@ -99,6 +99,7 @@ function DataTable({ projects, user }) {
       },
       {
         Header: "View details",
+        accessor: "details",
         Cell: ({ row }) => (
           <>
             <Link
@@ -111,35 +112,41 @@ function DataTable({ projects, user }) {
         ),
       },
 
-      user.role === "ADMIN" || user.role === "PROJECT_MANAGER"
-        ? {
-            accessor: "edit",
-            Cell: ({ row }) => (
-              <>
-                <Menu>
-                  <MenuButton
-                    as={IconButton}
-                    aria-label="Options"
-                    icon={<SettingsIcon/>}
-                    variant="outline"
-                  />
-                  <Portal>
-                    <MenuList>
-                      <MenuItem>
-                        <Link
-                          as={NextLink}
-                          href={`/software/projects/edit/${row.original._id}`}
-                        >
-                          Edit / Delete
-                        </Link>
-                      </MenuItem>
-                    </MenuList>
-                  </Portal>
-                </Menu>
-              </>
-            ),
+      
+         {
+          accessor:"edit",
+          Cell: ({ row }) => (
+          
+            <>
+              
+                  {
+                    user.role === "ADMIN" || user.role === "PROJECT_MANAGER" &&
+                    <Menu>
+                      <MenuButton
+                        as={IconButton}
+                        aria-label="Options"
+                        icon={<SettingsIcon/>}
+                        variant="outline"
+                      />
+                      <Portal>
+                        <MenuList>
+                          <MenuItem>
+                            <Link
+                              as={NextLink}
+                              href={`/software/projects/edit/${row.original._id}`}
+                            >
+                              Edit / Delete
+                            </Link>
+                          </MenuItem>
+                        </MenuList>
+                      </Portal>
+                    </Menu>
+                  }
+              
+            </>
+          ),
           }
-        : null,
+        
     ],
     []
   );

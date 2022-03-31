@@ -97,7 +97,7 @@ function Todo({ users }) {
                       setMessage(data.error)
                     }
                     if(data.success){
-                     dispatch(fetchData(userInfo._id));
+                     dispatch(fetchData(userInfo.org));
                       setLoading(false)
                       resetForm()
                     }

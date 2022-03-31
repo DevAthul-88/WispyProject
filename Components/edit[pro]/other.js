@@ -41,7 +41,7 @@ function other({ data, de, org }) {
 
   useEffect(() => {
     if (reload === true) {
-      dispatch(fetchData(userInfo._id));
+      dispatch(fetchData(userInfo.org));
     }
   }, [reload]);
 

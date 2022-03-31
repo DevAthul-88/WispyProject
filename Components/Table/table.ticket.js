@@ -53,6 +53,7 @@ function DataTable({ projects, user }) {
 
       {
         Header: "status",
+        accessor: "status",
         Cell: ({ row }) => (
           <div style={{"textTransform":"capitalize"}}>
           
@@ -63,6 +64,7 @@ function DataTable({ projects, user }) {
       },
       {
         Header: "type",
+        accessor: "type",
         Cell: ({ row }) => (
           <div style={{"textTransform":"capitalize"}}>
           
@@ -89,6 +91,7 @@ function DataTable({ projects, user }) {
       },
       {
         Header: "View details",
+        accessor: "id",
         Cell: ({ row }) => (
           <>
             <Link
@@ -101,35 +104,36 @@ function DataTable({ projects, user }) {
         ),
       },
 
-      user.role === "ADMIN" || user.role === "PROJECT_MANAGER"
-        ? {
+      
+        {
             accessor: "edit",
             Cell: ({ row }) => (
-              <>
-                <Menu>
-                  <MenuButton
-                    as={IconButton}
-                    aria-label="Options"
-                    icon={<SettingsIcon />}
-                    variant="outline"
-                  />
-                  <Portal>
-                    <MenuList>
-                      <MenuItem>
-                        <Link
-                          as={NextLink}
-                          href={`/software/tickets/edit/${row.original._id}`}
-                        >
-                          Edit / Delete
-                        </Link>
-                      </MenuItem>
-                    </MenuList>
-                  </Portal>
-                </Menu>
-              </>
+             user.role === "ADMIN" || user.role === "PROJECT_MANAGER" && 
+             <>
+             <Menu>
+               <MenuButton
+                 as={IconButton}
+                 aria-label="Options"
+                 icon={<SettingsIcon />}
+                 variant="outline"
+               />
+               <Portal>
+                 <MenuList>
+                   <MenuItem>
+                     <Link
+                       as={NextLink}
+                       href={`/software/tickets/edit/${row.original._id}`}
+                     >
+                       Edit / Delete
+                     </Link>
+                   </MenuItem>
+                 </MenuList>
+               </Portal>
+             </Menu>
+           </>
             ),
           }
-        : null,
+        
     ],
     []
   );

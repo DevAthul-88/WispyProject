@@ -26,7 +26,7 @@ function Slug() {
     data && data.tickets.find((e) => e._id + "" == router.query.slug);
 
   useEffect(() => {
-    dispatch(fetchData(userInfo._id));
+    dispatch(fetchData(userInfo.org));
   }, [edit_reload]);
   return (
     <div>

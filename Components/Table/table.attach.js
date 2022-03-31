@@ -68,7 +68,7 @@ function DataTable({ org , ticket  , orgId}) {
 
   React.useEffect(() => {
     if (change) {
-      dispatch(fetchData(userInfo._id));
+      dispatch(fetchData(userInfo.org));
     }
   }, [change]);
 

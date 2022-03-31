@@ -17,9 +17,8 @@ function employees() {
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchData(userInfo._id));
+    dispatch(fetchData(userInfo.org));
   }, [reload]);
-
   return (
     <>
       <Head>

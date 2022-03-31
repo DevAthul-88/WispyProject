@@ -50,7 +50,7 @@ function Comments({ comment }) {
 
   React.useEffect(() => {
     if (change) {
-      dispatch(fetchData(userInfo._id));
+      dispatch(fetchData(userInfo.org));
     }
   }, [change]);
 

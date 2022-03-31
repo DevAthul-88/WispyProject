@@ -47,7 +47,7 @@ export default function Details({ data }) {
 
   useEffect(() => {
     if (reload === true) {
-      dispatch(fetchData(userInfo._id));
+      dispatch(fetchData(userInfo.org));
     }
   }, [reload]);
 

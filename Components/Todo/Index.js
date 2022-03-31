@@ -174,7 +174,7 @@ function DataTable({ orgId }) {
       `/api/org/todo/?query=${router.query.slug}&orgId=${orgId}&todo=${id}`
     );
     if (omi.data.reload) {
-      dispatch(fetchData(userInfo._id));
+      dispatch(fetchData(userInfo.org));
     }
   };
   const handleDelete = async () => {
@@ -182,7 +182,7 @@ function DataTable({ orgId }) {
       `/api/org/todo/?query=${router.query.slug}&orgId=${orgId}&todo=${id}`
     );
     if (omi.data.reload) {
-      dispatch(fetchData(userInfo._id));
+      dispatch(fetchData(userInfo.org));
     }
   };
 
