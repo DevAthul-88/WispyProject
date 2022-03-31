@@ -1,7 +1,7 @@
 import {
   Container,
-  Avatar,
   List,
+  Heading,
   ListItem,
   Divider,
   Tabs,
@@ -50,18 +50,22 @@ function index() {
       <Container maxWidth={"container.lg"} marginRight={"20"}>
         {userInfo && userInfo.role === "ADMIN" ? (
           <>
-            <Avatar size="2xl" name={userInfo && userInfo.username} />
+            <Heading>
+            My account
+            </Heading>
+            <Divider marginTop={"5"}/>
             <List marginTop={"5"} spacing={3}>
-              <ListItem fontSize={"2xl"}>
+              <Heading fontSize={"2xl"} marginBottom="5">Personal information</Heading>
+              <ListItem fontSize={"xl"}>
                 Username: {userInfo && userInfo.username}
               </ListItem>
-              <ListItem fontSize={"2xl"}>
+              <ListItem fontSize={"xl"}>
                 Email: {userInfo && userInfo.email}
               </ListItem>
-              <ListItem fontSize={"2xl"}>
+              <ListItem fontSize={"xl"}>
                 Role: {userInfo && userInfo.role}
               </ListItem>
-              <ListItem fontSize={"2xl"}>
+              <ListItem fontSize={"xl"}>
                 Created: {userInfo && format(userInfo.createdAt)}
               </ListItem>
             </List>
