@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { Container, Flex, Text, Stack, Button } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchData } from "../../redux/org/action";
-import Loader from "../../Components/Loader";
+import { fetchData } from "../../../redux/org/action";
+import Loader from "../../../Components/Loader";
 import Head from "next/head";
-import NoData from "../../Components/noData";
+import NoData from "../../../Components/noData";
 import { FaPlus } from "react-icons/fa";
-import Modal from "../../Components/Modal/Modal.emp";
-import Tables from "../../Components/Table/table.emp";
+import Modal from "../../../Components/Modal/Modal.emp";
+import Tables from "../../../Components/Table/table.emp";
 
 function employees() {
   const dispatch = useDispatch();
