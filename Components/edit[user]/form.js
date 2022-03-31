@@ -55,6 +55,7 @@ function Edit({data , id}) {
                   <Field
                     name="username"
                     as={CustomInputComponent}
+                    defaultValue={data.username}
                     type={"text"}
                     focusBorderColor={"messenger.500"}
                     borderColor={
@@ -74,6 +75,7 @@ function Edit({data , id}) {
                   <FormLabel>Email address</FormLabel>
                   <Field
                     name="email"
+                    defaultValue={data.email}
                     as={CustomInputComponent}
                     focusBorderColor={"messenger.500"}
                     borderColor={
@@ -91,6 +93,7 @@ function Edit({data , id}) {
                   <Field
                     as={customSelectorComponent}
                     name={"role"}
+                    defaultValue={data.role}
                     borderColor={
                       errors.role && touched.role ? "red.500" : "gray.300"
                     }
@@ -110,24 +113,7 @@ function Edit({data , id}) {
                     ""
                   )}
                 </FormControl>
-                <FormControl marginTop={"5"}>
-                  <FormLabel>Employee ID</FormLabel>
-                  <Field
-                    name="emp_id"
-                    as={CustomInputComponent}
-                    type={"password"}
-                    focusBorderColor={"messenger.500"}
-                    borderColor={
-                      errors.emp_id && touched.emp_id ? "red.500" : "gray.300"
-                    }
-                  />
-                  {errors.emp_id && touched.emp_id ? (
-                    <FormLabel color={"red.600"}>{errors.emp_id}</FormLabel>
-                  ) : (
-                    ""
-                  )}
-                </FormControl>
-
+               
                  
                   <Button
                   marginTop={"5"}
