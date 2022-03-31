@@ -32,11 +32,7 @@ function Model({ data, de , org }) {
     };
   });
 
-  useEffect(() => {
-    if (reload) {
-      window.location.reload();
-    }
-  }, [reload]);
+
 
   return (
     <>
