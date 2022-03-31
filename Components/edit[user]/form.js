@@ -9,13 +9,12 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
-import EmpSchema from "../../Validation/emp_add";
+import EmpSchema from "../../Validation/emp_edit";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
-import { createEmp } from "../../redux/employee/action";
+import { editEmp } from "../../redux/employee/action";
 
 function Edit({data , id}) {
-    console.log(data);
   const dispatch = useDispatch();
   const { set_emp_loading, set_emp_error, refresh } = useSelector(
     (state) => state.emp
@@ -43,8 +42,8 @@ function Edit({data , id}) {
             userId: userInfo && userInfo._id,
           }}
           validationSchema={EmpSchema}
-          onSubmit={(values, { resetForm }) => {
-            dispatch(createEmp(values));
+          onSubmit={(values) => {
+            dispatch(editEmp(values));
           }}
         >
           {({ errors, touched }) => (
