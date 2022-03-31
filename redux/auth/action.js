@@ -5,6 +5,9 @@ import {
   SET_ADMIN_LOGIN_REQUEST,
   SET_ADMIN_LOGIN_SUCCESS,
   SET_ADMIN_LOGIN_ERROR,
+  SET_SUB_LOGIN_REQUEST,
+  SET_SUB_LOGIN_SUCCESS,
+  SET_SUB_LOGIN_ERROR,
 } from "./type";
 import axios from "axios";
 
@@ -29,5 +32,17 @@ export const adminLoginAction = (credentials) => async (dispatch) => {
     dispatch({ type: SET_ADMIN_LOGIN_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: SET_ADMIN_LOGIN_ERROR, payload: error.message });
+  }
+};
+
+export const submitterLoginAction = (credentials) => async (dispatch) => {
+  try {
+    dispatch({ type: SET_SUB_LOGIN_REQUEST });
+    const { data } = await axios.post("/api/auth/login/submitter", credentials);
+    if (data.error)
+      return dispatch({ type: SET_SUB_LOGIN_ERROR, payload: data.error });
+    dispatch({ type: SET_SUB_LOGIN_SUCCESS, payload: data });
+  } catch (error) {
+    dispatch({ type: SET_SUB_LOGIN_ERROR, payload: error.message });
   }
 };

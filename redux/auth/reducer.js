@@ -5,6 +5,9 @@ import {
   SET_ADMIN_LOGIN_REQUEST,
   SET_ADMIN_LOGIN_SUCCESS,
   SET_ADMIN_LOGIN_ERROR,
+  SET_SUB_LOGIN_REQUEST,
+  SET_SUB_LOGIN_SUCCESS,
+  SET_SUB_LOGIN_ERROR,
 } from "./type";
 
 const initialState = {};
@@ -23,6 +26,12 @@ export const userReducer = (state = initialState, action) => {
       return { admin_loading: false, user: action.payload };
     case SET_ADMIN_LOGIN_ERROR:
       return { admin_loading: false, admin_error: action.payload };
+      case SET_SUB_LOGIN_REQUEST:
+        return { sub_loading: true };
+      case SET_SUB_LOGIN_SUCCESS:
+        return { sub_loading: false, user: action.payload };
+      case SET_SUB_LOGIN_ERROR:
+        return { sub_loading: false, sub_error: action.payload };
     default:
       return state;
   }

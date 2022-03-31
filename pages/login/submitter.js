@@ -14,14 +14,14 @@ import {
   import { Formik, Form, Field } from "formik";
   import LoginSchema from "../../Validation/login";
   import { useDispatch, useSelector } from "react-redux";
-  import { adminLoginAction } from "../../redux/auth/action";
+  import { submitterLoginAction } from "../../redux/auth/action";
   import Alert from "../../Components/Alert";
   import { useEffect } from "react";
   import User from '../../lib/user'
   
   export default function SplitScreen() {
     const dispatch = useDispatch();
-    const { admin_loading, admin_error, admin_message, user } = useSelector(
+    const { sub_loading, sub_error, sub_message, user } = useSelector(
       (state) => state.auth
     );
     useEffect(() => {
@@ -47,8 +47,8 @@ import {
             }}
             validationSchema={LoginSchema}
             onSubmit={(values, { resetForm }) => {
-              dispatch(adminLoginAction(values));
-              if(admin_error){
+              dispatch(submitterLoginAction(values));
+              if(sub_error){
   
               }else{
                 resetForm();
@@ -62,18 +62,18 @@ import {
                   <Link textDecoration="underline">Go Back</Link>
                 </NextLink>
   
-                {admin_error && (
+                {sub_error && (
                   <Alert
                     trigger={true}
                     type={"error"}
-                    description={admin_error}
+                    description={sub_error}
                   />
                 )}
-                {admin_message && (
+                {sub_message && (
                   <Alert
                     trigger={true}
                     type={"success"}
-                    description={admin_message}
+                    description={sub_message}
                   />
                 )}
   
@@ -148,7 +148,7 @@ import {
                       type="submit"
                       colorScheme={"messenger"}
                       variant={"solid"}
-                      isLoading={admin_loading}
+                      isLoading={sub_loading}
                     >
                       Log in
                     </Button>
