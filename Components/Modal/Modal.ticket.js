@@ -22,7 +22,7 @@ import { useEffect } from "react";
 
 function Model({ toggle, setToggle, data }) {
   const dispatch = useDispatch();
-  const { loading, error, reload } = useSelector((state) => state.ticket);
+  const { loading, error} = useSelector((state) => state.ticket);
   const options = [
     { value: "high", label: "High" },
     { value: "medium", label: "Medium" },
@@ -59,11 +59,7 @@ function Model({ toggle, setToggle, data }) {
     };
   });
 
-  useEffect(() => {
-    if (reload) {
-      window.location.reload();
-    }
-  }, [reload]);
+
 
   return (
     <>
