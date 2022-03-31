@@ -2,9 +2,6 @@ import {
   GET_ORG_REQUEST,
   GET_ORG_SUCCESS,
   GET_ORG_ERROR,
-  SET_EMP_REQUEST,
-  SET_EMP_SUCCESS,
-  SET_EMP_ERROR,
 } from "./type";
 import axios from "axios";
 

@@ -16,7 +16,7 @@ function index() {
   console.log(data);
 
   useEffect(() => {
-    dispatch(fetchData(userInfo._id));
+    dispatch(fetchData(userInfo.org));
   }, []);
   return (
     <Container maxWidth={"container.lg"} marginRight={"14"}>
