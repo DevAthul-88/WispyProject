@@ -24,6 +24,7 @@ export default async function handler(req, res) {
           org,
           role,
           password: hashedPassword,
+          createdAt: Date.now(),
         };
         await orgModel.updateOne(
           { "owner.id": userId },
