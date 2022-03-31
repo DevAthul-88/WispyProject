@@ -16,13 +16,11 @@ import {
   useDisclosure,
   Menu,
   MenuButton,
-  MenuDivider,
   MenuItem,
   MenuList,
 } from '@chakra-ui/react';
 import {
   FiHome,
-  FiSettings,
   FiMenu,
   FiBell,
   FiChevronDown,
@@ -157,6 +155,10 @@ const NavItem = ({ icon, href  , children, ...rest }) => {
 
 const MobileNav = ({ onOpen, ...rest }) => {
   const {userInfo} = useSelector((state) => state.auth)
+  const handleSignOut = () => {
+    localStorage.clear()
+    window.location.href = "/"
+  }
   return (
     <Flex
       ml={{ base: 0, md: 60 }}
@@ -185,12 +187,7 @@ const MobileNav = ({ onOpen, ...rest }) => {
       </Text>
 
       <HStack spacing={{ base: '0', md: '6' }}>
-        <IconButton
-          size="lg"
-          variant="ghost"
-          aria-label="open menu"
-          icon={<FiBell />}
-        />
+       
         <Flex alignItems={'center'}>
           <Menu>
             <MenuButton
@@ -220,11 +217,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
             <MenuList
               bg={useColorModeValue('white', 'gray.900')}
               borderColor={useColorModeValue('gray.200', 'gray.700')}>
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>Settings</MenuItem>
-              <MenuItem>Billing</MenuItem>
-              <MenuDivider />
-              <MenuItem>Sign out</MenuItem>
+              <MenuItem ><NextLink href="/software/profile">Profile</NextLink></MenuItem>
+              <MenuItem onClick={handleSignOut}>Sign out</MenuItem>
             </MenuList>
           </Menu>
         </Flex>
