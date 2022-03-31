@@ -4,6 +4,8 @@ import bcrypt from "bcrypt";
 import { v4 as uuidv4 } from "uuid";
 db();
 
+const objectId = mongoose.Types.ObjectId;
+
 export default async function handler(req, res) {
   if (req.method === "POST") {
     try {
@@ -42,7 +44,20 @@ export default async function handler(req, res) {
   }
   else if(req.method === 'PUT') {
     try {
+      const { username, email, org, role, userId } = req.body;
       console.log(req.body);
+      await orgModel.findByIdAndUpdate({_id:objectId(org)} ,  {
+        $set: {
+          "employees.$[i].username": username,
+          "employees.$[i].email": email,
+          "employees.$[i].role": role,
+          
+        },
+      },
+      {
+        arrayFilters: [{ "i._id": objectId(userId) }],
+      })
+      res.send({refresh: true})
     } catch (error) {
       res.send({ error: error.message });
     }

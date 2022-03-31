@@ -1,5 +1,4 @@
 import {
-  ModalFooter,
   Button,
   Flex,
   FormControl,

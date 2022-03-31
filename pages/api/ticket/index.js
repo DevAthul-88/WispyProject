@@ -39,7 +39,6 @@ export default async function handler(req, res) {
 
       res.send({ refresh: true });
     } catch (error) {
-      console.log(error.message);
       res.send({ error: error.message });
     }
   } else if (req.method === "PUT") {
