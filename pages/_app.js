@@ -5,6 +5,7 @@ import Sidebar from "../Components/Sidebar/Sidebar";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import Store from "../redux/store";
+import Head from 'next/head'
 
 function MyApp({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
@@ -19,6 +20,9 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <Provider store={Store}>
+      <Head>
+        <link rel="shortcut icon" href="/favicon-32x32.png" type="image/x-icon" />
+      </Head>
       <ChakraProvider>
         {auth ? <Sidebar /> : <Navbar />}
         <Component {...pageProps} />

@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { fetchData } from "../../../redux/org/action";
 import { useDispatch } from "react-redux";
 
 function deleteProject({ userInfo, de, org }) {
@@ -37,16 +36,16 @@ function deleteProject({ userInfo, de, org }) {
   };
 
   React.useEffect(() => {
-    if (reload === true) {
+    
       window.location.href = "/software/tickets"
-    }
+    
   }, [reload]);
 
   return (
     <React.Fragment>
       {userInfo.role === "ADMIN" || userInfo.role === "PROJECT_MANAGER" ? (
         <>
-          <Divider marginTop={"5"} />
+         
           <Button colorScheme={"red"} marginTop={"5"} variant="outline" onClick={onOpen}>
             Delete ticket
           </Button>
