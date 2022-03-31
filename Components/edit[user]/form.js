@@ -12,8 +12,10 @@ import EmpSchema from "../../Validation/emp_edit";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
 import { editEmp } from "../../redux/employee/action";
+import { useRouter } from "next/router";
 
-function Edit({data , id}) {
+function Edit({ data, id }) {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { set_emp_loading, set_emp_error, refresh } = useSelector(
     (state) => state.emp
@@ -38,7 +40,7 @@ function Edit({data , id}) {
             email: data.email,
             role: data.role,
             org: id,
-            userId: userInfo && userInfo._id,
+            userId: router.query.slug,
           }}
           validationSchema={EmpSchema}
           onSubmit={(values) => {
@@ -46,7 +48,7 @@ function Edit({data , id}) {
           }}
         >
           {({ errors, touched }) => (
-            <Stack spacing={4} w={"full"} >
+            <Stack spacing={4} w={"full"}>
               <Form>
                 <FormControl marginTop={"5"}>
                   <FormLabel>Username</FormLabel>
@@ -111,17 +113,15 @@ function Edit({data , id}) {
                     ""
                   )}
                 </FormControl>
-               
-                 
-                  <Button
-                  marginTop={"5"}
-                    colorScheme={"messenger"}
-                    type="submit"
-                    isLoading={set_emp_loading}
-                  >
-                    Save
-                  </Button>
 
+                <Button
+                  marginTop={"5"}
+                  colorScheme={"messenger"}
+                  type="submit"
+                  isLoading={set_emp_loading}
+                >
+                  Save
+                </Button>
               </Form>
             </Stack>
           )}

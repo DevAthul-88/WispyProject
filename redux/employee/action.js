@@ -19,7 +19,7 @@ export const editEmp = (credentials) => async (dispatch) => {
   try {
     dispatch({ type: SET_EMP_REQUEST });
 
-    const { data } = await axios.put("/api/org/emp", credentials);
+    const { data } = await axios.patch("/api/org/emp", credentials);
     if (data.error)
       return dispatch({ type: SET_EMP_ERROR, payload: data.error });
     dispatch({ type: SET_EMP_SUCCESS , payload:data.refresh });
