@@ -20,7 +20,7 @@ const ticketReducer = (state = initialState, action) => {
     case TICKET_EDIT_LOADING:
       return { edit_loading: true };
     case TICKET_EDIT_SUCCESS:
-      return { edit_loading: true, edit_reload: true };
+      return { edit_loading: false, edit_reload: true };
     case TICKET_EDIT_FAILURE:
       return { edit_loading: false, edit_error: action.payload };
     default:

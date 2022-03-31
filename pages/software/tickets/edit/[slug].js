@@ -20,13 +20,14 @@ function Slug() {
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.org);
   const { userInfo } = useSelector((state) => state.auth);
+  const { edit_reload } = useSelector((state) => state.ticket);
 
   const proj =
     data && data.tickets.find((e) => e._id + "" == router.query.slug);
 
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
-  }, []);
+  }, [edit_reload]);
   return (
     <div>
       <Head>

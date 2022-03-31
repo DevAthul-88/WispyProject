@@ -53,11 +53,6 @@ function Model({ data, de , org }) {
     };
   });
 
-  useEffect(() => {
-    if(edit_reload) {
-      window.location.reload();
-    }
-  }, [edit_reload]);
 
   return (
     <>
