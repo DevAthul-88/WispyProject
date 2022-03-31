@@ -14,7 +14,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
 import { createEmp } from "../../redux/employee/action";
 
-function Model() {
+function Edit({data , id}) {
+    console.log(data);
   const dispatch = useDispatch();
   const { set_emp_loading, set_emp_error, refresh } = useSelector(
     (state) => state.emp
@@ -32,14 +33,13 @@ function Model() {
       {set_emp_error && (
         <Alert trigger={true} type={"error"} description={set_emp_error} />
       )}
-      <Flex justify={"center"}>
+      <Flex>
         <Formik
           initialValues={{
-            username: "",
-            email: "",
-            role: "",
-            emp_id: "",
-            org: name,
+            username: data.username,
+            email: data.email,
+            role: data.role,
+            org: id,
             userId: userInfo && userInfo._id,
           }}
           validationSchema={EmpSchema}
@@ -48,7 +48,7 @@ function Model() {
           }}
         >
           {({ errors, touched }) => (
-            <Stack spacing={4} w={"full"} maxW={"md"}>
+            <Stack spacing={4} w={"full"} >
               <Form>
                 <FormControl marginTop={"5"}>
                   <FormLabel>Username</FormLabel>
@@ -127,22 +127,17 @@ function Model() {
                     ""
                   )}
                 </FormControl>
-                <ModalFooter>
+
+                 
                   <Button
-                    colorScheme="red"
-                    mr={3}
-                    onClick={() => setToggle(!toggle)}
-                  >
-                    Close
-                  </Button>
-                  <Button
+                  marginTop={"5"}
                     colorScheme={"messenger"}
                     type="submit"
                     isLoading={set_emp_loading}
                   >
                     Save
                   </Button>
-                </ModalFooter>
+
               </Form>
             </Stack>
           )}
@@ -152,7 +147,7 @@ function Model() {
   );
 }
 
-export default Model;
+export default Edit;
 
 const CustomInputComponent = (props) => (
   <Input type={props.type} {...props} width={"full"} />

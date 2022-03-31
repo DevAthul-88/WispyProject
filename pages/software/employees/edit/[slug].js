@@ -52,7 +52,7 @@ function Slug() {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <Form />
+                    <Form data={proj && proj} id={data && data._id}/>
                   </TabPanel>
                   <TabPanel></TabPanel>
                 </TabPanels>
