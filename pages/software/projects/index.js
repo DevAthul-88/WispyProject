@@ -13,12 +13,12 @@ function employees() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { data, error, loading } = useSelector((state) => state.org);
-  const { refresh } = useSelector((state) => state.emp);
+  const { reload } = useSelector((state) => state.project);
   const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     dispatch(fetchData(userInfo._id));
-  }, [refresh]);
+  }, [reload]);
 
   return (
     <>

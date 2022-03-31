@@ -19,9 +19,11 @@ import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
 import { createProject } from "../../redux/Project/action";
 import { useEffect } from "react";
+import { fetchData } from "../../redux/org/action";
 
 function Model({ toggle, setToggle, data }) {
   const dispatch = useDispatch();
+  const { userInfo } = useSelector((state) => state.auth);
   const { loading, error  , reload} = useSelector((state) => state.project);
   const options = [
     { value: "high", label: "High" },
@@ -37,11 +39,7 @@ function Model({ toggle, setToggle, data }) {
     };
   });
 
-  useEffect(() => {
-     if(reload){
-       window.location.reload()
-     }
-  },[reload])
+ 
 
   return (
     <>
