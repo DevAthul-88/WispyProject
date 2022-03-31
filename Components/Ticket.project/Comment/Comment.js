@@ -18,6 +18,8 @@ import {
 import axios from "axios";
 import { fetchData } from "../../../redux/org/action";
 import Alert from "../../Alert";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import ReactMarkdown from "react-markdown";
 
 function Comments({ comment }) {
   const dispatch = useDispatch();
@@ -79,7 +81,30 @@ function Comments({ comment }) {
                     {e.username}
                   </Link>
                 </Flex>
-                <Text marginTop={"5"}>{e.comment}</Text>
+                <Text marginTop={"5"}>
+                  <ReactMarkdown
+                    children={e.comment}
+                    components={{
+                      code({ node, inline, className, children, ...props }) {
+                        const match = /language-(\w+)/.exec(className || "");
+                        return !inline && match ? (
+                          <SyntaxHighlighter
+                            children={String(children).replace(/\n$/, "")}
+                            showLineNumbers
+                            language={match[1]}
+                            PreTag="div"
+                            customStyle={{ background: "none" }}
+                            {...props}
+                          />
+                        ) : (
+                          <code className={className} {...props}>
+                            {children}
+                          </code>
+                        );
+                      },
+                    }}
+                  />
+                </Text>
                 <Flex justify={"space-between"}>
                   <Text marginTop={"2"}>{format(e.createdAt)}</Text>
                   {userInfo !== null && userInfo !== undefined ? (

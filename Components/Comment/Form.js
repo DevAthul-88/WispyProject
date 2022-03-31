@@ -46,7 +46,7 @@ function Form() {
    {error && <Alert trigger={true} type="error" description={error} />}
       <form onSubmit={handleSubmit}>
         <Textarea
-          placeholder="Describe your comment here"
+          placeholder="Describe your comment here - (markdown supported)"
           colorScheme={"messenger"}
           onChange={(e) => setComment(e.target.value)}
           required
