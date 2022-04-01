@@ -13,16 +13,14 @@ import { fetchData } from "../../../../redux/org/action";
 import Form from "../../../../Components/edit[pro]/form";
 import Loader from "../../../../Components/Loader";
 import { useRouter } from "next/router";
-import Other from '../../../../Components/edit[pro]/other'
+import Other from "../../../../Components/edit[pro]/other";
 
 function Slug() {
   const router = useRouter();
   const dispatch = useDispatch();
   const { data, loading } = useSelector((state) => state.org);
   const { userInfo } = useSelector((state) => state.auth);
-  const { reload } = useSelector(
-    (state) => state.project
-  );
+  const { reload } = useSelector((state) => state.project);
 
   const proj =
     data && data.projects.find((e) => e._id + "" == router.query.slug);
@@ -54,9 +52,19 @@ function Slug() {
                 </TabList>
                 <TabPanels>
                   <TabPanel>
-                    <Form data={data && data.employees} de={data && proj && proj} org={data && data}/>
+                    <Form
+                      data={data && data.employees}
+                      de={data && proj && proj}
+                      org={data && data}
+                    />
                   </TabPanel>
-                  <TabPanel><Other data={data && data.employees} de={data && proj && proj} org={data && data}/></TabPanel>
+                  <TabPanel>
+                    <Other
+                      data={data && data.employees}
+                      de={data && proj && proj}
+                      org={data && data}
+                    />
+                  </TabPanel>
                 </TabPanels>
               </Tabs>
             </Container>
@@ -68,3 +76,5 @@ function Slug() {
 }
 
 export default Slug;
+
+

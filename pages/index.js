@@ -65,14 +65,16 @@ export default function SplitScreen() {
 
 export const getServerSideProps = () => {
   
-  if(User() !== undefined) {
-    return {
-      redirect: {
-        destination: "/software/",
-        permanent: false,
-      },
-      props: {},
-    };
-  }
+ 
+    if(Object.keys(User).length > 0){
+      return {
+        redirect: {
+          destination: "/software",
+          permanent: false,
+        },
+        props: {},
+      };
+    }
+  
   return {props:{}}
 }
