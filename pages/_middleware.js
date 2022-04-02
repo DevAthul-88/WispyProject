@@ -2,6 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 import Token from "../lib/token";
 
 export default function middleware(request = NextRequest) {
+  console.log(Token());
   const url = request.nextUrl.clone();
 
   if (url.pathname == "/software") {

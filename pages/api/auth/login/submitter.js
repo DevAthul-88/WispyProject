@@ -13,7 +13,6 @@ export default async function handler(req, res) {
     if (!org) return res.send({ error: "No organization found" });
 
     if (org) {
-      console.log(org);
       const User = org.employees.find((e) => e.email === req.body.email);
       if (!User) return res.send({ error: "No user found" });
 
