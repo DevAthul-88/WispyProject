@@ -18,6 +18,7 @@ import { adminLoginAction } from "../../redux/auth/action";
 import Alert from "../../Components/Alert";
 import { useEffect } from "react";
 import User from '../../lib/user'
+import Router from "next/router";
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
@@ -30,6 +31,12 @@ export default function SplitScreen() {
       localStorage.setItem("userInfo", JSON.stringify(user.userInfo));
       window.location.href = "/software/"
     }
+
+    const token = JSON.parse(localStorage.getItem("token"));
+    if(token){
+      Router.push("/software/")
+    }
+
   }, [user]);
 
   return (

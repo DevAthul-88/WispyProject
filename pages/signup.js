@@ -16,10 +16,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../redux/auth/action";
 import Alert from "../Components/Alert";
 import User from "../lib/user";
+import { useEffect } from "react";
+import Router from "next/router";
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
   const { loading, error, message } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    if(token){
+      Router.push("/software/")
+    }
+  },[])
+  
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
