@@ -8,15 +8,20 @@ import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../Components/Loader";
 import { fetchData } from "../../redux/org/action";
 import  {TicketChart} from '../../Components/Charts/ticket.bar'
+import Router from 'next/router'
 
 function index() {
   const { data, error, loading } = useSelector((state) => state.org);
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
-  console.log(data);
+
 
   useEffect(() => {
     dispatch(fetchData(userInfo.org));
+    const token = JSON.parse(localStorage.getItem("token"));
+    if(!token){
+      Router.push("/login/")
+    }
   }, []);
   return (
     <Container maxWidth={"container.lg"} marginRight={"14"}>
