@@ -21,6 +21,7 @@
     "formik": "^2.2.9",
     "framer-motion": "6",
     "jsonwebtoken": "^8.5.1",
+    "local-storage": "^2.0.0",
     "markdown-to-jsx": "^7.1.7",
     "mongodb": "^4.4.1",
     "mongoose": "^6.2.4",
