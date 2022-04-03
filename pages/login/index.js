@@ -30,29 +30,13 @@ export default function SplitScreen() {
            </Link>
           </Stack>
 
-          <Stack marginTop={"8"} >
-            <Text fontSize={"2xl"} >
-              Login as developer
-            </Text>
-            <Link href={"/login/developer"}>
-            <Button colorScheme={"linkedin"}  variant={"outline"}>Get started</Button>
-            </Link>
-          </Stack>
+         
 
           <Stack marginTop={"8"} >
             <Text fontSize={"2xl"} >
-              Login as project manager
+              Login as employee
             </Text>
-           <Link href={"/login/manager"}>
-           <Button colorScheme={"red"}  variant={"outline"}>Get started</Button>
-           </Link>
-          </Stack>
-
-          <Stack marginTop={"8"} >
-            <Text fontSize={"2xl"} >
-              Login as submitter
-            </Text>
-           <Link href={"/login/submitter"}>
+           <Link href={"/login/employee"}>
            <Button colorScheme={"facebook"}  variant={"outline"}>Get started</Button>
            </Link>
           </Stack>
