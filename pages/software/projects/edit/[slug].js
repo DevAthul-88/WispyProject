@@ -14,6 +14,7 @@ import Form from "../../../../Components/edit[pro]/form";
 import Loader from "../../../../Components/Loader";
 import { useRouter } from "next/router";
 import Other from "../../../../Components/edit[pro]/other";
+import Router from 'next/router';
 
 function Slug() {
   const router = useRouter();
@@ -27,6 +28,10 @@ function Slug() {
 
   useEffect(() => {
     dispatch(fetchData(userInfo.org));
+    const token = JSON.parse(localStorage.getItem("token"));
+    if(!token){
+      Router.push("/login/")
+    }
   }, [reload]);
   return (
     <div>

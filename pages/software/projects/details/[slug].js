@@ -17,6 +17,7 @@ import Comment from "../../../../Components/Comment/Index";
 import Table from "../../../../Components/Table/users";
 import Todo from "../../../../Components/Todo/Todo";
 import Ticket from "../../../../Components/Ticket.project/index";
+import Router from 'next/router'
 
 function Slug() {
   const router = useRouter();
@@ -31,6 +32,10 @@ function Slug() {
       : data && data.employees.filter((e) => proj[0].members.includes(e._id));
   useEffect(() => {
     dispatch(fetchData(userInfo.org));
+    const token = JSON.parse(localStorage.getItem("token"));
+    if(!token){
+      Router.push("/login/")
+    }
   }, []);
 
   return (

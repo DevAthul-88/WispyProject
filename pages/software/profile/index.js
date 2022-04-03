@@ -25,7 +25,7 @@ import {
   Input,
 } from "@chakra-ui/react";
 import Alerts from "../../../Components/Alert";
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Head from "next/head";
 import { format } from "timeago.js";
@@ -33,7 +33,7 @@ import { FaHammer } from "react-icons/fa";
 import EditSchema from "../../../Validation/profile_admin";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
-import { fetchData } from "../../../redux/org/action";
+import Router  from 'next/router';
 
 function index() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -42,6 +42,12 @@ function index() {
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    if(!token){
+      Router.push("/login/")
+    }
+  },[])
   return (
     <>
       <Head>

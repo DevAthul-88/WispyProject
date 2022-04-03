@@ -8,6 +8,7 @@ import NoData from "../../../Components/noData";
 import { FaPlus } from "react-icons/fa";
 import Modal from "../.../../../../Components/Modal/Modal.project";
 import Tables from "../../../Components/Table/table.proj";
+import Router from 'next/router'
 
 function employees() {
   const dispatch = useDispatch();
@@ -18,6 +19,10 @@ function employees() {
 
   useEffect(() => {
     dispatch(fetchData(userInfo.org));
+    const token = JSON.parse(localStorage.getItem("token"));
+    if(!token){
+      Router.push("/login/")
+    }
   }, [reload]);
   return (
     <>
