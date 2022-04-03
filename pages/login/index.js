@@ -8,10 +8,16 @@ import {
 import Head from "next/head";
 import Link from "next/link";
 import User from '../../lib/user'
-
+import Router from "next/router";
+import { useEffect } from "react";
 
 export default function SplitScreen() {
- 
+  useEffect(() => {
+    const token = JSON.parse(localStorage.getItem("token"));
+    if(token){
+      Router.push("/software/")
+    }
+  },[])
 
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
