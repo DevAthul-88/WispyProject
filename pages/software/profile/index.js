@@ -33,21 +33,20 @@ import { FaHammer } from "react-icons/fa";
 import EditSchema from "../../../Validation/profile_admin";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
-import Router  from 'next/router';
+import Router from "next/router";
+import Details from '../../../Components/Profile/details'
 
 function index() {
   const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.org);
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
-    if(!token){
-      Router.push("/login/")
+    if (!token) {
+      Router.push("/login/");
     }
-  },[])
+  }, []);
   return (
     <>
       <Head>
@@ -56,12 +55,12 @@ function index() {
       <Container maxWidth={"container.lg"} marginRight={"20"}>
         {userInfo && userInfo.role === "ADMIN" ? (
           <>
-            <Heading>
-            My account
-            </Heading>
-            <Divider marginTop={"5"}/>
+            <Heading>My account</Heading>
+            <Divider marginTop={"5"} />
             <List marginTop={"5"} spacing={3}>
-              <Heading fontSize={"2xl"} marginBottom="5">Personal information</Heading>
+              <Heading fontSize={"2xl"} marginBottom="5">
+                Personal information
+              </Heading>
               <ListItem fontSize={"xl"}>
                 Username: {userInfo && userInfo.username}
               </ListItem>
@@ -114,14 +113,15 @@ function index() {
                             setLoading(false);
                             setMessage(data.error);
                           }
-                          if (data.success) {     
+                          if (data.success) {
                             setLoading(false);
                             if (typeof window !== "undefined") {
-                              localStorage.setItem("userInfo" , JSON.stringify(data.user))
-                              window.location.reload()
+                              localStorage.setItem(
+                                "userInfo",
+                                JSON.stringify(data.user)
+                              );
+                              window.location.reload();
                             }
-                            
-                            
                           }
                         }
                         createTodo();
@@ -202,16 +202,16 @@ function index() {
           </>
         ) : (
           <>
-            <Tabs>
+            <Tabs isFitted variant="enclosed-colored" colorScheme={"messenger"}>
               <TabList>
-                <Tab>One</Tab>
-                <Tab>Two</Tab>
-                <Tab>Three</Tab>
+                <Tab>Details</Tab>
+                <Tab>Current projects</Tab>
+                <Tab>Current tickets</Tab>
               </TabList>
 
               <TabPanels>
                 <TabPanel>
-                  <p>one!</p>
+                  <Details />
                 </TabPanel>
                 <TabPanel>
                   <p>two!</p>
