@@ -37,7 +37,7 @@ function employees() {
           <Container maxWidth={"container.lg"} marginRight={"20"}>
             <Flex justify={"space-between"} marginBottom={"5"}>
               <Text fontSize={"2xl"} fontWeight={"bold"}>
-                Employee
+                Staff
               </Text>
               {userInfo && (
                 <>

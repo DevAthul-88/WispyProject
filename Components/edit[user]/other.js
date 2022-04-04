@@ -33,7 +33,7 @@ function deleteProject({ data, id }) {
     }
     if (omi.data.success) {
       setReload(true);
-      window.location.href = "/software/employees";
+      window.location.href = "/software/staff";
     }
   };
 

@@ -88,7 +88,7 @@ function DataTable({ org, user }) {
                       <MenuItem>
                         <Link
                           as={NextLink}
-                          href={`/software/employees/edit/${row.original._id}`}
+                          href={`/software/staff/edit/${row.original._id}`}
                         >
                           Edit / Delete
                         </Link>

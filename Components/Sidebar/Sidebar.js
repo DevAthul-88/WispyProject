@@ -36,7 +36,7 @@ import {useSelector} from 'react-redux'
 const LinkItems = [
   { name: 'Dashboard', icon: FiHome  , href: '/software'},
   { name: 'Projects', icon: FiBriefcase , href: '/software/projects'},
-  { name: 'Employees', icon: FiUsers  , href: '/software/employees'},
+  { name: 'Staff', icon: FiUsers  , href: '/software/staff'},
   { name: 'Tickets', icon: FaTicketAlt , href: '/software/tickets'},
   { name: 'Profile', icon: FaUser , href: '/software/profile'},
 ];
