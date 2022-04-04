@@ -75,8 +75,7 @@ function DataTable({ org, user }) {
         accessor: "edit",
         Cell: ({ row }) => (
           <>
-            {user.role === "ADMIN" ||
-              (user.role === "PROJECT_MANAGER" && (
+            {userInfo.role == "ADMIN" || userInfo.role == "PROJECT_MANAGER" ? (
                 <Menu>
                   <MenuButton
                     as={IconButton}
@@ -97,7 +96,7 @@ function DataTable({ org, user }) {
                     </MenuList>
                   </Portal>
                 </Menu>
-              ))}
+            ): null}
           </>
         ),
       },
