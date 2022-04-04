@@ -79,6 +79,7 @@ function DataTable({ orgId }) {
         Header: "Complete",
         Cell: ({ row }) => (
           <>
+          
             {userInfo.role === "ADMIN" ||
             userInfo.role === "PROJECT_MANAGER" ? (
               <Button
@@ -91,10 +92,10 @@ function DataTable({ orgId }) {
               </Button>
             ) : (
               <>
-                {row.original.userId === userInfo._id ? (
+                {row.original.user == userInfo._id ? (
                   <Button
                     size={"sm"}
-                    colorScheme="red"
+                    colorScheme="green"
                     onClick={() => handleComplete(row.original._id)}
                     disabled={row.original.isCompleted}
                   >
@@ -125,7 +126,8 @@ function DataTable({ orgId }) {
               </Button>
             ) : (
               <>
-                {row.original.userId === userInfo._id ? (
+                {row.original.user == userInfo._id ? (
+                  
                   <Button
                     size={"sm"}
                     colorScheme="red"
