@@ -40,9 +40,9 @@ export default function SplitScreen() {
 
           <Stack marginTop={"8"} >
             <Text fontSize={"2xl"} >
-              Login as employee
+              Login as staff
             </Text>
-           <Link href={"/login/employee"}>
+           <Link href={"/login/staff"}>
            <Button colorScheme={"facebook"}  variant={"outline"}>Get started</Button>
            </Link>
           </Stack>

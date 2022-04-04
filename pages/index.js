@@ -5,12 +5,14 @@ import {
   Image,
   Stack,
   Text,
+  Link,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import Head from 'next/head';
 import Router from "next/router";
 import { useEffect } from "react";
 import User from '../lib/user'
+import NextLink from 'next/link'
 
 export default function SplitScreen() {
   useEffect(() => {
@@ -56,10 +58,12 @@ export default function SplitScreen() {
             system. It's perfect for freelancers, agencies, and moonlighters.
           </Text>
           <Stack direction={{ base: "column", md: "row" }} spacing={4}>
-            <Button rounded={"full"} colorScheme={"messenger"}>
-              Get Started
-            </Button>
-            <Button rounded={"full"}>How It Works</Button>
+            <NextLink href="/login" >
+               <Button colorScheme="messenger">Get Started</Button>
+            </NextLink>
+            <NextLink href="/guide" >
+               <Button  rounded={"full"}>How It Works</Button>
+            </NextLink>
           </Stack>
         </Stack>
       </Flex>
