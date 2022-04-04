@@ -17,7 +17,6 @@ import NextLink from "next/link";
 const Links = [
   { name: "Features", href: "/features" },
   { name: "Guide", href: "/guide" },
-  { name: "Announcements", href: "/announcements" },
 ];
 const NavLink = ({ children, href }, { children: ReactNode }) => (
   <NextLink href={href}>
