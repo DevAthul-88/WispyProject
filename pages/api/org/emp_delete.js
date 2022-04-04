@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         await orgModel.findByIdAndUpdate(
           { _id: objectId(orgId) },
           {
-             $pull:{"employees.$._id":objectId(emp)}
+             $pull:{"employees":{_id:objectId(emp)}}
           },
           
         );
