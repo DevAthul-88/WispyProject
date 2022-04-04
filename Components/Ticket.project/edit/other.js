@@ -32,14 +32,13 @@ function deleteProject({ userInfo, de, org }) {
       console.error(omi.data.error);
       setLoading(false);
     }
-    if (omi.data.success) return setReload(true);
+    if (omi.data.success){
+      setReload(true)
+      window.location.href = "/software/tickets"
+    };
   };
 
-  React.useEffect(() => {
-    
-      window.location.href = "/software/tickets"
-    
-  }, [reload]);
+
 
   return (
     <React.Fragment>

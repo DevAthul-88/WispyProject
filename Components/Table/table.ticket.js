@@ -29,6 +29,8 @@ import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
 import dateFormat from "dateformat";
 import Export from "../Download/ticket";
+import { useSelector } from "react-redux";
+
 
 function DataTable({ projects, user }) {
   const colorScheme = (priority) => {
@@ -43,7 +45,7 @@ function DataTable({ projects, user }) {
     }
   };
   const data = React.useMemo(() => projects, []);
-
+  const { userInfo } = useSelector((state) => state.auth);
   const columns = React.useMemo(
     () => [
       {
@@ -101,31 +103,37 @@ function DataTable({ projects, user }) {
       {
         accessor: "edit",
         Cell: ({ row }) =>
-          user.role === "ADMIN" ||
-          (user.role === "PROJECT_MANAGER" && (
+          
             <>
-              <Menu>
-                <MenuButton
-                  as={IconButton}
-                  aria-label="Options"
-                  icon={<SettingsIcon />}
-                  variant="outline"
-                />
-                <Portal>
-                  <MenuList>
-                    <MenuItem>
-                      <Link
-                        as={NextLink}
-                        href={`/software/tickets/edit/${row.original._id}`}
-                      >
-                        Edit / Delete
-                      </Link>
-                    </MenuItem>
-                  </MenuList>
-                </Portal>
-              </Menu>
+              {
+                userInfo.role === "ADMIN" ||
+                userInfo.role === "PROJECT_MANAGER" ? (
+                  <>
+                    <Menu>
+                      <MenuButton
+                        as={IconButton}
+                        aria-label="Options"
+                        icon={<SettingsIcon />}
+                        variant="outline"
+                      />
+                      <Portal>
+                        <MenuList>
+                          <MenuItem>
+                            <Link
+                              as={NextLink}
+                              href={`/software/tickets/edit/${row.original._id}`}
+                            >
+                              Edit / Delete
+                            </Link>
+                          </MenuItem>
+                        </MenuList>
+                      </Portal>
+                    </Menu>
+                  </>
+                ):null}
+              
             </>
-          )),
+          
       },
     ],
     []

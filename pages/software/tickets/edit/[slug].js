@@ -24,7 +24,7 @@ function Slug() {
   const { edit_reload } = useSelector((state) => state.ticket);
 
   const proj =
-    data && data.tickets.find((e) => e._id + "" == router.query.slug);
+    data && data.tickets.find((e) => e._id  == router.query.slug);
 
   useEffect(() => {
     dispatch(fetchData(userInfo.org));
