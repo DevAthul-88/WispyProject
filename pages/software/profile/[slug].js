@@ -1,7 +1,7 @@
 import {
   Container,
-  Avatar,
   List,
+  Heading,
   ListItem,
   Divider,
   Tabs,
@@ -33,22 +33,20 @@ import { FaHammer } from "react-icons/fa";
 import EditSchema from "../../../Validation/profile_admin";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
-import { fetchData } from "../../../redux/org/action";
-import Router from 'next/router'
+import Router from "next/router";
+import Details from "../../../Components/Profile/details";
 
 function index() {
   const { userInfo } = useSelector((state) => state.auth);
-  const dispatch = useDispatch();
-  const { data } = useSelector((state) => state.org);
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
-    if(!token){
-      Router.push("/login/")
+    if (!token) {
+      Router.push("/login/");
     }
-  },[])
+  }, []);
   return (
     <>
       <Head>
@@ -57,18 +55,22 @@ function index() {
       <Container maxWidth={"container.lg"} marginRight={"20"}>
         {userInfo && userInfo.role === "ADMIN" ? (
           <>
-            <Avatar size="2xl" name={userInfo && userInfo.username} />
+            <Heading>My account</Heading>
+            <Divider marginTop={"5"} />
             <List marginTop={"5"} spacing={3}>
-              <ListItem fontSize={"2xl"}>
+              <Heading fontSize={"2xl"} marginBottom="5">
+                Personal information
+              </Heading>
+              <ListItem fontSize={"xl"}>
                 Username: {userInfo && userInfo.username}
               </ListItem>
-              <ListItem fontSize={"2xl"}>
+              <ListItem fontSize={"xl"}>
                 Email: {userInfo && userInfo.email}
               </ListItem>
-              <ListItem fontSize={"2xl"}>
+              <ListItem fontSize={"xl"}>
                 Role: {userInfo && userInfo.role}
               </ListItem>
-              <ListItem fontSize={"2xl"}>
+              <ListItem fontSize={"xl"}>
                 Created: {userInfo && format(userInfo.createdAt)}
               </ListItem>
             </List>
@@ -111,14 +113,15 @@ function index() {
                             setLoading(false);
                             setMessage(data.error);
                           }
-                          if (data.success) {     
+                          if (data.success) {
                             setLoading(false);
                             if (typeof window !== "undefined") {
-                              localStorage.setItem("userInfo" , JSON.stringify(data.user))
-                              window.location.reload()
+                              localStorage.setItem(
+                                "userInfo",
+                                JSON.stringify(data.user)
+                              );
+                              window.location.reload();
                             }
-                            
-                            
                           }
                         }
                         createTodo();
@@ -199,22 +202,14 @@ function index() {
           </>
         ) : (
           <>
-            <Tabs>
+            <Tabs isFitted variant="enclosed-colored" colorScheme={"messenger"}>
               <TabList>
-                <Tab>One</Tab>
-                <Tab>Two</Tab>
-                <Tab>Three</Tab>
+                <Tab>Details</Tab>
               </TabList>
 
               <TabPanels>
                 <TabPanel>
-                  <p>one!</p>
-                </TabPanel>
-                <TabPanel>
-                  <p>two!</p>
-                </TabPanel>
-                <TabPanel>
-                  <p>three!</p>
+                  <Details />
                 </TabPanel>
               </TabPanels>
             </Tabs>

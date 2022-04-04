@@ -34,7 +34,7 @@ import EditSchema from "../../../Validation/profile_admin";
 import { Formik, Form, Field } from "formik";
 import axios from "axios";
 import Router from "next/router";
-import Details from '../../../Components/Profile/details'
+import Details from "../../../Components/Profile/details";
 
 function index() {
   const { userInfo } = useSelector((state) => state.auth);
@@ -205,19 +205,11 @@ function index() {
             <Tabs isFitted variant="enclosed-colored" colorScheme={"messenger"}>
               <TabList>
                 <Tab>Details</Tab>
-                <Tab>Current projects</Tab>
-                <Tab>Current tickets</Tab>
               </TabList>
 
               <TabPanels>
                 <TabPanel>
                   <Details />
-                </TabPanel>
-                <TabPanel>
-                  <p>two!</p>
-                </TabPanel>
-                <TabPanel>
-                  <p>three!</p>
                 </TabPanel>
               </TabPanels>
             </Tabs>
