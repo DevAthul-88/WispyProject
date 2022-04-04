@@ -28,7 +28,7 @@ import {
 import { useTable, useSortBy, usePagination } from "react-table";
 import NextLink from "next/link";
 import dateFormat from "dateformat";
-import Export from '../Download/ticket'
+import Export from "../Download/ticket";
 
 function DataTable({ projects, user }) {
   const colorScheme = (priority) => {
@@ -55,10 +55,8 @@ function DataTable({ projects, user }) {
         Header: "status",
         accessor: "status",
         Cell: ({ row }) => (
-          <div style={{"textTransform":"capitalize"}}>
-          
-              {row.original.status}
-           
+          <div style={{ textTransform: "capitalize" }}>
+            {row.original.status}
           </div>
         ),
       },
@@ -66,11 +64,7 @@ function DataTable({ projects, user }) {
         Header: "type",
         accessor: "type",
         Cell: ({ row }) => (
-          <div style={{"textTransform":"capitalize"}}>
-          
-              {row.original.type}
-           
-          </div>
+          <div style={{ textTransform: "capitalize" }}>{row.original.type}</div>
         ),
       },
       {
@@ -104,36 +98,35 @@ function DataTable({ projects, user }) {
         ),
       },
 
-      
-        {
-            accessor: "edit",
-            Cell: ({ row }) => (
-             user.role === "ADMIN" || user.role === "PROJECT_MANAGER" && 
-             <>
-             <Menu>
-               <MenuButton
-                 as={IconButton}
-                 aria-label="Options"
-                 icon={<SettingsIcon />}
-                 variant="outline"
-               />
-               <Portal>
-                 <MenuList>
-                   <MenuItem>
-                     <Link
-                       as={NextLink}
-                       href={`/software/tickets/edit/${row.original._id}`}
-                     >
-                       Edit / Delete
-                     </Link>
-                   </MenuItem>
-                 </MenuList>
-               </Portal>
-             </Menu>
-           </>
-            ),
-          }
-        
+      {
+        accessor: "edit",
+        Cell: ({ row }) =>
+          user.role === "ADMIN" ||
+          (user.role === "PROJECT_MANAGER" && (
+            <>
+              <Menu>
+                <MenuButton
+                  as={IconButton}
+                  aria-label="Options"
+                  icon={<SettingsIcon />}
+                  variant="outline"
+                />
+                <Portal>
+                  <MenuList>
+                    <MenuItem>
+                      <Link
+                        as={NextLink}
+                        href={`/software/tickets/edit/${row.original._id}`}
+                      >
+                        Edit / Delete
+                      </Link>
+                    </MenuItem>
+                  </MenuList>
+                </Portal>
+              </Menu>
+            </>
+          )),
+      },
     ],
     []
   );
@@ -158,7 +151,7 @@ function DataTable({ projects, user }) {
   return (
     <>
       <Flex justify={"space-between"} marginTop="5">
-        <Export data={projects}/>
+        <Export data={projects} />
         <div className="pagination">
           <Button
             onClick={() => previousPage()}

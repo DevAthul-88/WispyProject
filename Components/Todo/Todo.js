@@ -52,7 +52,7 @@ function Todo({ users }) {
               </Button>
             ) : (
               <>
-                {users.includes((e) => e.id === userInfo._id) ? (
+                {users.some((e) => e._id === userInfo._id) ? (
                   <Button
                     colorScheme={"messenger"}
                     leftIcon={<AddIcon />}

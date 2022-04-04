@@ -15,12 +15,13 @@ import { useSelector } from "react-redux";
 import Head from "next/head";
 import { format } from "timeago.js";
 import Router from "next/router";
-import Loader from '../../../Components/Loader'
+import Loader from "../../../Components/Loader";
 
 function index() {
   const { data } = useSelector((state) => state.org);
   const [loading, setLoading] = React.useState(true);
   const [userInfo, setUserInfo] = React.useState("");
+  
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (!token) {
@@ -30,7 +31,7 @@ function index() {
       setUserInfo(data.employees.find((e) => e._id == Router.query.slug));
       setLoading(false);
     }
-  }, [data, userInfo]);
+  }, [data , userInfo]);
   return (
     <>
       <Head>
