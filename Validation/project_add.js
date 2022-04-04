@@ -8,5 +8,6 @@ const SignupSchema = Yup.object().shape({
   description: Yup.string().required("Description is required"),
   members: Yup.array().min(1 , "Add at least one member").required("Members is required"),
   priority: Yup.string().required("Priority level is required"),
+  
 });
 export default SignupSchema;

@@ -48,7 +48,7 @@ function employees() {
                         colorScheme={"messenger"}
                         onClick={() => setToggle(true)}
                       >
-                        Add user
+                        Add staff
                       </Button>
                     </Stack>
                   ) : null}
