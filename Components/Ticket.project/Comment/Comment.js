@@ -66,7 +66,6 @@ function Comments({ comment }) {
                 borderWidth={"thin"}
                 borderRadius="md"
                 padding={"4"}
-                maxW="xl"
                 key={index}
                 marginTop={"2"}
               >
@@ -76,7 +75,11 @@ function Comments({ comment }) {
                     display={"inline-block"}
                     marginTop={"2"}
                     as={NextLink}
-                    href={`/profile/${e.userId}`}
+                    href={
+                      userInfo._id === e.userId
+                        ? `/software/profile`
+                        : `/software/profile/${e.userId}`
+                    }
                   >
                     {e.username}
                   </Link>
