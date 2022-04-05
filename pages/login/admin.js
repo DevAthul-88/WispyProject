@@ -160,7 +160,7 @@ export default function SplitScreen() {
                     align={"start"}
                     justify={"space-between"}
                   >
-                    <Link color={"messenger.500"}>Forgot password?</Link>
+    
                   </Stack>
                   <Button
                     type="submit"
