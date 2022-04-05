@@ -133,7 +133,7 @@ function Model({ toggle, setToggle, name }) {
                         )}
                       </FormControl>
                       <FormControl marginTop={"5"}>
-                        <FormLabel>Employee ID</FormLabel>
+                        <FormLabel>Staff ID</FormLabel>
                         <Field
                           name="emp_id"
                           as={CustomInputComponent}

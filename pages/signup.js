@@ -20,6 +20,7 @@ import User from "../lib/user";
 import { useEffect , useState} from "react";
 import Router from "next/router";
 import {ViewIcon , ViewOffIcon} from '@chakra-ui/icons'
+import Footer from '../Components/Footer'
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
@@ -165,6 +166,7 @@ export default function SplitScreen() {
       <Flex flex={1}>
         <Image alt={"Login Image"} objectFit={"cover"} src={"/image_3.webp"} />
       </Flex>
+      <Footer />
     </Stack>
   );
 }
