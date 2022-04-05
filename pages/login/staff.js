@@ -22,6 +22,7 @@ import { useEffect , useState} from "react";
 import User from "../../lib/user";
 import Router from "next/router";
 import {ViewIcon , ViewOffIcon} from '@chakra-ui/icons'
+import Footer from '../../Components/Footer'
 export default function SplitScreen() {
   const dispatch = useDispatch();
   const { sub_loading, sub_error, sub_message, user } = useSelector(
@@ -42,7 +43,8 @@ export default function SplitScreen() {
   }, [user]);
 
   return (
-    <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
+    <>
+      <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
         <title>WispyProject - Login</title>
       </Head>
@@ -172,6 +174,8 @@ export default function SplitScreen() {
         <Image alt={"Login Image"} objectFit={"cover"} src={"/image_4.jpg"} />
       </Flex>
     </Stack>
+    <Footer />
+    </>
   );
 }
 const CustomInputComponent = (props) => <Input type={props.type} {...props} />;
