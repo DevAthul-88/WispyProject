@@ -10,7 +10,7 @@ import Modal from "../.../../../../Components/Modal/Modal.project";
 import Tables from "../../../Components/Table/table.proj";
 import Router from 'next/router'
 
-function employees() {
+function Index() {
   const dispatch = useDispatch();
   const { userInfo } = useSelector((state) => state.auth);
   const { data, error, loading } = useSelector((state) => state.org);
@@ -82,4 +82,4 @@ function employees() {
   );
 }
 
-export default employees;
+export default Index;

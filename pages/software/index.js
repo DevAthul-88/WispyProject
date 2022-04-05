@@ -10,7 +10,7 @@ import { fetchData } from "../../redux/org/action";
 import  {TicketChart} from '../../Components/Charts/ticket.bar'
 import Router from 'next/router'
 
-function index() {
+function Index() {
   const { data, error, loading } = useSelector((state) => state.org);
   const { userInfo } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
@@ -69,4 +69,4 @@ function index() {
   );
 }
 
-export default index;
+export default Index;

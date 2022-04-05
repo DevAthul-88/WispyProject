@@ -36,7 +36,7 @@ import axios from "axios";
 import Router from "next/router";
 import Details from "../../../Components/Profile/details";
 
-function index() {
+function Index() {
   const { userInfo } = useSelector((state) => state.auth);
   const [loading, setLoading] = React.useState(false);
   const [message, setMessage] = React.useState("");
@@ -220,7 +220,7 @@ function index() {
   );
 }
 
-export default index;
+export default Index;
 
 const CustomInputComponent = (props) => (
   <Input type={props.type} {...props} width={"full"} />

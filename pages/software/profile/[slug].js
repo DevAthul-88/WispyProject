@@ -6,6 +6,7 @@ import {
   Divider,
   Tabs,
   TabList,
+  Input,
   TabPanels,
   Tab,
   TabPanel,
@@ -17,7 +18,7 @@ import { format } from "timeago.js";
 import Router from "next/router";
 import Loader from "../../../Components/Loader";
 
-function index() {
+function Index() {
   const { data } = useSelector((state) => state.org);
   const [loading, setLoading] = React.useState(true);
   const [userInfo, setUserInfo] = React.useState("");
@@ -78,7 +79,7 @@ function index() {
   );
 }
 
-export default index;
+export default Index;
 
 const CustomInputComponent = (props) => (
   <Input type={props.type} {...props} width={"full"} />
