@@ -7,6 +7,8 @@ import {
   Input,
   Stack,
   Image,
+  InputGroup,
+  InputRightElement,
   Link,
 } from "@chakra-ui/react";
 import Head from "next/head";
@@ -16,15 +18,17 @@ import LoginSchema from "../../Validation/login";
 import { useDispatch, useSelector } from "react-redux";
 import { adminLoginAction } from "../../redux/auth/action";
 import Alert from "../../Components/Alert";
-import { useEffect } from "react";
+import { useEffect , useState} from "react";
 import User from '../../lib/user'
 import Router from "next/router";
+import {ViewIcon , ViewOffIcon} from '@chakra-ui/icons'
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
   const { admin_loading, admin_error, admin_message, user } = useSelector(
     (state) => state.auth
   );
+  const [show, setShow] = useState(false)
   useEffect(() => {
     if (user) {
       localStorage.setItem("token", JSON.stringify(user.token));
@@ -126,10 +130,11 @@ export default function SplitScreen() {
                 </FormControl>
                 <FormControl marginTop={"5"}>
                   <FormLabel>Password</FormLabel>
+                  <InputGroup>
                   <Field
                     name="password"
                     as={CustomInputComponent}
-                    type={"password"}
+                    type={show ? 'text' : 'password'}
                     focusBorderColor={"messenger.500"}
                     borderColor={
                       errors.password && touched.password
@@ -137,6 +142,12 @@ export default function SplitScreen() {
                         : "gray.300"
                     }
                   />
+                   <InputRightElement width="4.5rem">
+                      <Button h="1.75rem" size="sm" onClick={() => {setShow(!show)}}>
+                        {show ? <ViewIcon /> : <ViewOffIcon/>}
+                      </Button>
+                    </InputRightElement>
+                    </InputGroup>
                   {errors.password && touched.password ? (
                     <FormLabel color={"red.600"}>{errors.password}</FormLabel>
                   ) : (
