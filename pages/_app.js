@@ -6,6 +6,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import Store from "../redux/store";
 import Head from "next/head";
+import Footer from '../Components/Footer'
 
 function MyApp({ Component, pageProps }) {
   const [auth, setAuth] = useState(false);
@@ -29,6 +30,7 @@ function MyApp({ Component, pageProps }) {
       <ChakraProvider>
         {auth ? <Sidebar /> : <Navbar />}
         <Component {...pageProps} />
+        <Footer />
       </ChakraProvider>
     </Provider>
   );
