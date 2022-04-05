@@ -10,6 +10,7 @@ import {
   } from '@chakra-ui/react';
   import { BsPerson  } from 'react-icons/bs';
   import {  FiFile } from 'react-icons/fi'
+  import {FaTicketAlt} from 'react-icons/fa'
   
   const StatsCardProps  = {
     title: String,
@@ -63,7 +64,7 @@ import {
           <StatsCard
             title={'Tickets'}
             stat={t}
-            icon={<TiTicket size={'3em'} />}
+            icon={<FaTicketAlt size={'3em'} />}
           />
         </SimpleGrid>
       </Box>
