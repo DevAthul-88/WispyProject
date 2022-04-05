@@ -84,7 +84,7 @@ export default function CallToAction() {
                 top={"-20%"}
                 left={0}
                 zIndex={-1}
-                color={useColorModeValue("messenger.100", "messenger.400")}
+                color={"messenger.200"}
               />
               <Box
                 position={"relative"}
