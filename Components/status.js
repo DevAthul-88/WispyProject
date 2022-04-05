@@ -9,9 +9,7 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
   import { BsPerson  } from 'react-icons/bs';
-  import {  FiFile } from 'react-icons/fi';
-  import { GoLocation } from 'react-icons/go';
-  import {TiTicket} from 'react-icons/Ti'
+  import {  FiFile } from 'react-icons/fi'
   
   const StatsCardProps  = {
     title: String,
