@@ -8,7 +8,6 @@ import {
   Image,
   Icon,
   createIcon,
-  useColorModeValue,
 } from "@chakra-ui/react";
 import Head from "next/head";
 import Footer from '../Components/Footer'
