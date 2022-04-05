@@ -34,6 +34,7 @@ export default function SplitScreen() {
   }, []);
 
   return (
+   <>
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
         <title>WispyProject - Sign up</title>
@@ -166,8 +167,10 @@ export default function SplitScreen() {
       <Flex flex={1}>
         <Image alt={"Login Image"} objectFit={"cover"} src={"/image_3.webp"} />
       </Flex>
-      <Footer />
+  
     </Stack>
+    <Footer />
+   </>
   );
 }
 

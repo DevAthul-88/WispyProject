@@ -13,6 +13,7 @@ import Router from "next/router";
 import { useEffect } from "react";
 import User from '../lib/user'
 import NextLink from 'next/link'
+import Footer from '../Components/Footer'
 
 export default function SplitScreen() {
   useEffect(() => {
@@ -23,6 +24,7 @@ export default function SplitScreen() {
   },[])
 
   return (
+    <>
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       
       <Head>
@@ -71,6 +73,8 @@ export default function SplitScreen() {
         <Image alt={"Login Image"} objectFit={"cover"} src='/image_2.jpg' />
       </Flex>
     </Stack>
+    <Footer />
+    </>
   );
 }
 

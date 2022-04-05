@@ -12,18 +12,23 @@ import {
   Input,
   Stack,
   Select,
+  InputRightElement,
+  InputGroup,
 } from "@chakra-ui/react";
 import { Formik, Form, Field } from "formik";
 import EmpSchema from "../../Validation/emp_add";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "../../Components/Alert";
 import { createEmp } from "../../redux/employee/action";
+import { useState } from "react";
+import {ViewIcon , ViewOffIcon} from '@chakra-ui/icons'
 
 function Model({ toggle, setToggle, name }) {
   const dispatch = useDispatch();
   const { set_emp_loading, set_emp_error, refresh } = useSelector(
     (state) => state.emp
   );
+  const [show, setShow] = useState(false)
   const { userInfo } = useSelector((state) => state.auth);
   const options = [
     { value: "MODERATOR", label: "Moderator" },
@@ -134,10 +139,12 @@ function Model({ toggle, setToggle, name }) {
                       </FormControl>
                       <FormControl marginTop={"5"}>
                         <FormLabel>Staff ID</FormLabel>
+                        <InputGroup>
+                        
                         <Field
                           name="emp_id"
                           as={CustomInputComponent}
-                          type={"password"}
+                          type={show ? 'text' : 'password'}
                           focusBorderColor={"messenger.500"}
                           borderColor={
                             errors.emp_id && touched.emp_id
@@ -145,6 +152,12 @@ function Model({ toggle, setToggle, name }) {
                               : "gray.300"
                           }
                         />
+                         <InputRightElement width="4.5rem">
+                      <Button h="1.75rem" size="sm" onClick={() => {setShow(!show)}}>
+                        {show ? <ViewIcon /> : <ViewOffIcon/>}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                         {errors.emp_id && touched.emp_id ? (
                           <FormLabel color={"red.600"}>
                             {errors.emp_id}
