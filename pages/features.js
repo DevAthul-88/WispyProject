@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 import Head from "next/head";
+import Footer from '../Components/Footer'
 
 const features = [
   {
@@ -99,6 +100,7 @@ export default function GridListWithHeading() {
           ))}
         </SimpleGrid>
       </Container>
+      <Footer />
     </Box>
   );
 }

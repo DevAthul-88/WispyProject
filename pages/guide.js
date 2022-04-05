@@ -11,6 +11,7 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import Head from "next/head";
+import Footer from '../Components/Footer'
 
 export default function CallToAction() {
   const arr = [
@@ -22,28 +23,28 @@ export default function CallToAction() {
     },
 
     {
-        title: "How to add a new staff",
-        description: `To create a new staff member, press the "add staff" button and it will pop up a modal.
+      title: "How to add a new staff",
+      description: `To create a new staff member, press the "add staff" button and it will pop up a modal.
         Enter the staff credentials, then press the "create" button, and there you are. Remember! Never forget staff credentials because he will need them if he needs to login to something.`,
-        image: "/guide/WispyProject-Employees.png",
-      },
+      image: "/guide/WispyProject-Employees.png",
+    },
 
-      {
-        title: "What after a project completed",
-        description: `After completing a project, the members who were assigned to the project, the project manager, or admin can mark the project as completed.
+    {
+      title: "What after a project completed",
+      description: `After completing a project, the members who were assigned to the project, the project manager, or admin can mark the project as completed.
         So after that, navigate to the project "Edit/Delete" button on the table and you will be redirected to another page. Navigate to the other tab. You can see that if the project is marked as completed, then the admin or project manager can declare this project as completed.`,
-        image: "/guide/WispyProject-Project-Details.png",
-      },
+      image: "/guide/WispyProject-Project-Details.png",
+    },
 
-      {
-        title: "Project credentials",
-        description: `The project credentials are very important. Before you create a project, add some staff, and then you will see that image on the other side. 
+    {
+      title: "Project credentials",
+      description: `The project credentials are very important. Before you create a project, add some staff, and then you will see that image on the other side. 
         Enter project credentials, carefully adding members as much as you want, then edit the project later.`,
-        image: "/guide/WispyProject-Projects.png",
-      },
-
+      image: "/guide/WispyProject-Projects.png",
+    },
   ];
   return (
+    <>
     <Container maxW={"7xl"}>
       <Head>
         <title>WispyProject - Guide</title>
@@ -107,6 +108,9 @@ export default function CallToAction() {
         );
       })}
     </Container>
+    <Footer />
+    
+    </>
   );
 }
 
