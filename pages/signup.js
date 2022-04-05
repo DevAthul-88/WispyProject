@@ -5,7 +5,8 @@ import {
   FormLabel,
   Heading,
   Input,
-  Link,
+  InputRightElement,
+  InputGroup,
   Stack,
   Image,
 } from "@chakra-ui/react";
@@ -16,20 +17,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { registerAction } from "../redux/auth/action";
 import Alert from "../Components/Alert";
 import User from "../lib/user";
-import { useEffect } from "react";
+import { useEffect , useState} from "react";
 import Router from "next/router";
+import {ViewIcon , ViewOffIcon} from '@chakra-ui/icons'
 
 export default function SplitScreen() {
   const dispatch = useDispatch();
   const { loading, error, message } = useSelector((state) => state.auth);
-
+  const [show, setShow] = useState(false)
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
-    if(token){
-      Router.push("/software/")
+    if (token) {
+      Router.push("/software/");
     }
-  },[])
-  
+  }, []);
+
   return (
     <Stack minH={"100vh"} direction={{ base: "column", md: "row" }}>
       <Head>
@@ -121,17 +123,24 @@ export default function SplitScreen() {
                 </FormControl>
                 <FormControl marginTop={"5"}>
                   <FormLabel>Password</FormLabel>
-                  <Field
-                    name="password"
-                    as={CustomInputComponent}
-                    type={"password"}
-                    focusBorderColor={"messenger.500"}
-                    borderColor={
-                      errors.password && touched.password
-                        ? "red.500"
-                        : "gray.300"
-                    }
-                  />
+                  <InputGroup>
+                    <Field
+                      name="password"
+                      as={CustomInputComponent}
+                      type={show ? 'text' : 'password'}
+                      focusBorderColor={"messenger.500"}
+                      borderColor={
+                        errors.password && touched.password
+                          ? "red.500"
+                          : "gray.300"
+                      }
+                    />
+                    <InputRightElement width="4.5rem">
+                      <Button h="1.75rem" size="sm" onClick={() => {setShow(!show)}}>
+                        {show ? <ViewIcon /> : <ViewOffIcon/>}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                   {errors.password && touched.password ? (
                     <FormLabel color={"red.600"}>{errors.password}</FormLabel>
                   ) : (
@@ -163,7 +172,6 @@ export default function SplitScreen() {
 const CustomInputComponent = (props) => <Input type={props.type} {...props} />;
 
 export const getServerSideProps = () => {
- 
   if (User() !== undefined) {
     return {
       redirect: {
@@ -171,7 +179,6 @@ export const getServerSideProps = () => {
         permanent: false,
       },
       props: {},
-      
     };
   }
   return { props: {} };
