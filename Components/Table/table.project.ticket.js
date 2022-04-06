@@ -147,7 +147,7 @@ function DataTable({ projects, user }) {
 
   return (
     <>
-      <Flex justify={"space-between"} marginTop="5">
+      <Flex justify={"space-between"} marginTop="5" flexWrap={"wrap"}>
         <div></div>
         <div className="pagination">
           <Button
