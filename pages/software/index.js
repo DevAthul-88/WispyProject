@@ -44,7 +44,7 @@ function Index() {
             </Box>
           )}
 
-          <Flex marginTop={"10"}>
+          <Flex marginTop={"10"} flexWrap="wrap">
           {data && data.tickets && (
             <Box borderWidth={"thin"} padding={"2"} width={"full"}>
               <TicketChart projects={data.tickets}/>
