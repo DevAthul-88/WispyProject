@@ -11,3 +11,6 @@ body {
 .bebas{
   font-family: 'Bebas Neue', cursive !important;
 }
+tbody{
+  overflow: scroll !important;
+}
