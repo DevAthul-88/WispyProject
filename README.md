@@ -1,3 +1,7 @@
+## WispyProject
+
+### WispyProject is a free, open-source bug tracking and project management system. It's perfect for freelancers, agencies, and moonlighters.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
