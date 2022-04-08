@@ -26,6 +26,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - CSS
 - Chakra-Ui
 - Redux
+- Yup + Formik
 - React-Redux
 - And more....
 
